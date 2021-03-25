@@ -1,4 +1,4 @@
 # rRestaurant
 eRestaurant - SES1A
 
-How to Run
+How to Run Project
