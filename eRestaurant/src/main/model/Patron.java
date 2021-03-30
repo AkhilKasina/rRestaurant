@@ -1,4 +1,4 @@
-package model;
+package eRestaurant.src.main.model;
 
 public class Patron {
 
