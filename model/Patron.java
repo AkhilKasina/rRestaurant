@@ -7,7 +7,6 @@ public class Patron {
 
 
     public Patron(String username, String password) {
-
         this.username = username;
         this.password = password;
     }

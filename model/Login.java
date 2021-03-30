@@ -13,9 +13,9 @@ public class Login {
     public void addPatron(String username, String password) {
         for (Patron patron : this.patrons) {
             if (patron.getUsername().equals(username))
-                patrons.add(new Patron(username, password));
-            else
                 System.out.println("This Username already exsists.");
+            else
+                patrons.add(new Patron(username, password));
         }
      
 
