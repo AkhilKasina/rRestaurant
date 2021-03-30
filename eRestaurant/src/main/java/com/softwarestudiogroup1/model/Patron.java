@@ -1,4 +1,4 @@
-package eRestaurant.src.main.model;
+package eRestaurant.src.main.java.com.softwarestudiogroup1.model;
 
 public class Patron {
 
