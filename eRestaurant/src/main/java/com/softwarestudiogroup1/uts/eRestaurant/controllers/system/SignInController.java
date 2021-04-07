@@ -11,6 +11,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+import javax.swing.text.View;
+
+import com.softwarestudiogroup1.uts.eRestaurant.ViewManager;
 import com.softwarestudiogroup1.uts.eRestaurant.models.CustomerRepository;
 
 import org.springframework.ui.Model;
@@ -29,7 +32,7 @@ public class SignInController {
 
         model.addAttribute("loginPatron", new Patron());
 
-        return "loginPage";
+        return ViewManager.LOG_IN;
     }
 
     @PostMapping("/login")
@@ -60,11 +63,12 @@ public class SignInController {
             return "redirect:/booking";
         } 
 
-        return "signupPage";
+        // Display Error instead
+        return ViewManager.SIGN_UP;
     }
 
     @GetMapping("/signup")
     public String signUpPage() {
-        return "signupPage";
+        return ViewManager.SIGN_UP;
     }
 }
