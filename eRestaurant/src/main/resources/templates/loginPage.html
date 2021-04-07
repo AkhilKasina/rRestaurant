@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login</title>
+   <link rel="stylesheet" th:href="@{/loginPage/login.css}">
+</head>
+<header>
+   <a th:href="@{/}">
+      <button>
+         <b>Home</b>
+      </button>
+   </a>
+</header>
+
+<body>
+   <div class="loginpage">
+      <div class="form">
+         <table>
+            <tr>
+               <th>
+                  <label>Username: </label>
+               </th>
+               <th>
+                  <input type="uname" placeholder="Enter Username or E-mail" />
+               </th>
+            </tr>
+            <tr>
+               <th><label>Password: </label></th>
+               <th><input type="password" placeholder="Enter Pasword" /></th>
+            </tr>
+         </table>
+         <button>Login</button>
+         <br>
+         <a th:href="@{/signup}">
+         <p>Register?</p> <p>Forgot Password?</p></a>
+
+      </div>
+
+   </div>
+</body>
+
+</html>
