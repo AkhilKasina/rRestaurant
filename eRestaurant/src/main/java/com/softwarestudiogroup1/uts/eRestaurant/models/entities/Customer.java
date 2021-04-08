@@ -1,14 +1,27 @@
 package com.softwarestudiogroup1.uts.eRestaurant.models.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name= "customers")
@@ -41,6 +54,9 @@ public class Customer {
 
     @Column(name = "address")
 	private String address;
+
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "customer", fetch = FetchType.EAGER)
+	private Set<Booking> bookings;
 
 	public Integer getId() {
 		return id;
@@ -101,4 +117,33 @@ public class Customer {
     public String getPassword() {
         return password;
     }
+
+	protected Set<Booking> getBookingsInternal() {
+		if (this.bookings == null) {
+			this.bookings = new HashSet<>();
+		}
+		return this.bookings;
+	}
+
+	protected void setBookingsInteral(Set<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
+	public List<Booking> getBookings() {
+		List<Booking> sortedBookings = new ArrayList<>(getBookingsInternal());
+		PropertyComparator.sort(sortedBookings, new MutableSortDefinition("id", true, true));
+
+		return Collections.unmodifiableList(sortedBookings);
+	}
+
+
+
+	public void addBooking(Booking booking) {
+		if (booking.getId() == null) {
+			getBookingsInternal().add(booking);
+		}
+		
+		booking.setCustomer(this);
+	}
+
 }

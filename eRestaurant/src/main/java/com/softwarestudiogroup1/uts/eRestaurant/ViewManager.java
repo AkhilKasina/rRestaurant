@@ -9,6 +9,7 @@ public class ViewManager {
 
     // CUSTOMER
     public static final String CUS_BOOKING = "customers/bookingPage";
+    public static final String CUS_PORTAL = "customers/customerPortal";
 
     private ViewManager() {}
 }
