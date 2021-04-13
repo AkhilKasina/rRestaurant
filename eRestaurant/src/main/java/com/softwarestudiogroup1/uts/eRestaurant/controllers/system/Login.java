@@ -1,4 +1,4 @@
-package eRestaurant.src.main.java.com.softwarestudiogroup1.model;
+package model;
 
 import java.util.List;
 import java.util.ArrayList;

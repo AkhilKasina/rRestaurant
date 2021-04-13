@@ -1,13 +1,21 @@
-package eRestaurant.src.main.java.com.softwarestudiogroup1.model;
+package com.softwarestudiogroup1.uts.eRestaurant.models.entities;
 
 public class Patron {
 
-    private final String username;
-    private final String password;
+    private String username;
+    private String password;
 
 
-    public Patron(String username, String password) {
+    public Patron() {
+        // this.username = username;
+        // this.password = password;
+    }
+
+    public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
