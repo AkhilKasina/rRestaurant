@@ -1,7 +1,7 @@
 
 -- Customer
 CREATE TABLE IF NOT EXISTS customers (
-    customer_id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30),
     password VARCHAR(30),
     first_name VARCHAR(30),
@@ -13,17 +13,16 @@ CREATE TABLE IF NOT EXISTS customers (
 
 
 CREATE TABLE IF NOT EXISTS bookings (
-    booking_id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    booking_date Date,
-    booking_time TIME,
+    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    booking_time TIMESTAMP,
     table_position VARCHAR(5),
 
     customer_id INT(7) UNSIGNED NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
 CREATE TABLE IF NOT EXISTS items (
-    item_id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     image_data MEDIUMBLOB,
     menu_type VARCHAR(10)
@@ -34,8 +33,8 @@ CREATE TABLE IF NOT EXISTS bookingitems (
     booking_id INT(7) UNSIGNED NOT NULL,
     item_id INT(7) UNSIGNED NOT NULL,
 
-    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id),
-    FOREIGN KEY (item_id) REFERENCES items(item_id)
+    FOREIGN KEY (booking_id) REFERENCES bookings(id),
+    FOREIGN KEY (item_id) REFERENCES items(id)
 );
 
 -- System User
