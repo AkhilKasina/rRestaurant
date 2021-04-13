@@ -24,7 +24,7 @@ import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name= "customers")
+@Table(name = "customers")
 public class Customer {
 
     @Id
