@@ -60,7 +60,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-	</dependencies>
+	
+   <dependency>
+     <groupId>hu.kazocsaba</groupId>
+     <artifactId>column-table-model</artifactId>
+     <version>1.0.0</version>
+   </dependency>
+ </dependencies>
 
 	<build>
 		<plugins>
