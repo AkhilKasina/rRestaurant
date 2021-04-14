@@ -41,34 +41,60 @@ public class SignInController {
         boolean success = false;
         int id = -1;
 
-        List<Customer> cusLists = customerRepository.findAll();
-
         String username = patron.getUsername();
         String password = patron.getPassword();
 
         System.out.println("Login " +username + "  " + password);
 
-        for (Customer currentCus: cusLists) {
-            if (currentCus.getUsername().equals(username) && currentCus.getPassword().equals(password)) {
-                success = true;
-                id = currentCus.getId();
-                break;
+        if (username.startsWith("M") || username.startsWith("m")) {
+            // Manager Login
+        } 
+        else if (username.startsWith("S") || username.startsWith("s")) {
+            // Staff Login
+        }
+        else {
+            // Customer Login
+            List<Customer> cusLists = customerRepository.findAll();
+
+            for (Customer currentCus: cusLists) {
+                if (currentCus.getUsername().equals(username) && currentCus.getPassword().equals(password)) {
+                    success = true;
+                    id = currentCus.getId();
+                    break;
+                }
+            }
+
+            if (success == true) {
+                redirectAttributes.addFlashAttribute("customerID", id);
+                return "redirect:/booking";
             }
         }
-        
-        System.out.println("is Success " + success);
 
-        if (success == true) {
-            redirectAttributes.addFlashAttribute("customerID", id);
-            return "redirect:/booking";
-        } 
+        System.out.println("isLoginSuccess: " + success);
+
+        
 
         // Display Error instead
         return ViewManager.SIGN_UP;
     }
 
     @GetMapping("/signup")
-    public String signUpPage() {
+    public String signUpPage(Model model) {
+        model.addAttribute("signupCustomer", new NewCustomerDAO());
         return ViewManager.SIGN_UP;
+    }
+
+    @PostMapping("/signup")
+    public String customerSignUp(@ModelAttribute("signupCustomer") NewCustomerDAO newCustomerDAO, final RedirectAttributes redirectAttributes) {
+        
+        Customer newCustomer = new Customer();
+        newCustomer.set(newCustomerDAO.getFirstName(), newCustomerDAO.getLastName(), 
+                        newCustomerDAO.getTelephone(), newCustomerDAO.getAddress(), 
+                        newCustomerDAO.getUserName(), newCustomerDAO.getPassword());
+        
+        customerRepository.save(newCustomer);
+
+        redirectAttributes.addFlashAttribute("customerID", newCustomer.getId());
+        return "redirect:/booking";
     }
 }
