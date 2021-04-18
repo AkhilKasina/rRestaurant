@@ -97,13 +97,11 @@ public class SignInController {
                 return "redirect:/booking";
             }
         }
-
-        System.out.println("isLoginSuccess: " + success);
-
         
 
         // Display Error instead
-        return ViewManager.SIGN_UP;
+        model.addAttribute("success", success);
+        return ViewManager.LOG_IN;
     }
 
     @GetMapping("/signup")
