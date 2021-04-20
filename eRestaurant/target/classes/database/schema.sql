@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS items (
 );
 
 CREATE TABLE IF NOT EXISTS bookingitems (
-    bookingitem_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
+    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     booking_id INT(7) UNSIGNED NOT NULL,
     item_id INT(7) UNSIGNED NOT NULL,
 
@@ -39,17 +39,19 @@ CREATE TABLE IF NOT EXISTS bookingitems (
 
 -- System User
 CREATE TABLE IF NOT EXISTS managers (
-    manager_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
+    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(40),
-    manager_password VARCHAR(30),
+    username VARCHAR(30),
+    password VARCHAR(30),
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     telephone VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS staffs (
-    staff_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
-    manager_password VARCHAR(30),
+    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(30),
+    password VARCHAR(30),
     email VARCHAR(40),
     first_name VARCHAR(30),
     last_name VARCHAR(30),

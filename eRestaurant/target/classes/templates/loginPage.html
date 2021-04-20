@@ -35,6 +35,10 @@
          </table>
          <button type="submit">Login</button>
          <br>
+         <div th:if="${success == false}">
+            <p style="color: red"> Login Unsuccessful, please try again</p>
+         </div>
+         <br>
          <a th:href="@{/signup}">
          <p>Register?</p> <p>Forgot Password?</p></a>
 
