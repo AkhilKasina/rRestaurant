@@ -1,5 +1,5 @@
 body{
-   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(/eRestaurant/src/main/resources/static/homePage/backgroung.jpg);
+   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(backgroung.jpg);
    height: 100vh;
    
    background-position: center;
