@@ -1,0 +1,90 @@
+body {
+  background-image: url(menuBackground.jpg);
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+}
+
+.whitePage {
+  background-color: white;
+  width: 80vw;
+  margin: auto;
+  box-shadow: 5px 10px;
+}
+
+.wrapper {
+  margin: 20px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.title h4 {
+  text-transform: capitalize;
+  font-size: 48px;
+  position: relative;
+  display: inline-block;
+}
+
+.title h3 {
+  display: block;
+  font-size: 18px;
+  font-style: italic;
+  margin-top: -30px;
+}
+
+.title h4:before {
+  position: absolute;
+  content: "";
+  width: 250px;
+  height: 3px;
+  background-color: #58af5b;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.item {
+  flex-basis: 580px;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item:nth-child(5),
+.item:nth-child(6) {
+  border-bottom: 0;
+}
+
+.item:hover {
+  background-color: #f5f5f5;
+  transition: 0.5s;
+}
+
+.item h4 {
+  text-transform: capitalize;
+  font-size: 22px;
+  border-bottom: 1px dashed #333;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+
+.item h4 span {
+  float: right;
+  color: #58af5b;
+  font-style: italic;
+}
