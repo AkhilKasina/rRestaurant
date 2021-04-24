@@ -146,4 +146,13 @@ public class Customer {
 		booking.setCustomer(this);
 	}
 
+	public void set(String firstName, String lastName, String telephone, String address, String username, String password ) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.telephone = telephone;
+		this.address = address;
+		this.username = username;
+		this.password = password;
+	}
+
 }
