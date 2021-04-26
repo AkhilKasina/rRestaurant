@@ -5,11 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BookingDAO {
-
     private int id;
-
     private String bookingDate;
     private String bookingTime;
+    private String tablePosition;
 
     public int getId() {
         return id;
@@ -33,6 +32,14 @@ public class BookingDAO {
 
     public void setBookingTime(String bookingTime) {
         this.bookingTime = bookingTime;
+    }
+
+    public String getTablePosition(){
+        return tablePosition;
+    }
+
+    public void setTablePosition(String tablePosition){
+        this.tablePosition = tablePosition;
     }
 
     private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
