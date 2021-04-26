@@ -56,8 +56,6 @@ public class Booking {
     }
 
     public void setBookingDateTime(Date bookingDateTime) {
-        this.bookingDate= bookingDateTime.toString().split(" ")[0];
-        this.bookingTime = bookingDateTime.toString().split(" ")[1];
         this.bookingDateTime = bookingDateTime;
     }
 

@@ -54,7 +54,7 @@ public class BookingDAO {
 
     public Date getBookingTimeStamp() {
         try {
-            return DATE_TIME_FORMAT.parse(this.bookingDate + " " + bookingTime + ":00");
+            return DATE_TIME_FORMAT.parse(bookingDate + " " + bookingTime + ":00");
         } catch (ParseException e) {
             throw new IllegalArgumentException(e);
         }

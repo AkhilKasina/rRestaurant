@@ -87,6 +87,8 @@ public class CustomerController {
                 
                 Booking newBooking = new Booking();
 
+                newBooking.setBookingDateTime(bookingDAO.getBookingTimeStamp());
+
                 newBooking.setBookingTime(bookingDAO.getBookingTime());
 
                 newBooking.setBookingDate(bookingDAO.getBookingDate());
@@ -107,9 +109,7 @@ public class CustomerController {
     // EDIT BOOKING
     @GetMapping("/booking/{bookingID}")
     public String editBooking(@PathVariable("bookingID") int bookingID, Model model) {
-        System.out.println(bookingID);
         Booking booking = this.bookingRepository.findById(bookingID).get();
-        System.out.println(booking);
         BookingDAO bookingDAO = new BookingDAO();
         bookingDAO.setId(booking.getId());
         bookingDAO.setDateAndTime(booking.getBookingDateTime());
