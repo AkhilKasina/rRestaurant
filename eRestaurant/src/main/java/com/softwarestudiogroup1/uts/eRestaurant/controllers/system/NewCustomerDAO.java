@@ -1,7 +1,7 @@
 package com.softwarestudiogroup1.uts.eRestaurant.controllers.system;
 
 public class NewCustomerDAO {
-    private String userName;
+    private String username;
     private String password;
     private String firstName;
     private String lastName;
@@ -9,11 +9,11 @@ public class NewCustomerDAO {
     private String address;
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setPassword(String password) {

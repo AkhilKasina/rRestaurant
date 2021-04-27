@@ -62,7 +62,7 @@ public class SignInController {
 
         System.out.println("Login " +username + "  " + password);
 
-        if (username.startsWith("M") || username.startsWith("m")) {
+        if (username.startsWith("M_") || username.startsWith("m_")) {
             // Manager Login
             Optional<Manager> currentManager = managerRepository.findByUserNameAndLastName(username, password);
 
@@ -71,7 +71,7 @@ public class SignInController {
                 return "redirect:/manager";
             }
         } 
-        else if (username.startsWith("S") || username.startsWith("s")) {
+        else if (username.startsWith("S_") || username.startsWith("s_")) {
             // Staff Login
             Optional<Staff> currentStaff = staffRepository.findByUserNameAndLastName(username, password);
 
@@ -104,13 +104,13 @@ public class SignInController {
         return ViewManager.LOG_IN;
     }
 
-    @GetMapping("/signupPage")
+    @GetMapping("/signup")
     public String signUpPage(Model model) {
         model.addAttribute("signupCustomer", new NewCustomerDAO());
         return ViewManager.SIGN_UP;
     }
 
-    @PostMapping("/signupPage")
+    @PostMapping("/signup")
     public String customerSignUp(@ModelAttribute("signupCustomer") NewCustomerDAO newCustomerDAO, final RedirectAttributes redirectAttributes) {
         
         Customer newCustomer = new Customer();

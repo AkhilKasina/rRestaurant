@@ -80,17 +80,20 @@ public class CustomerController {
         && bookingDAO.getBookingTime().replaceAll("\\s+","").isEmpty() == false) {
             Optional<Customer> currentCus = customerRepository.findById(currentID);
 
-            System.out.println("Booking: " + bookingDAO.getBookingDate() + " time: " + bookingDAO.getBookingTime());
+            System.out.println("Booking: " + bookingDAO.getBookingDate() + " time: " + bookingDAO.getBookingTime() + " table: " + bookingDAO.getTablePosition());
 
             if (currentCus.isPresent()) {
                 Customer customer = currentCus.get();
                 
                 Booking newBooking = new Booking();
 
-                newBooking.setBookingTime(bookingDAO.getBookingTimeStamp());
+                newBooking.setBookingDateTime(bookingDAO.getBookingTimeStamp());
 
-                // FIX: Set customer position from customer input
-                newBooking.setTablePosition("1E");
+                newBooking.setBookingTime(bookingDAO.getBookingTime());
+
+                newBooking.setBookingDate(bookingDAO.getBookingDate());
+
+                newBooking.setTablePosition(bookingDAO.getTablePosition());
 
                 customer.addBooking(newBooking);
 
@@ -106,12 +109,11 @@ public class CustomerController {
     // EDIT BOOKING
     @GetMapping("/booking/{bookingID}")
     public String editBooking(@PathVariable("bookingID") int bookingID, Model model) {
-
         Booking booking = this.bookingRepository.findById(bookingID).get();
-
         BookingDAO bookingDAO = new BookingDAO();
         bookingDAO.setId(booking.getId());
-        bookingDAO.setDateAndTime(booking.getBookingTime());
+        bookingDAO.setDateAndTime(booking.getBookingDateTime());
+        bookingDAO.setTablePosition(booking.getTablePosition());
 
         model.addAttribute("allowDelete", true);
         model.addAttribute("customerBooking", bookingDAO);
@@ -124,8 +126,8 @@ public class CustomerController {
         Optional<Booking> booking = this.bookingRepository.findById(bookingDAO.getId());
 
         if (currentCus.isPresent() &&  booking.isPresent()) {
-            booking.get().setBookingTime(bookingDAO.getBookingTimeStamp());
-
+            booking.get().setBookingDateTime(bookingDAO.getBookingTimeStamp());
+            booking.get().setTablePosition(bookingDAO.getTablePosition());
             currentCus.get().addBooking(booking.get());
             this.bookingRepository.save(booking.get());
         }
