@@ -62,7 +62,7 @@ public class SignInController {
 
         System.out.println("Login " +username + "  " + password);
 
-        if (username.startsWith("M") || username.startsWith("m")) {
+        if (username.startsWith("M_") || username.startsWith("m_")) {
             // Manager Login
             Optional<Manager> currentManager = managerRepository.findByUserNameAndLastName(username, password);
 
@@ -71,7 +71,7 @@ public class SignInController {
                 return "redirect:/manager";
             }
         } 
-        else if (username.startsWith("S") || username.startsWith("s")) {
+        else if (username.startsWith("S_") || username.startsWith("s_")) {
             // Staff Login
             Optional<Staff> currentStaff = staffRepository.findByUserNameAndLastName(username, password);
 
