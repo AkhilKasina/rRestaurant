@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Booking</title>
-</head>
-<body>
-
-    <h1> Welcome to user booking </h1>
+  </head>
+  <body>
+    <h1>Welcome to user booking</h1>
     <form th:object="${customerBooking}" method="post">
-        <input type="hidden" id="id" th:field="*{id}" />
-        <input type="date" id="bookingDate" placeholder="yyyy-mm-dd" th:field="*{bookingDate}">
-          <br>
-        <input type="time" id="bookingTime" th:field="*{bookingTime}">
-          <br>
-      <button> CANCEL </button>
-      <button th:with="text=${customerBooking.bookingDate} ? 'UPDATING BOOKING' : 'BOOK'" th:text="${text}" type="submit"> BOOK </button>
-      <br>
-      
+      <input type="hidden" id="id" th:field="*{id}" />
+      <input
+        type="date"
+        id="bookingDate"
+        placeholder="yyyy-mm-dd"
+        th:field="*{bookingDate}"
+      />
+      <br />
+      <input type="time" id="bookingTime" th:field="*{bookingTime}" />
+      <br />
+      <button>CANCEL</button>
+      <button
+        th:with="text=${customerBooking.bookingDate} ? 'UPDATING BOOKING' : 'BOOK'"
+        th:text="${text}"
+        type="submit"
+      >
+        BOOK
+      </button>
+      <button th:href="${/orderPage}">ORDER</button>
+      <br />
     </form>
 
-    <form th:if="${allowDelete}" th:action="@{/booking/{bookingID}/delete(bookingID=${customerBooking.id})}" method="get">
-      <input type="Submit" th:value="Delete">
+    <form
+      th:if="${allowDelete}"
+      th:action="@{/booking/{bookingID}/delete(bookingID=${customerBooking.id})}"
+      method="get"
+    >
+      <input type="Submit" th:value="Delete" />
     </form>
-    
-
-</body>
+  </body>
+</html>
