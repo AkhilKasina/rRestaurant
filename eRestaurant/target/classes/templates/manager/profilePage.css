@@ -63,22 +63,34 @@
    margin-left: 340px;
 }
 
-.header{
+header{
    display: flex;
    justify-content: space-between;
    padding: 1rem;
+   box-shadow: 4px 4px 10px rgba(0, 0,0, 0.3);
+   
+   
+   
+
+
 
 }
-.user-wrapper{
+.userwrapper{
    display: flex;
    align-items: center;
-
 }
-.user-wrapper img {
-   border-radius: 50%;
+.userwrapper img {
+   border-radius:  50%;
    margin-right: 1rem;
 }
-.user-wrapper small{ 
+.userwrapper small{
    display: inline-block;
    color: var(--text-grey);
+   
+}
+main{
+   margin-top:  10px;
+   padding: 2rem 1.5rem;
+  
+   
 }
