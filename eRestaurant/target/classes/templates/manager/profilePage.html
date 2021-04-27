@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="https://www.thymeleaf.org">
 
 <head>
    <meta charset="UTF-8">
@@ -22,16 +22,16 @@
       <div class="sidebar-menu" >
          <ul>
             <li>
-               <a href="" class="active"><span class="las la-bars"> </span> <span> Dashboard  </span></a>
+               <a href="profilePage.html" class="active"><span class="las la-bars"> </span> <span> Dashboard  </span></a>
             </li>
             <li>
                <a href=""><span class="las la-utensils"></span> <span></span>Restrurant</span></a>
             </li>
             <li>
-               <a href=""><span class="las la-address-book"></span> <span></span>Staff</span></a>
+               <a href="staffmanager.html"><span class="las la-address-book"></span> <span></span>Staff</span></a>
             </li>
             <li>
-               <a href=""><span class="las la-list"></span> <span></span>Menu</span></a>
+               <a href="menumanager.html"><span class="las la-list"></span> <span></span>Menu</span></a>
             </li>
          </ul>
       </div>
@@ -84,6 +84,43 @@
                   <span class="las la-shopping-bag"></span>
                </div>
 
+            </div>
+         </div>
+         <div class="recentflex">
+            <div class="customers">
+               <div class="card-header">
+                  <h2>Recent Customers</h2>
+                  <button>See all <span class="las la-arrow right"></span></button>
+               </div>
+               <div class="card-body">
+                  <table width=100%>
+                     <thead>
+                        <tr>
+                           <td>Cus.NO</td>
+                           <td>Name</td>
+                           <td>Bookings made</td>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>1</td>
+                           <td>Jane Smith</td>
+                           <td>2</td>
+                        </tr>
+                        <tr>
+                           <td>2</td>
+                           <td>Kara Zor-El</td>
+                           <td>2</td>
+                        </tr>
+                        <tr>
+                           <td>3</td>
+                           <td>Barry Allen</td>
+                           <td>2</td>
+                        </tr>
+                     </tbody>
+                  </table>
+
+               </div>
             </div>
          </div>
       </main>
