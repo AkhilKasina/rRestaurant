@@ -20,11 +20,13 @@
             <th>Booking ID</th>
             <th>Booking Time</th>
             <th>Booking Date</th>
+            <th>Table</th>
         </tr>
         <tr th:each="booking : ${customer.bookings}">
             <td><a th:href="@{/booking/{bookingID}(bookingID=${booking.id})}">View</a></td>
             <td th:text=${booking.id}></td>
             <td th:text=${booking.bookingTime}></td>
+            <td th:text=${booking.bookingDate}></td>
             <td th:text=${booking.tablePosition}></td>
         </tr>
     </table><br>
