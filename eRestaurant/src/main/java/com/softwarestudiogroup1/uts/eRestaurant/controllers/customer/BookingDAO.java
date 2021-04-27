@@ -5,11 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BookingDAO {
-
     private int id;
-
     private String bookingDate;
     private String bookingTime;
+    private String tablePosition;
 
     public int getId() {
         return id;
@@ -35,6 +34,14 @@ public class BookingDAO {
         this.bookingTime = bookingTime;
     }
 
+    public String getTablePosition(){
+        return tablePosition;
+    }
+
+    public void setTablePosition(String tablePosition){
+        this.tablePosition = tablePosition;
+    }
+
     private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public void setDateAndTime(Date timeStamp) {
@@ -47,7 +54,7 @@ public class BookingDAO {
 
     public Date getBookingTimeStamp() {
         try {
-            return DATE_TIME_FORMAT.parse(this.bookingDate + " " + bookingTime + ":00");
+            return DATE_TIME_FORMAT.parse(bookingDate + " " + bookingTime + ":00");
         } catch (ParseException e) {
             throw new IllegalArgumentException(e);
         }

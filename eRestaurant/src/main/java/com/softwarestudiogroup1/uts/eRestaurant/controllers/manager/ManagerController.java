@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -28,7 +29,7 @@ public class ManagerController {
 
     }
     
-    @GetMapping("manager")
+    @GetMapping("/manager")
     public String managerPortal(@ModelAttribute("managerID") int managerID, Model model) {
         this.currentID = managerID;
         Optional<Manager> currentManager = managerRepository.findById(this.currentID);
@@ -38,7 +39,13 @@ public class ManagerController {
             model.addAttribute("manager", manager);
         }
 
-        return "";
+        return ViewManager.MNG_PORTAL;
+    }
+
+    private String redirectToCustomerPortal(final RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("managerID", this.currentID);
+        return "redirect:/manager";
     }
     
 }

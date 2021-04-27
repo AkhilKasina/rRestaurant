@@ -16,5 +16,8 @@ public class ViewManager {
     public static final String CUS_ORDER = "customers/orderPage";
     public static final String CUS_CONFIRM = "customers/orderConfirmation";
 
+    // MANAGER
+    public static final String MNG_PORTAL = "manager/profilePage";
+
     private ViewManager() {}
 }
