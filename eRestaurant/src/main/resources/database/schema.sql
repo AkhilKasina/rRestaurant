@@ -10,8 +10,6 @@ CREATE TABLE IF NOT EXISTS customers (
     address VARCHAR(200)
 );
 
-
-
 CREATE TABLE IF NOT EXISTS bookings (
     id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     booking_time TIMESTAMP,
@@ -25,7 +23,8 @@ CREATE TABLE IF NOT EXISTS items (
     id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     price DOUBLE,
-    menu_type VARCHAR(10)
+    menu_type VARCHAR(10),
+    description VARCHAR(200)
 );
 
 CREATE TABLE IF NOT EXISTS bookingitems (

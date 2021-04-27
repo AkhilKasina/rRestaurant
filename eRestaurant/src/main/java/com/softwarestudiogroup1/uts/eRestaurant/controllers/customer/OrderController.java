@@ -25,4 +25,9 @@ public class OrderController {
     public String orderPage(Model model) {
         return ViewManager.CUS_ORDER;
     }
+
+    @GetMapping("/orderConfirmation")
+    public String orderConfirmation(Model model) {
+        return ViewManager.CUS_CONFIRM;
+    }
 }
