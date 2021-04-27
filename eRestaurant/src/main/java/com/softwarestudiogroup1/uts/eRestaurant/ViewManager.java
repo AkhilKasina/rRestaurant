@@ -6,6 +6,9 @@ public class ViewManager {
     public static final String HOME_RESTAURANT = "homeRestaurant";
     public static final String LOG_IN = "loginPage";
     public static final String SIGN_UP = "signupPage";
+    public static final String LUNCH_MENU = "lunchMenu";
+    public static final String DINNER_MENU = "dinnerMenu";
+
 
     // CUSTOMER
     public static final String CUS_BOOKING = "customers/bookingPage";

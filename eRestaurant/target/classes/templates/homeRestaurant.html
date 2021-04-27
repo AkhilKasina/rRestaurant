@@ -9,7 +9,18 @@
 </head>
 <body>
   
-    <header>
+  <header>
+    <div class="dropdown">
+      <a th:href="@{/lunchMenu}">
+        <button class="dropbtn"><b>Menu</b></button>
+        <div class="dropdown-menu">
+          <a th:href="@{/lunchMenu}"><b>Lunch</b></a>
+          <hr>
+          <a th:href="@{/dinnerMenu}"><b>Dinner</b></a>
+        </div>
+      </a>
+    </div>
+
       <a th:href="@{/login}">
         <button ><b>Login</b></button>
       </a>
@@ -18,8 +29,7 @@
           <button ><b>Register</b></button>
       </a>
         
-        
-    </header>
+  </header>
 
       <main>
           <h1>

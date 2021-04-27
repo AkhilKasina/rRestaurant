@@ -1,60 +1,98 @@
-body{
-   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(backgroung.jpg);
-   height: 100vh;
-   
-   background-position: center;
-
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(backgroung.jpg);
+  height: 100vh;
+  background-position: center;
 }
-header{
-   text-align: right;
+header {
+  text-align: right;
 }
-h1{
-   text-align: center;
-   
+h1 {
+  text-align: center;
 }
-h2{
-   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   font-size: 30px;
-   color: antiquewhite;
+h2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 30px;
+  color: antiquewhite;
 }
-h3{
-   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   font-size: 30px;
-   color: antiquewhite;
+h3 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 30px;
+  color: antiquewhite;
 }
 button {
-   font-family: Arial, Helvetica, sans-serif;
-   background-color: #73a875;
-   color: white;
-   padding: 14px 20px;
-   margin: 8px 0;
-   border: none;
-   cursor: pointer;
-   width: auto;
-   text-align: center;
-   font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #73a875;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  text-align: center;
+  font-size: 16px;
 }
-p{
-   font-family: Arial, Helvetica, sans-serif;
-   font-size: 20px;
-   color: aliceblue;
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: aliceblue;
 }
 
-main{
-   text-align: center;
-   font-family: Arial, Helvetica, sans-serif;
-   color: antiquewhite;
-   width: 100%;
+main {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: antiquewhite;
+  width: 100%;
 }
-table{
-   width: 100%;
+table {
+  width: 100%;
 }
-th{
-   width: 33.3333%;
+th {
+  width: 33.3333%;
 }
-label{
-    width: 100px;
- } 
-button:hover {opacity: 0.8;}
+label {
+  width: 100px;
+}
+button:hover {
+  opacity: 0.8;
+}
 
-   
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #73a875;
+  text-align: center;
+  padding: 10px 16px;
+  z-index: 1;
+}
+
+.dropdown-menu a {
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  color: orange;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+hr {
+  width: 100%;
+  text-align: center;
+  background-color: grey;
+  height: 2px;
+  border-width: 0;
+}
