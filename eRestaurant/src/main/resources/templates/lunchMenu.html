@@ -19,6 +19,20 @@
           <h4>Lunch Menu</h4>
           <h3>Available 12pm to 4pm</h3>
         </div>
+        <div>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Description</th>
+            </tr>
+            <tr th:each="item : ${Items}">
+              <td th:text="${item.name}"></td>
+              <td th:text="${item.price}"></td>
+              <td th:text="${item.description}"></td>
+          </tr>
+          </table>
+        </div>
         <div class="menu">
           <div class="item">
             <div>

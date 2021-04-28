@@ -31,13 +31,13 @@ public class ItemController {
     * This function is used for a purpose of database testing. 
     * Has to remove when publishing website
     */
-    @GetMapping("/allitem")
+    @GetMapping("/lunch")
     public String getHomePage(Model model) {
         List<Item> itemLists = itemRepository.findAll();
 
-        model.addAttribute("ItemLists", itemLists);
+        model.addAttribute("Items", itemLists);
 
-        return "menu/allitems";
+        return "lunchMenu";
         
     }
 
