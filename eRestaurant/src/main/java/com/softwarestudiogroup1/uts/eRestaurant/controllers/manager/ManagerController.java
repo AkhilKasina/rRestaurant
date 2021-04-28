@@ -1,5 +1,6 @@
 package com.softwarestudiogroup1.uts.eRestaurant.controllers.manager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -42,20 +43,22 @@ public class ManagerController {
     @GetMapping("/manager")
     public String managerPortal(@ModelAttribute("managerID") int managerID, Model model) {
         this.currentID = managerID;
-        Optional<Manager> currentManager = managerRepository.findById(this.currentID);
-
-        int i = 0;
-        String[] names = new String[bookingRepository.findAll().size()];
-        for (Booking booking : bookingRepository.findAll()){
-            Customer customer = customerRepository.findById(booking.getId()).get();
-            names[i] = customer.getFirstName() + " " + customer.getLastName();
-            i += 1;
-        }
-        model.addAttribute("bookings", bookingRepository.findAll());
-        model.addAttribute("names", names);
+        Optional<Manager> currentManager = managerRepository.findById(currentID);
         if (currentManager.isPresent()) {
             Manager manager = currentManager.get();
+
             model.addAttribute("manager", manager);
+
+            List<Booking> bookinglist = bookingRepository.findAll();
+
+            ArrayList<String> names = new ArrayList<>();
+            for (Booking booking : bookinglist){
+                Customer customer = booking.getCustomer();
+                names.add(customer.getFirstName() + " " + customer.getLastName());
+            }
+            model.addAttribute("names", names);
+            model.addAttribute("bookings", bookinglist );
+            
         }
         return ViewManager.MNG_PORTAL;
     }
