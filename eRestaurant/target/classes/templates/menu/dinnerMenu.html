@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order Lunch</title>
+    <title>Dinner Menu</title>
     <link rel="stylesheet" th:href="@{/menuPage/menu.css}" />
   </head>
   <header>
@@ -16,8 +16,8 @@
     <div class="whitePage">
       <div class="wrapper">
         <div class="title">
-          <h4>Lunch Menu</h4>
-          <h3>Available 12pm to 4pm</h3>
+          <h4>Dinner Menu</h4>
+          <h3>Available 5.30pm to 9pm</h3>
         </div>
         <div class="menuWrapper">
           <table th:each="item : ${Items}" class = "menu">
@@ -30,17 +30,12 @@
             <tr >
               <td th:text="${item.name}" class = "dish" id = "name"></td>
               <td th:text="${item.price}" class = "dish" id = "price"></td>
-              <td>
-                <input type="number" max = "5" value = "0" id = "quantity">
-              </td>
           </tr>
           <tr>
             <td th:text="${item.description}" class="desc"></td>
           </tr>
             </div>
           </table>
-          <a th:href="@{/}"><button class="orderBtn">ORDER</button></a>
-          <a th:href="@{/}"><button class="orderBtn" id="cancel">CANCEL</button></a>
         </div>
         </div>
       </div>
