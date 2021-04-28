@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login</title>
+   <link rel="stylesheet" th:href="@{/loginPage/login.css}">
+</head>
+<header>
+   <a th:href="@{/}">
+      <button>
+         <b>Home</b>
+      </button>
+   </a>
+</header>
+
+<body>
+   <div class="loginpage">
+      <form class="form" action="#" th:action="@{/login}" th:object="${loginPatron}" method="post">
+         <table>
+            <tr>
+               <th>
+                  <label>Username: </label>
+               </th>
+               <th>
+                  <input type="text" placeholder="Enter Username or E-mail" th:field="*{username}" />
+               </th>
+            </tr>
+            <tr>
+               <th><label>Password: </label></th>
+               <th><input type="password" placeholder="Enter Password" th:field="*{password}" /></th>
+            </tr>
+         </table>
+         <button type="submit">Login</button>
+         <br>
+         <div th:if="${success == false}">
+            <p style="color: red"> Login Unsuccessful, please try again</p>
+         </div>
+         <br>
+         <a th:href="@{/signup}">
+         <p>Register?</p> <p>Forgot Password?</p></a>
+
+      </form>
+   </div>
+</body>
+
+</html>

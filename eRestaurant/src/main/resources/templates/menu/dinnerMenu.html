@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dinner Menu</title>
+    <link rel="stylesheet" th:href="@{/menuPage/menu.css}" />
+  </head>
+  <header>
+    <a th:href="@{/}">
+      <button>Home</button>
+    </a>
+  </header>
+  <body>
+    <div class="whitePage">
+      <div class="wrapper">
+        <div class="title">
+          <h4>Dinner Menu</h4>
+          <h3>Available 5.30pm to 9pm</h3>
+        </div>
+        <div class="menuWrapper">
+          <table th:each="item : ${Items}" class = "menu">
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            <div class = "item">
+            <tr >
+              <td th:text="${item.name}" class = "dish" id = "name"></td>
+              <td th:text="${item.price}" class = "dish" id = "price"></td>
+          </tr>
+          <tr>
+            <td th:text="${item.description}" class="desc"></td>
+          </tr>
+            </div>
+          </table>
+        </div>
+        </div>
+      </div>
+  </body>
+</html>
