@@ -39,6 +39,30 @@ public class ManagerController {
         this.bookingRepository = bookingRepository;
         this.customerRepository = customerRepository;
     }
+
+    //@GetMapping("/restrurant")
+
+    @GetMapping("/staffmanager")
+    public String staffmanager(@ModelAttribute("managerID") int managerID, Model model) {
+        this.currentID = managerID;
+        Optional<Manager> currentManager = managerRepository.findById(currentID);
+        if (currentManager.isPresent()) {
+            Manager manager = currentManager.get();
+            model.addAttribute("manager", manager);
+            model.addAttribute("mangerID", this.currentID);
+        return ViewManager.MNG_STAFF;
+    }
+
+    @GetMapping("/menumanager")
+    public String menumanager(@ModelAttribute("managerID") int managerID, Model model) {
+        this.currentID = managerID;
+        Optional<Manager> currentManager = managerRepository.findById(currentID);
+        if (currentManager.isPresent()) {
+            Manager manager = currentManager.get();
+            model.addAttribute("manager", manager);
+            model.addAttribute("mangerID", this.currentID);
+        return ViewManager.MNG_MENU;
+    }
     
     @GetMapping("/manager")
     public String managerPortal(@ModelAttribute("managerID") int managerID, Model model) {
@@ -46,18 +70,18 @@ public class ManagerController {
         Optional<Manager> currentManager = managerRepository.findById(currentID);
         if (currentManager.isPresent()) {
             Manager manager = currentManager.get();
-
             model.addAttribute("manager", manager);
+            model.addAttribute("mangerID", this.currentID);
 
             List<Booking> bookinglist = bookingRepository.findAll();
-
             ArrayList<String> names = new ArrayList<>();
+
             for (Booking booking : bookinglist){
                 Customer customer = booking.getCustomer();
                 names.add(customer.getFirstName() + " " + customer.getLastName());
             }
             model.addAttribute("names", names);
-            model.addAttribute("bookings", bookinglist );
+            model.addAttribute("bookings", bookinglist);
             
         }
         return ViewManager.MNG_PORTAL;
@@ -68,5 +92,4 @@ public class ManagerController {
         redirectAttributes.addFlashAttribute("managerID", this.currentID);
         return "redirect:/manager";
     }
-    
 }
