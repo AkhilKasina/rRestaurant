@@ -105,13 +105,13 @@ public class SignInController {
         return ViewManager.LOG_IN;
     }
 
-    @GetMapping("/signupPage")
+    @GetMapping("/signup")
     public String signUpPage(Model model) {
         model.addAttribute("signupCustomer", new NewCustomerDAO());
         return ViewManager.SIGN_UP;
     }
 
-    @PostMapping("/signupPage")
+    @PostMapping("/signup")
     public String customerSignUp(@ModelAttribute("signupCustomer") NewCustomerDAO newCustomerDAO, final RedirectAttributes redirectAttributes) {
         
         Customer newCustomer = new Customer();
