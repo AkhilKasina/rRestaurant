@@ -43,47 +43,32 @@ public class ManagerController {
     //@GetMapping("/restrurant")
 
     @GetMapping("/staffmanager")
-    public String staffmanager(@ModelAttribute("managerID") int managerID, Model model) {
-        this.currentID = managerID;
-        Optional<Manager> currentManager = managerRepository.findById(currentID);
-        if (currentManager.isPresent()) {
-            Manager manager = currentManager.get();
-            model.addAttribute("manager", manager);
-            model.addAttribute("mangerID", this.currentID);
+    public String staffmanager(){
         return ViewManager.MNG_STAFF;
     }
 
     @GetMapping("/menumanager")
-    public String menumanager(@ModelAttribute("managerID") int managerID, Model model) {
-        this.currentID = managerID;
-        Optional<Manager> currentManager = managerRepository.findById(currentID);
-        if (currentManager.isPresent()) {
-            Manager manager = currentManager.get();
-            model.addAttribute("manager", manager);
-            model.addAttribute("mangerID", this.currentID);
+    public String menumanager(){
         return ViewManager.MNG_MENU;
     }
     
     @GetMapping("/manager")
-    public String managerPortal(@ModelAttribute("managerID") int managerID, Model model) {
-        this.currentID = managerID;
-        Optional<Manager> currentManager = managerRepository.findById(currentID);
-        if (currentManager.isPresent()) {
-            Manager manager = currentManager.get();
-            model.addAttribute("manager", manager);
-            model.addAttribute("mangerID", this.currentID);
+    public String managerPortal(Model model){//@ModelAttribute("managerID") int managerID, Model model) {
+        //this.currentID = managerID;
+        //Optional<Manager> currentManager = managerRepository.findById(currentID);
+        //if (currentManager.isPresent()) {
+            //Manager manager = currentManager.get();   ##### IS THIS NEEDED
+            //model.addAttribute("manager", manager);
 
-            List<Booking> bookinglist = bookingRepository.findAll();
-            ArrayList<String> names = new ArrayList<>();
+        List<Booking> bookinglist = bookingRepository.findAll();
+        ArrayList<String> names = new ArrayList<>();
 
-            for (Booking booking : bookinglist){
-                Customer customer = booking.getCustomer();
-                names.add(customer.getFirstName() + " " + customer.getLastName());
-            }
-            model.addAttribute("names", names);
-            model.addAttribute("bookings", bookinglist);
-            
+        for (Booking booking : bookinglist){
+            Customer customer = booking.getCustomer();
+            names.add(customer.getFirstName() + " " + customer.getLastName());
         }
+        model.addAttribute("names", names);
+        model.addAttribute("bookings", bookinglist);
         return ViewManager.MNG_PORTAL;
     }
 
