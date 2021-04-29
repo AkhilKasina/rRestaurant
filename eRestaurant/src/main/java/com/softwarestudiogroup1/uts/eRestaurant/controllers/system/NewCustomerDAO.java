@@ -8,12 +8,12 @@ public class NewCustomerDAO {
     private String telephone;
     private String address;
 
-    public void setUserName(String userName) {
-        this.username = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserName() {
-        return username;
+    public String getUsername() {
+        return this.username;
     }
 
     public void setPassword(String password) {

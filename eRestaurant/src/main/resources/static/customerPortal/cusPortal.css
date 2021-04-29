@@ -1,0 +1,61 @@
+body {
+  background-image: url(portalBackground.jpg);
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+}
+
+.whitePage {
+  background-color: white;
+  margin-bottom: 40px;
+  box-shadow: 10px 10px;
+  padding: 20px;
+}
+
+.col1{
+    width: 300px;
+    float: left;
+}
+
+.col2{
+    margin-left: 340px;
+}
+
+h1{
+    font-size: 24px;
+    font-style: italic;   
+    color: #58af5b;
+    margin: 0;
+
+}
+
+#name{
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 15px;
+    margin-top: 20px;
+}
+
+#address{
+  margin-top: 20px;
+}
+
+#address p{
+    font-weight: bold;
+}
+
+button {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #73a875;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  text-align: center;
+  font-size: 16px;
+}

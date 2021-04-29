@@ -21,13 +21,13 @@ import org.springframework.ui.Model;
 @Controller
 public class MenuController {
 
-    @GetMapping("/lunchMenu")
-    public String lunchMenuPage(Model model) {
-        return ViewManager.LUNCH_MENU;
-    }
+    // @GetMapping("/lunchMenu")
+    // public String lunchMenuPage(Model model) {
+    //     return ViewManager.LUNCH_MENU;
+    // }
     
-    @GetMapping("/dinnerMenu")
-    public String dinnerMenuPage(Model model) {
-        return ViewManager.DINNER_MENU;
-    }
+    // @GetMapping("/dinnerMenu")
+    // public String dinnerMenuPage(Model model) {
+    //     return ViewManager.DINNER_MENU;
+    // }
 }

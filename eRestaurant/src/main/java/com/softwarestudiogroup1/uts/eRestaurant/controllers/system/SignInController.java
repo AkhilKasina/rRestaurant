@@ -116,11 +116,11 @@ public class SignInController {
         Customer newCustomer = new Customer();
         newCustomer.set(newCustomerDAO.getFirstName(), newCustomerDAO.getLastName(), 
                         newCustomerDAO.getTelephone(), newCustomerDAO.getAddress(), 
-                        newCustomerDAO.getUserName(), newCustomerDAO.getPassword());
+                        newCustomerDAO.getUsername(), newCustomerDAO.getPassword());
         
         customerRepository.save(newCustomer);
 
         redirectAttributes.addFlashAttribute("customerID", newCustomer.getId());
-        return "redirect:/booking";
+        return "redirect:/booking/new";
     }
 }

@@ -32,20 +32,21 @@
   </header>
 
   <body>
-    <div class="loginpage">
-      <h2>New to our restaurant?</h2>
-      <p class="para">
-        Sign up for exclusive rewards and discounts the next time you reserve a
-        table using our website!
-      </p>
+    <div class="loginpage" id="signuppage">
       <div class="form">
         <form
           class="form"
+          id="sign"
           action="#"
           th:action="@{/signup}"
           th:object="${signupCustomer}"
           method="post"
         >
+        <h2>New to our restaurant?</h2>
+        <p class="para">
+          Sign up for exclusive rewards and discounts the next time you reserve a
+          table using our website!
+        </p>
           <table>
             <!-- <tr>
               <th>
@@ -61,7 +62,7 @@
                 <label>First Name: </label>
               </th>
               <td>
-                <input type="text" th:field="*{firstName}" required />
+                <input type="text" th:field="*{firstName}" placeholder="eg. John" required />
               </td>
             </tr>
             <tr>
@@ -69,7 +70,7 @@
                 <label>Last Name: </label>
               </th>
               <td>
-                <input type="text" th:field="*{lastName}" required />
+                <input type="text" th:field="*{lastName}" placeholder="eg. Smith" required />
               </td>
             </tr>
             <tr>
@@ -93,7 +94,7 @@
                 <input
                   type="text"
                   pattern="[0-9]{10}"
-                  placeholder="Enter Australian telephone"
+                  placeholder="Enter your Australian telephone number"
                   th:field="*{telephone}"
                   required
                 />
