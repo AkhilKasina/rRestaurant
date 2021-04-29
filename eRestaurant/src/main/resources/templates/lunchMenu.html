@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order Lunch</title>
+    <title>Lunch Menu</title>
     <link rel="stylesheet" th:href="@{/menuPage/menu.css}" />
   </head>
   <header>
@@ -19,15 +19,28 @@
           <h4>Lunch Menu</h4>
           <h3>Available 12pm to 4pm</h3>
         </div>
+        <div>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Description</th>
+            </tr>
+            <tr th:each="item : ${Items}">
+              <td th:text="${item.name}"></td>
+              <td th:text="${item.price}"></td>
+              <td th:text="${item.description}"></td>
+          </tr>
+          </table>
+        </div>
         <div class="menu">
           <div class="item">
             <div>
-              <h4>Carbonara Pasta <span>$18</span></h4>
+              <h4><span></span> <span>$18</span></h4>
               <p>
                 item description, ingredients, sample text etc fein oaeg malike
                 kemie emwodn gef kasignve andg egheurge nheyme
               </p>
-              <input id="quantity" type="number" max="5" value="0">
             </div>
           </div>
           <div class="item">
@@ -37,7 +50,6 @@
                 item description, ingredients, sample text etc fein oaeg malike
                 kemie emwodn gef kasignve andg egheurge nheyme
               </p>
-              <input id="quantity" type="number" max="5" value="0">
             </div>
           </div>
           <div class="item">
@@ -47,7 +59,6 @@
                 item description, ingredients, sample text etc fein oaeg malike
                 kemie emwodn gef kasignve andg egheurge nheyme
               </p>
-              <input id="quantity" type="number" max="5" value="0">
             </div>
           </div>
           <div class="item">
@@ -57,7 +68,6 @@
                 item description, ingredients, sample text etc fein oaeg malike
                 kemie emwodn gef kasignve andg egheurge nheyme
               </p>
-              <input id="quantity" type="number" max="5" value="0">
             </div>
           </div>
           <div class="item">
@@ -67,20 +77,17 @@
                 item description, ingredients, sample text etc fein oaeg malike
                 kemie emwodn gef kasignve andg egheurge nheyme
               </p>
-              <input id="quantity" type="number" max="5" value="0">
             </div>
           </div>
           <div class="item">
             <div>
-              <h4> alluring Nuke codes <span>$300</span></h4>
+              <h4>Putin's alluring Nuke codes <span>$300</span></h4>
               <p>
                 item description, ingredients, sample text etc fein oaeg malike
                 kemie emwodn gef kasignve andg egheurge nheyme
               </p>
-              <input id="quantity" type="number" max="5" value="0">
             </div>
           </div>
-          <a th:href="@{/orderConfirmation}"><button id="orderBtn">ORDER</button></a>
         </div>
       </div>
     </div>

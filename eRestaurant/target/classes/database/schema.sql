@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS items (
     name VARCHAR(50) NOT NULL,
     price DOUBLE,
     menu_type VARCHAR(10),
-    description VARCHAR(400)
+    description VARCHAR(200)
 );
 
 CREATE TABLE IF NOT EXISTS bookingitems (

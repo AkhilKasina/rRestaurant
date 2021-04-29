@@ -19,30 +19,70 @@
           <h4>Lunch Menu</h4>
           <h3>Available 12pm to 4pm</h3>
         </div>
-        <div class="menuWrapper">
-          <table th:each="item : ${Items}" class = "menu">
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-            <div class = "item">
-            <tr >
-              <td th:text="${item.name}" class = "dish" id = "name"></td>
-              <td th:text="${item.price}" class = "dish" id = "price"></td>
-              <td>
-                <input type="number" max = "5" value = "0" id = "quantity">
-              </td>
-          </tr>
-          <tr>
-            <td th:text="${item.description}" class="desc"></td>
-          </tr>
+        <div class="menu">
+          <div class="item">
+            <div>
+              <h4>Carbonara Pasta <span>$18</span></h4>
+              <p>
+                item description, ingredients, sample text etc fein oaeg malike
+                kemie emwodn gef kasignve andg egheurge nheyme
+              </p>
+              <input id="quantity" type="number" max="5" value="0">
             </div>
-          </table>
-          <a th:href="@{/}"><button class="orderBtn">ORDER</button></a>
-          <a th:href="@{/}"><button class="orderBtn" id="cancel">CANCEL</button></a>
-        </div>
+          </div>
+          <div class="item">
+            <div>
+              <h4>Chicken Parmesan <span>$15</span></h4>
+              <p>
+                item description, ingredients, sample text etc fein oaeg malike
+                kemie emwodn gef kasignve andg egheurge nheyme
+              </p>
+              <input id="quantity" type="number" max="5" value="0">
+            </div>
+          </div>
+          <div class="item">
+            <div>
+              <h4>Olive Pizza with Olive Oil <span>$42</span></h4>
+              <p>
+                item description, ingredients, sample text etc fein oaeg malike
+                kemie emwodn gef kasignve andg egheurge nheyme
+              </p>
+              <input id="quantity" type="number" max="5" value="0">
+            </div>
+          </div>
+          <div class="item">
+            <div>
+              <h4>Uncle Steve's shoddy Boomerang <span>$2</span></h4>
+              <p>
+                item description, ingredients, sample text etc fein oaeg malike
+                kemie emwodn gef kasignve andg egheurge nheyme
+              </p>
+              <input id="quantity" type="number" max="5" value="0">
+            </div>
+          </div>
+          <div class="item">
+            <div>
+              <h4>1990 Apple Macintosh Classic <span>$50</span></h4>
+              <p>
+                item description, ingredients, sample text etc fein oaeg malike
+                kemie emwodn gef kasignve andg egheurge nheyme
+              </p>
+              <input id="quantity" type="number" max="5" value="0">
+            </div>
+          </div>
+          <div class="item">
+            <div>
+              <h4> alluring Nuke codes <span>$300</span></h4>
+              <p>
+                item description, ingredients, sample text etc fein oaeg malike
+                kemie emwodn gef kasignve andg egheurge nheyme
+              </p>
+              <input id="quantity" type="number" max="5" value="0">
+            </div>
+          </div>
+          <a th:href="@{/orderConfirmation}"><button id="orderBtn">ORDER</button></a>
         </div>
       </div>
+    </div>
   </body>
 </html>
