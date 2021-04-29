@@ -64,8 +64,9 @@ public class SignInController {
 
         if (username.startsWith("M_") || username.startsWith("m_")) {
             // Manager Login
-            Optional<Manager> currentManager = managerRepository.findByUserNameAndLastName(username, password);
-
+            
+            Optional<Manager> currentManager = managerRepository.findByUserNameAndPassword(username, password);
+            System.out.println(currentManager.get().getId());
             if (currentManager.isPresent()) {
                 redirectAttributes.addFlashAttribute("managerID", currentManager.get().getId());
                 return "redirect:/manager";
