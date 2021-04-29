@@ -8,7 +8,7 @@
    <title>Manager Portal</title>
    <link rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-   <link rel="stylesheet" href="profilePage.css">
+   <link rel="stylesheet" href="/managerPage/profilePage.css">
 
 
 </head>
@@ -22,16 +22,16 @@
       <div class="sidebar-menu">
          <ul>
             <li>
-               <a href="profilePage.html"><span class="las la-bars"> </span> <span> Dashboard </span></a>
+               <a th:href="@{/manager}"><span class="las la-bars"> </span> <span> Dashboard  </span></a>
             </li>
             <li>
                <a href=""><span class="las la-utensils"></span> <span></span>Restrurant</span></a>
             </li>
             <li>
-               <a href="staffmanager.html" class="active"><span class="las la-address-book"></span> <span></span>Staff</span></a>
+               <a th:href="@{/staffmanager}" class="active"><span class="las la-address-book"></span> <span></span>Staff</span></a>
             </li>
             <li>
-               <a href="menumanager.html"><span class="las la-list"></span> <span></span>Menu</span></a>
+               <a th:href="@{/menumanager}"><span class="las la-list"></span> <span></span>Menu</span></a>
             </li>
          </ul>
       </div>
@@ -45,7 +45,7 @@
             Dashboard
          </h2>
          <div class="userwrapper">
-            <img src="male.jpg" width="50px" height="50px" alt="">
+            <img src="/managerPage/male.jpg" width="50px" height="50px" alt="">
             <div>
                <h4>John Doe</h4>
                <small>Store Manager</small>

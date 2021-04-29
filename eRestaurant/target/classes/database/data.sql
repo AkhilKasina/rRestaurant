@@ -3,6 +3,7 @@ VALUES(1, 'johnny', '123', 'Johnny', 'Nguyen', '012345634', '123 Add Street');
 
 INSERT INTO bookings VALUES(1, '2021-01-02 20:30:00','20:30:00','2021-01-02', 'Window 1', 1);
 
+
 INSERT INTO managers VALUES(1, 'M100001@manager.com', 'M_101', '123', 'Software', 'Engineering', '044469696');
 INSERT INTO items VALUES(1, 'PORK ST LOUIS', 35.9, 'lunch', 'Pork St. Louis Ribs offer the classic ribs look and taste – only ramped up to exceed your flavour expectations.');
 INSERT INTO items VALUES(2, 'BEEF FULL RACK', 45.9, 'dinner', 'We know, we know, our Beef Ribs are so mouthwateringly beautiful that you simply have to snap a photo.');
