@@ -2,13 +2,17 @@ package com.softwarestudiogroup1.uts.eRestaurant.controllers.customer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BookingDAO {
     private int id;
     private String bookingDate;
     private String bookingTime;
     private String tablePosition;
+
+    private ArrayList<BookingItemDAO> bookingItems;
 
     public int getId() {
         return id;
@@ -59,4 +63,13 @@ public class BookingDAO {
             throw new IllegalArgumentException(e);
         }
     }
+
+    public void setBookingItems(ArrayList<BookingItemDAO> bookingItems) {
+        this.bookingItems = bookingItems;
+    }
+
+    public ArrayList<BookingItemDAO> getBookingItems() {
+        return bookingItems;
+    }
+
 }

@@ -1,10 +1,14 @@
 package com.softwarestudiogroup1.uts.eRestaurant.controllers.customer;
 
 import com.softwarestudiogroup1.uts.eRestaurant.ViewManager;
+import com.softwarestudiogroup1.uts.eRestaurant.models.BookingItemRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.BookingRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.CustomerRepository;
+import com.softwarestudiogroup1.uts.eRestaurant.models.ItemRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Booking;
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Customer;
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Item;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,10 +30,14 @@ public class CustomerController {
 
     private final CustomerRepository customerRepository;
     private final BookingRepository bookingRepository;
+    private final ItemRepository itemRepository;
+    private final BookingItemRepository bookingItemRepository;
 
-    public CustomerController(CustomerRepository customerRepository, BookingRepository bookingRepository) {
+    public CustomerController(CustomerRepository customerRepository, BookingRepository bookingRepository, ItemRepository itemRepository, BookingItemRepository bookingItemRepository) {
         this.customerRepository = customerRepository;
         this.bookingRepository = bookingRepository;
+        this.itemRepository = itemRepository;
+        this.bookingItemRepository = bookingItemRepository;
     }
 
     /**
@@ -68,13 +77,35 @@ public class CustomerController {
 
     @GetMapping(value="/booking/new")
     public String processBookingForm(Model model) {
-        model.addAttribute("customerBooking", new BookingDAO());
+        BookingDAO newBooking = new BookingDAO();
+        
+        ArrayList<BookingItemDAO> bookingItems = new ArrayList<>();
+        List<Item> itemLists = itemRepository.findAll();
+
+        //only puts lunch items into lunchList
+        for(Item item : itemLists){
+            if(item.getMenuType().equals("lunch")){
+                BookingItemDAO bookingItem = new BookingItemDAO();
+
+                bookingItem.setItemID(item.getId());
+                bookingItem.setName(item.getName());
+                bookingItem.setPrice(item.getPrice());
+                bookingItem.setDescription(item.getDescription());
+                bookingItem.setQuantity("0");
+
+                bookingItems.add(bookingItem);
+            }
+        }
+
+        newBooking.setBookingItems(bookingItems);
+
+        model.addAttribute("customerBooking", newBooking);
         return ViewManager.CUS_BOOKING;
     }
     
     @PostMapping("/booking/new")
     public String processBooking(@ModelAttribute("customerBooking") BookingDAO bookingDAO, final RedirectAttributes redirectAttributes) {
-        
+
         // Validate Date and Time here
         if ( bookingDAO.getBookingDate().replaceAll("\\s+","").isEmpty() == false
         && bookingDAO.getBookingTime().replaceAll("\\s+","").isEmpty() == false) {
@@ -85,20 +116,39 @@ public class CustomerController {
             if (currentCus.isPresent()) {
                 Customer customer = currentCus.get();
                 
+                // Save Booking To Database
                 Booking newBooking = new Booking();
-
                 newBooking.setBookingDateTime(bookingDAO.getBookingTimeStamp());
-
                 newBooking.setBookingTime(bookingDAO.getBookingTime());
-
                 newBooking.setBookingDate(bookingDAO.getBookingDate());
-
                 newBooking.setTablePosition(bookingDAO.getTablePosition());
-
                 customer.addBooking(newBooking);
 
                 bookingRepository.save(newBooking);
 
+                // Save Booking Items to Database
+                ArrayList<BookingItem> newBookingItems = new ArrayList<>();
+
+                for (BookingItemDAO bookItemIter: bookingDAO.getBookingItems()) {
+                    BookingItem newBookingItem = new BookingItem();
+
+                    Optional<Item> item = itemRepository.findById(bookItemIter.getItemID());
+                    int quantity = Integer.parseInt(bookItemIter.getQuantity());
+                    
+                    // Validate item to save into database
+                    if (item.isPresent() && quantity > 0 ) {
+                        newBookingItem.setBooking(newBooking);
+                        newBookingItem.setItem(item.get());
+                        newBookingItem.setQuantity(quantity);
+
+                        newBookingItems.add(newBookingItem);
+
+                        bookingItemRepository.save(newBookingItem);
+
+                        System.out.println("Items Saved " + item.get().getName() + " quantity: " + quantity);
+                    }
+                    
+                }
             }
         }
         
@@ -114,6 +164,26 @@ public class CustomerController {
         bookingDAO.setId(booking.getId());
         bookingDAO.setDateAndTime(booking.getBookingDateTime());
         bookingDAO.setTablePosition(booking.getTablePosition());
+
+        ArrayList<BookingItemDAO> bookingItems = new ArrayList<>();
+        List<Item> itemLists = itemRepository.findAll();
+
+        //only puts lunch items into lunchList
+        for(Item item : itemLists){
+            if(item.getMenuType().equals("lunch")){
+                BookingItemDAO bookingItem = new BookingItemDAO();
+
+                bookingItem.setItemID(item.getId());
+                bookingItem.setName(item.getName());
+                bookingItem.setPrice(item.getPrice());
+                bookingItem.setDescription(item.getDescription());
+                bookingItem.setQuantity("0");
+
+                bookingItems.add(bookingItem);
+            }
+        }
+
+        newBooking.setBookingItems(bookingItems);
 
         model.addAttribute("allowDelete", true);
         model.addAttribute("customerBooking", bookingDAO);
@@ -147,7 +217,6 @@ public class CustomerController {
         // redirectAttributes.addFlashAttribute("customerID", this.currentID);
         return redirectToCustomerPortal(redirectAttributes);
     }
-
 
     // CONVENIENCE
     private String redirectToCustomerPortal(final RedirectAttributes redirectAttributes) {
