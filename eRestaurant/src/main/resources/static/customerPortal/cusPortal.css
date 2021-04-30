@@ -1,5 +1,6 @@
 body {
-  background-image: url(portalBackground.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(backgroung.jpg);
   height: 100vh;
   background-attachment: fixed;
   background-position: center;
@@ -9,23 +10,29 @@ body {
 }
 
 .whitePage {
-  background-color: white;
-  margin-bottom: 40px;
-  box-shadow: 10px 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 20px;
   padding: 20px;
+  border-radius: 20px;
 }
 
 .col1{
+    background-color: rgba(179, 164, 164, 0.6);
     width: 300px;
     float: left;
+    border-radius: 20px;
 }
 
 .col2{
+    background-color: rgba(179, 164, 164, 0.6);
+    padding: 2px;
     margin-left: 340px;
+    border-radius: 20px;
+    max-width: 600px;
 }
 
 h1{
-    font-size: 24px;
+    font-size: 18px;
     font-style: italic;   
     color: #58af5b;
     margin: 0;
@@ -33,18 +40,12 @@ h1{
 }
 
 #name{
-    font-size: 30px;
+    font-size: 24px;  
     font-weight: bold;
-    margin-left: 15px;
-    margin-top: 20px;
-}
-
-#address{
-  margin-top: 20px;
-}
-
-#address p{
-    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%
 }
 
 button {
@@ -58,4 +59,54 @@ button {
   width: auto;
   text-align: center;
   font-size: 16px;
+  text-decoration: none;
+}
+
+
+.func{
+  text-align: center;
+}
+
+.func button{
+  width: 200px;
+}
+
+#red {
+  background-color: #ED2939;
+}
+
+#book{
+  height: 600px;
+}
+
+table{
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table thead tr{
+  background-color: #73a875;
+  color: #ffffff;
+  text-align: left;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+table tbody tr:last-of-type {
+  border-bottom: 2px solid #73a875;
 }
