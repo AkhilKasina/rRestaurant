@@ -77,29 +77,29 @@ public class CustomerController {
 
     @GetMapping(value="/booking/new")
     public String processBookingForm(Model model) {
-        BookingDAO newBooking = new BookingDAO();
+        BookingDAO bookingDAO = new BookingDAO();
         
-        ArrayList<BookingItemDAO> bookingItems = new ArrayList<>();
+        ArrayList<BookingItemDAO> bookingItemDAOs = new ArrayList<>();
         List<Item> itemLists = itemRepository.findAll();
 
         //only puts lunch items into lunchList
         for(Item item : itemLists){
             if(item.getMenuType().equals("lunch")){
-                BookingItemDAO bookingItem = new BookingItemDAO();
+                BookingItemDAO bookingItemDAO = new BookingItemDAO();
 
-                bookingItem.setItemID(item.getId());
-                bookingItem.setName(item.getName());
-                bookingItem.setPrice(item.getPrice());
-                bookingItem.setDescription(item.getDescription());
-                bookingItem.setQuantity("0");
+                bookingItemDAO.setItemID(item.getId());
+                bookingItemDAO.setName(item.getName());
+                bookingItemDAO.setPrice(item.getPrice());
+                bookingItemDAO.setDescription(item.getDescription());
+                bookingItemDAO.setQuantity("0");
 
-                bookingItems.add(bookingItem);
+                bookingItemDAOs.add(bookingItemDAO);
             }
         }
 
-        newBooking.setBookingItems(bookingItems);
+        bookingDAO.setBookingItems(bookingItemDAOs);
 
-        model.addAttribute("customerBooking", newBooking);
+        model.addAttribute("customerBooking", bookingDAO);
         return ViewManager.CUS_BOOKING;
     }
     
@@ -122,37 +122,15 @@ public class CustomerController {
                 newBooking.setBookingTime(bookingDAO.getBookingTime());
                 newBooking.setBookingDate(bookingDAO.getBookingDate());
                 newBooking.setTablePosition(bookingDAO.getTablePosition());
-                customer.addBooking(newBooking);
+                newBooking.setCustomer(customer);
 
                 bookingRepository.save(newBooking);
 
-                // Save Booking Items to Database
-                ArrayList<BookingItem> newBookingItems = new ArrayList<>();
-
-                for (BookingItemDAO bookItemIter: bookingDAO.getBookingItems()) {
-                    BookingItem newBookingItem = new BookingItem();
-
-                    Optional<Item> item = itemRepository.findById(bookItemIter.getItemID());
-                    int quantity = Integer.parseInt(bookItemIter.getQuantity());
-                    
-                    // Validate item to save into database
-                    if (item.isPresent() && quantity > 0 ) {
-                        newBookingItem.setBooking(newBooking);
-                        newBookingItem.setItem(item.get());
-                        newBookingItem.setQuantity(quantity);
-
-                        newBookingItems.add(newBookingItem);
-
-                        bookingItemRepository.save(newBookingItem);
-
-                        System.out.println("Items Saved " + item.get().getName() + " quantity: " + quantity);
-                    }
-                    
-                }
+                saveBookingItemsToDBs(bookingDAO.getBookingItems(), newBooking);
+            
             }
         }
         
-        // redirectAttributes.addFlashAttribute("customerID", this.currentID);
         return redirectToCustomerPortal(redirectAttributes);
     }
 
@@ -202,37 +180,17 @@ public class CustomerController {
     @PostMapping("/booking/{bookingID}")
     public String updateBooking(@ModelAttribute("customerBooking") BookingDAO bookingDAO, final RedirectAttributes redirectAttributes) {
         Optional<Customer> currentCus = customerRepository.findById(currentID);
-        Optional<Booking> booking = this.bookingRepository.findById(bookingDAO.getId());
+        Optional<Booking> currentBooking = this.bookingRepository.findById(bookingDAO.getId());
 
-        if (currentCus.isPresent() &&  booking.isPresent()) {
-            Booking updatedBooking = booking.get();
+        if (currentCus.isPresent() &&  currentBooking.isPresent()) {
+            Booking updatedBooking = currentBooking.get();
             updatedBooking.setBookingDateTime(bookingDAO.getBookingTimeStamp());
             updatedBooking.setTablePosition(bookingDAO.getTablePosition());
             updatedBooking.setCustomer(currentCus.get());
-            
-            ArrayList<BookingItem> newBookingItems = new ArrayList<>();
 
-                for (BookingItemDAO bookItemIter: bookingDAO.getBookingItems()) {
-                    BookingItem newBookingItem = new BookingItem();
+            saveBookingItemsToDBs(bookingDAO.getBookingItems(), updatedBooking);
 
-                    Optional<Item> item = itemRepository.findById(bookItemIter.getItemID());
-                    int quantity = Integer.parseInt(bookItemIter.getQuantity());
-                    
-                    // Validate item to save into database
-                    if (item.isPresent() && quantity > 0 ) {
-                        newBookingItem.setBooking(updatedBooking);
-                        newBookingItem.setItem(item.get());
-                        newBookingItem.setQuantity(quantity);
-
-                        newBookingItems.add(newBookingItem);
-
-                        bookingItemRepository.save(newBookingItem);
-
-                    }
-                    
-                }
-
-            this.bookingRepository.save(booking.get());
+            this.bookingRepository.save(currentBooking.get());
         }
 
         return redirectToCustomerPortal(redirectAttributes);
@@ -246,11 +204,43 @@ public class CustomerController {
             this.bookingRepository.deleteById(bookingID);
         }
 
-        // redirectAttributes.addFlashAttribute("customerID", this.currentID);
         return redirectToCustomerPortal(redirectAttributes);
     }
 
     // CONVENIENCE
+
+    /**
+     * Transfering bookingItemDAOs to BookingItem Entities. 
+     * Then saved into database with corresponding Booking Entity
+     * 
+     * @param bookingItemDAOs: List of DAOs
+     * @param savedBooking: Booking that contain items
+     */
+    private void saveBookingItemsToDBs(List<BookingItemDAO> bookingItemDAOs, Booking savedBooking) {
+        ArrayList<BookingItem> newBookingItems = new ArrayList<>();
+
+        for (BookingItemDAO bookItemIter: bookingItemDAOs) {
+            BookingItem newBookingItem = new BookingItem();
+
+            Optional<Item> item = itemRepository.findById(bookItemIter.getItemID());
+            int quantity = Integer.parseInt(bookItemIter.getQuantity());
+                    
+            // Validate item to save into database
+            if (item.isPresent() && quantity > 0 ) {
+                newBookingItem.setBooking(savedBooking);
+                newBookingItem.setItem(item.get());
+                newBookingItem.setQuantity(quantity);
+
+                newBookingItems.add(newBookingItem);
+
+                this.bookingItemRepository.save(newBookingItem);
+
+            }
+                    
+         }
+
+    }
+
     private String redirectToCustomerPortal(final RedirectAttributes redirectAttributes) {
 
         redirectAttributes.addFlashAttribute("customerID", this.currentID);

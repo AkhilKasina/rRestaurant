@@ -122,8 +122,6 @@ public class Booking {
 		return Collections.unmodifiableList(sortedBookingItemss);
 	}
 
-
-
 	public void addBookingItems(List<BookingItem> bookingItems) {
         Set<BookingItem> sets = new HashSet<>();
         
