@@ -14,7 +14,7 @@ label{
 }
 button{
    font-family: Arial, Helvetica, sans-serif;
-   background-color: #58af5b;
+   background-color: #73a875;
    color: white;
    padding: 14px 20px;
    margin: 8px 0;
@@ -26,8 +26,7 @@ button{
 }
 .loginpage{
    width: 450px;
-   padding: 10% 0 0 ;
-   margin: auto;
+   margin: 10px auto;
    background: rgb(102, 95, 95) rgba(107, 99, 99, 0.6);
    text-align: center;
 
@@ -40,7 +39,7 @@ button{
    background:rgba(255, 255, 255, 0.7);
    position: relative;
    z-index: 1;
-   max-width: 0 auto 100px;
+   max-width: 100%;
    text-align: center;
    table-layout: auto;
    margin: 0 auto 100px;
@@ -52,7 +51,7 @@ button{
    font-family: "Roboto",sans-serif;
    outline: 1;
    background: rgb(179, 164, 164);
-   width:100%;
+   width: 100%;
    border: 2px;
    border-radius: 5px;
    margin: 0 0 15px;
@@ -62,4 +61,12 @@ button{
 }
 button:hover{
    opacity: 0.8;
+}
+
+#signuppage{
+   width: 800px;
+}
+
+#sign input{
+   width: 400px;
 }

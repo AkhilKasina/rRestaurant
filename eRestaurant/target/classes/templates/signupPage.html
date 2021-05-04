@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
-    <link rel="stylesheet" href="@{/loginPage/login.css}" />
-    <script>
+    <link rel="stylesheet" th:href="@{/loginPage/login.css}" />
+    <!-- <script>
       //   checks if passwords are matching
       function checkPassword(form) {
         psw1 = form.psw1.value;
@@ -20,7 +20,7 @@
           return true;
         }
       }
-    </script>
+    </script> -->
   </head>
 
   <header>
@@ -32,22 +32,23 @@
   </header>
 
   <body>
-    <div class="loginpage">
-      <h2>New to our restaurant?</h2>
-      <p class="para">
-        Sign up for exclusive rewards and discounts the next time you reserve a
-        table using our website!
-      </p>
+    <div class="loginpage" id="signuppage">
       <div class="form">
         <form
           class="form"
+          id="sign"
           action="#"
-          th:action="@{/process_signup}"
+          th:action="@{/signup}"
           th:object="${signupCustomer}"
           method="post"
         >
+        <h2>New to our restaurant?</h2>
+        <p class="para">
+          Sign up for exclusive rewards and discounts the next time you reserve a
+          table using our website!
+        </p>
           <table>
-            <tr>
+            <!-- <tr>
               <th>
                 <label>Email: </label>
               </th>
@@ -55,13 +56,13 @@
                 <input type="email" th:field="*{email}" />
                 placeholder="Enter your E-mail" required/>
               </td>
-            </tr>
+            </tr> -->
             <tr>
               <th>
                 <label>First Name: </label>
               </th>
               <td>
-                <input type="text" th:field="*{first_name}" required />
+                <input type="text" th:field="*{firstName}" placeholder="eg. John" required />
               </td>
             </tr>
             <tr>
@@ -69,7 +70,7 @@
                 <label>Last Name: </label>
               </th>
               <td>
-                <input type="text" th:field="*{last_name}" required />
+                <input type="text" th:field="*{lastName}" placeholder="eg. Smith" required />
               </td>
             </tr>
             <tr>
@@ -93,7 +94,7 @@
                 <input
                   type="text"
                   pattern="[0-9]{10}"
-                  placeholder="Enter Australian telephone"
+                  placeholder="Enter your Australian telephone number"
                   th:field="*{telephone}"
                   required
                 />
@@ -125,11 +126,20 @@
               </td>
             </tr>
             <tr>
+              <th><label> Address</label></th>
+              <td> 
+                <input 
+                type="text" 
+                th:field="*{address}" 
+                /> 
+              </td>
+            </tr>
+            <tr>
               <td colspan="2"><button type="submit">Submit</button></td>
             </tr>
           </table>
         </form>
-        <p>Already a member? <a href="@{/login}">Login here</a></p>
+        <p>Already a member? <a th:href="@{/login}">Login here</a></p>
       </div>
     </div>
   </body>

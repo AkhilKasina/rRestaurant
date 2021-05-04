@@ -36,6 +36,9 @@ public class Item{
     @Column(name = "menu_type")
     private String menuType;
 
+	@Column(name = "description")
+	private String description;
+
     public Integer getId() {
 		return id;
 	}
@@ -70,5 +73,13 @@ public class Item{
 
 	public void setMenuType(String menuType) {
 		this.menuType = menuType;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

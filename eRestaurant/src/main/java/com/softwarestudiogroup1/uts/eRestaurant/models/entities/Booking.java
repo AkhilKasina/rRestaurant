@@ -1,5 +1,8 @@
 package com.softwarestudiogroup1.uts.eRestaurant.models.entities;
 
+import java.security.Timestamp;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,10 +25,16 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Column(name = "booking_time")
+    @Column(name = "booking_datetime")
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private java.util.Date bookingTime;
+    private Date bookingDateTime;
+
+    @Column(name = "booking_time")
+    private String bookingDate;
+
+    @Column(name = "booking_date")
+    private String bookingTime;
 
     @Column(name = "table_position")
     private String tablePosition;
@@ -42,12 +51,28 @@ public class Booking {
         this.id = id;
     }
 
-    public java.util.Date getBookingTime() {
+    public Date getBookingDateTime() {
+        return bookingDateTime;
+    }
+
+    public void setBookingDateTime(Date bookingDateTime) {
+        this.bookingDateTime = bookingDateTime;
+    }
+
+    public void setBookingTime(String time){
+        this.bookingTime = time;
+    }
+
+    public String getBookingTime(){
         return bookingTime;
     }
 
-    public void setBookingTime(java.util.Date bookingTime) {
-        this.bookingTime = bookingTime;
+    public void setBookingDate(String date){
+        this.bookingDate = date;
+    }
+
+    public String getBookingDate(){
+        return bookingDate;
     }
 
     public String getTablePosition() {

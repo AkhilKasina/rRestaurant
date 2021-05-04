@@ -19,5 +19,5 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 
     @Query("SELECT manager FROM Manager manager WHERE LOWER(manager.username) = LOWER(?1) AND manager.password = ?2")
     @Transactional(readOnly = true)
-    Optional<Manager> findByUserNameAndLastName(String username, String password);
+    Optional<Manager> findByUserNameAndPassword(String username, String password);
 }

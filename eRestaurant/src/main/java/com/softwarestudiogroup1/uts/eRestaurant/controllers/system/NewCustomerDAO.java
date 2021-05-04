@@ -1,19 +1,19 @@
 package com.softwarestudiogroup1.uts.eRestaurant.controllers.system;
 
 public class NewCustomerDAO {
-    private String userName;
+    private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String telephone;
     private String address;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return this.username;
     }
 
     public void setPassword(String password) {
