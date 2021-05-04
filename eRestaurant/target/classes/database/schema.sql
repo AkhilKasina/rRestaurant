@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS items (
 
 CREATE TABLE IF NOT EXISTS bookingitems (
     id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    booking_id INT(7) UNSIGNED,
-    item_id INT(7) UNSIGNED,
+    booking_id INT(7) UNSIGNED NOT NULL,
+    item_id INT(7) UNSIGNED NOT NULL,
 
     quantity INT(5),
 
