@@ -37,7 +37,7 @@ public class Booking {
     
     @Column(name = "booking_datetime")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date bookingDateTime;
 
     @Column(name = "booking_time")

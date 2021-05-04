@@ -185,6 +185,8 @@ public class CustomerController {
         if (currentCus.isPresent() &&  currentBooking.isPresent()) {
             Booking updatedBooking = currentBooking.get();
             updatedBooking.setBookingDateTime(bookingDAO.getBookingTimeStamp());
+            updatedBooking.setBookingTime(bookingDAO.getBookingTime());
+            updatedBooking.setBookingDate(bookingDAO.getBookingDate());
             updatedBooking.setTablePosition(bookingDAO.getTablePosition());
             updatedBooking.setCustomer(currentCus.get());
 
@@ -226,7 +228,7 @@ public class CustomerController {
             int quantity = Integer.parseInt(bookItemIter.getQuantity());
                     
             // Validate item to save into database
-            if (item.isPresent() && quantity > 0 ) {
+            if (item.isPresent() && quantity >= 0 ) {
                 newBookingItem.setBooking(savedBooking);
                 newBookingItem.setItem(item.get());
                 newBookingItem.setQuantity(quantity);

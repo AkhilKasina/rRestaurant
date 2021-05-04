@@ -46,7 +46,7 @@ public class BookingDAO {
         this.tablePosition = tablePosition;
     }
 
-    private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     public void setDateAndTime(Date timeStamp) {
         String datesString = timeStamp.toString().split(" ")[0];
@@ -58,7 +58,7 @@ public class BookingDAO {
 
     public Date getBookingTimeStamp() {
         try {
-            return DATE_TIME_FORMAT.parse(bookingDate + " " + bookingTime + ":00");
+            return DATE_TIME_FORMAT.parse(bookingDate + " " + bookingTime);
         } catch (ParseException e) {
             throw new IllegalArgumentException(e);
         }
