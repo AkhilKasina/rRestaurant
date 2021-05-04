@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Staff Portal</title>
+   <title>Manager Portal</title>
    <link rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
    <link rel="stylesheet" href="profilePage.css">
@@ -19,16 +19,16 @@
          <h2><span class="las la-concierge-bell"></span>LE BISTROT D'ANDRE</h2>
 
       </div>
-      <div class="sidebar-menu" >
+      <div class="sidebar-menu">
          <ul>
             <li>
-               <a href="profilePage.html" class="active"><span class="las la-bars"> </span> <span> Dashboard  </span></a>
+               <a href="profilePage.html"><span class="las la-bars"> </span> <span> Dashboard </span></a>
             </li>
             <li>
                <a href=""><span class="las la-utensils"></span> <span></span>Restaurant</span></a>
             </li>
             <li>
-               <a href="staffmanager.html"><span class="las la-address-book"></span> <span></span>Staff</span></a>
+               <a href="staffmanager.html" class="active"><span class="las la-address-book"></span> <span></span>Staff</span></a>
             </li>
             <li>
                <a href="menumanager.html"><span class="las la-list"></span> <span></span>Menu</span></a>
@@ -54,49 +54,44 @@
       </header>
 
       <main>
-         <div class="cards">
-            <div class="card-single">
-               <div>
-                  <h1>34</h1>
-                  <span>Customers</span>
-               </div>
-               <div>
-                  <span class="las la-users"></span>
-               </div>
-
-            </div>
-            <div class="card-single">
-               <div>
-                  <h1>12</h1>
-                  <span>Bookings</span>
-               </div>
-               <div>
-                  <span class="las la-ticket-alt"></span>
-               </div>
-
-            </div>
-            <div class="card-single">
-               <div>
-                  <h1>14</h1>
-                  <span>Orders</span>
-               </div>
-               <div>
-                  <span class="las la-shopping-bag"></span>
-               </div>
-
-            </div>
-         </div>
-         <div>
-            <table class="gap">
-               <tr>
-                  <th>. </th>
-               </tr>
-            </table>
-         </div>
          <div class="recentflex">
             <div class="customers">
                <div class="card-header">
-                  <h2>Recent Customers</h2>
+                  <h2>Add Staff Member</h2>
+                  <button>Add Staff <span class="las la-arrow right"></span></button>
+               </div>
+               <div class="card-body">
+                  <table width=100%>
+                     <tr>
+                        <td>Member Name:</td>
+                        <td><input type="text" placeholder="Member Name"></td>
+                     </tr>
+                     <tr>
+                        <td>Member Description:</td>
+                        <td><input type="text" placeholder="Member Description"></td>
+                     </tr>
+                     <tr>
+                        <td>Hourly Wage</td>
+                        <td><input type="text" placeholder="Hourly Wage" > </td>
+                     </tr>
+                     <tr>
+                        <td>Date Of Birth</td>
+                        <td><input type="date" ></td>
+                     </tr>
+                     <tr>
+                        <td>Shift Type:</td>
+                        <td>
+                           Lunch <input type="checkbox" name="Shift type" id="">
+                           Dinner <input type="checkbox" name="Shift type" id="">
+                        </td>
+                        
+                     </tr>
+                  </table>
+               </div>
+               <div class="gap">""</div>
+
+               <div class="card-header">
+                  <h2>Serving Staff</h2>
                   <button>See all <span class="las la-arrow right"></span></button>
                </div>
                <div class="card-body">
@@ -105,7 +100,7 @@
                         <tr>
                            <td>Cus.NO</td>
                            <td>Name</td>
-                           <td>Bookings made</td>
+                           <td>Working Hours</td>
                         </tr>
                      </thead>
                      <tbody>
@@ -117,12 +112,12 @@
                         <tr>
                            <td>2</td>
                            <td>Kara Zor-El</td>
-                           <td>2</td>
+                           <td>4</td>
                         </tr>
                         <tr>
                            <td>3</td>
                            <td>Barry Allen</td>
-                           <td>2</td>
+                           <td>6</td>
                         </tr>
                      </tbody>
                   </table>
@@ -130,6 +125,8 @@
                </div>
             </div>
          </div>
+         
+
       </main>
 
    </div>

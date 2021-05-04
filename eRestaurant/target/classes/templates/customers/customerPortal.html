@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/loginPage/login.css}">
     <title>Customer</title>
 </head>
 
 <body>
     <div>
         <h1>Welcome</h1>
-        <span th:text="${customer.firstName + ' ' + customer.lastName}"></span><br/>
-        <span>Address: </span><span th:text="${customer.address}"></span><br/>
+        <span th:text="${customer.firstName + ' ' + customer.lastName}"></span><br />
+        <span>Address: </span><span th:text="${customer.address}"></span><br />
     </div>
     <h2> Bookings </h2>
-    <table> 
+    <table>
         <tr>
             <th>Action</th>
             <th>Booking ID</th>
@@ -31,6 +33,6 @@
     <form action="#" th:action="@{/booking/new}">
         <button type="submit">Book a table</button>
     </form>
-    
+
 
 </body>
