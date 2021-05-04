@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS items (
     id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     price DOUBLE,
-    menu_type VARCHAR(10)
+    menu_type VARCHAR(10),
+    description VARCHAR(400)
 );
 
 CREATE TABLE IF NOT EXISTS bookingitems (
