@@ -122,6 +122,6 @@ public class SignInController {
         customerRepository.save(newCustomer);
 
         redirectAttributes.addFlashAttribute("customerID", newCustomer.getId());
-        return "redirect:/booking/new";
+        return "redirect:/booking";
     }
 }

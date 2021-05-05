@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer</title>
+    <link rel="stylesheet" th:href="@{/customerPortal/cusPortal.css}" />
+    <title>Customer Portal</title>
 </head>
 
 <body>
-    <div>
-        <h1>Welcome</h1>
-        <span th:text="${customer.firstName + ' ' + customer.lastName}"></span><br/>
-        <span>Address: </span><span th:text="${customer.address}"></span><br/>
+    <div class="col1">
+        <div class="whitePage">
+            <h1>Welcome, </h1>
+            <div id="name">
+                <span th:text="${customer.firstName + ' ' + customer.lastName}"></span>
+            </div>
+            
+            <span><b>Address: </b></span><span th:text="${customer.address}"></span><br/>
+        </div>
+        <div class="whitePage">
+            <div class="func">
+                <form action="#" th:action="@{/booking/new}">
+                    <button type="submit">Book a table</button>
+                </form>
+                <form action="#">
+                    <button type="submit">Function A</button>
+                </form>
+                <form action="#">
+                    <button type="submit">Function B</button>
+                </form>
+                <form action="#">
+                    <button type="submit">Function C</button>
+                </form>
+                <form action="#" th:action="@{/}">
+                    <button type="submit" id="red">Log Out</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <h2> Bookings </h2>
-    <table> 
-        <tr>
-            <th>Action</th>
-            <th>Booking ID</th>
-            <th>Booking Time</th>
-            <th>Booking Date</th>
-            <th>Table</th>
-        </tr>
-        <tr th:each="booking : ${customer.bookings}">
-            <td><a th:href="@{/booking/{bookingID}(bookingID=${booking.id})}">View</a></td>
-            <td th:text=${booking.id}></td>
-            <td th:text=${booking.bookingTime}></td>
-            <td th:text=${booking.bookingDate}></td>
-            <td th:text=${booking.tablePosition}></td>
-        </tr>
-    </table><br>
-    <form action="#" th:action="@{/booking/new}">
-        <button type="submit">Book a table</button>
-    </form>
-    <form action="#" th:action="@{/}">
-        <button type="submit">Log Out</button>
-    </form>
+    <div class="col2">
+        <div class="whitePage" id="book"> 
+            <h1> Bookings </h1>
+            <table> 
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Booking Time</th>
+                        <th>Booking Date</th>
+                        <th>Table</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="booking : ${customer.bookings}">
+                        <td th:text=${booking.id}></td>
+                        <td th:text=${booking.bookingTime}></td>
+                        <td th:text=${booking.bookingDate}></td>
+                        <td th:text=${booking.tablePosition}></td>
+                        <td><a th:href="@{/booking/{bookingID}(bookingID=${booking.id})}">View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>

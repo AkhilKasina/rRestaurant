@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
 
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Staff Portal</title>
+   <title>Manager Portal</title>
    <link rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-   <link rel="stylesheet" href="/managerPage/profilePage.css">
+   <link rel="stylesheet" href="Staff.css">
 
 
 </head>
@@ -19,20 +19,15 @@
          <h2><span class="las la-concierge-bell"></span>LE BISTROT D'ANDRE</h2>
 
       </div>
-      <div class="sidebar-menu" >
+      <div class="sidebar-menu">
          <ul>
             <li>
-               <a th:href="@{/manager}" class="active"><span class="las la-bars"> </span> <span> Dashboard  </span></a>
+               <a href="StaffPortal.html" class="active"><span class="las la-bars"> </span> <span> Dashboard </span></a>
             </li>
             <li>
-               <a href=""><span class="las la-utensils"></span> <span></span>Restaurant</span></a>
+               <a href="staffRestaurant.html"><span class="las la-utensils"></span> <span></span>Restaurant</span></a>
             </li>
-            <li>
-               <a th:href="@{/staffmanager}"><span class="las la-address-book"></span> <span></span>Staff</span></a>
-            </li>
-            <li>
-               <a th:href="@{/menumanager}"><span class="las la-list"></span> <span></span>Menu</span></a>
-            </li>
+
          </ul>
       </div>
    </div>
@@ -45,14 +40,13 @@
             Dashboard
          </h2>
          <div class="userwrapper">
-            <img src="/managerPage/male.jpg" width="50px" height="50px" alt="">
+            <img src="male.jpg" width="50px" height="50px" alt="">
             <div>
-               <h4>John Doe</h4>
-               <small>Store Manager</small>
+               <h4>Finn Tearle</h4>
+               <small>Staff Member</small>
             </div>
          </div>
       </header>
-
       <main>
          <div class="cards">
             <div class="card-single">
@@ -86,13 +80,7 @@
 
             </div>
          </div>
-         <div>
-            <table class="gap">
-               <tr>
-                  <th>. </th>
-               </tr>
-            </table>
-         </div>
+         <div class="gap">""</div>
          <div class="recentflex">
             <div class="customers">
                <div class="card-header">
@@ -101,18 +89,28 @@
                </div>
                <div class="card-body">
                   <table width=100%>
-                     <th>Booking ID</th>
-                     <th>Booking Time</th>
-                     <th>Booking Date</th>
-                     <th>Table</th>
-                     <th>Customer ID</th>
+                     <thead>
+                        <tr>
+                           <td>Cus.NO</td>
+                           <td>Name</td>
+                           <td>Bookings made</td>
+                        </tr>
+                     </thead>
                      <tbody>
-                        <tr th:each="booking, Index : ${bookings}">
-                           <td th:text=${booking.id} style="text-align:center"></td>
-                           <td th:text=${booking.bookingTime} style="text-align:center"></td>
-                           <td th:text=${booking.bookingDate} style="text-align:center"></td>
-                           <td th:text=${booking.tablePosition} style="text-align:center"></td>
-                           <td th:text=${names[Index.index]} style="text-align:center"></td>
+                        <tr>
+                           <td>1</td>
+                           <td>Jane Smith</td>
+                           <td>2</td>
+                        </tr>
+                        <tr>
+                           <td>2</td>
+                           <td>Kara Zor-El</td>
+                           <td>2</td>
+                        </tr>
+                        <tr>
+                           <td>3</td>
+                           <td>Barry Allen</td>
+                           <td>2</td>
                         </tr>
                      </tbody>
                   </table>
@@ -121,7 +119,6 @@
             </div>
          </div>
       </main>
-
    </div>
 </body>
 
