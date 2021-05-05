@@ -7,11 +7,6 @@
     <title>Order Lunch</title>
     <link rel="stylesheet" th:href="@{/menuPage/menu.css}" />
   </head>
-  <header>
-    <a th:href="@{/}">
-      <button>Home</button>
-    </a>
-  </header>
   <body>
     <div class="whitePage">
       <div class="wrapper">
@@ -20,27 +15,29 @@
           <h3>Available 12pm to 4pm</h3>
         </div>
         <div class="menuWrapper">
-          <table th:each="item : ${Items}" class = "menu">
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-            <div class = "item">
-            <tr >
-              <td th:text="${item.name}" class = "dish" id = "name"></td>
-              <td th:text="${item.price}" class = "dish" id = "price"></td>
-              <td>
-                <input type="number" max = "5" value = "0" id = "quantity">
-              </td>
-          </tr>
-          <tr>
-            <td th:text="${item.description}" class="desc"></td>
-          </tr>
-            </div>
-          </table>
-          <a th:href="@{/}"><button class="orderBtn">ORDER</button></a>
-          <a th:href="@{/}"><button class="orderBtn" id="cancel">CANCEL</button></a>
+          <form >
+            <table th:each="item : ${Items}" class = "menu">
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <div class = "item">
+                <tr >
+                  <td th:text="${item.name}" class = "dish" id = "name"></td>
+                  <td th:text="${item.price}" class = "dish" id = "price"></td>
+                  <td>
+                    <input type="number" max = "5" min = "0" value = "0" id = "quantity" th:field= *{quantity}>
+                  </td>
+                </tr>
+                <tr>
+                <td th:text="${item.description}" class="desc"></td>
+                </tr>
+              </div>
+            </table>
+          </form>
+          
+          <a th:href="@{/booking/new}"><button class="orderBtn" id="cancel">CANCEL</button></a>
         </div>
         </div>
       </div>

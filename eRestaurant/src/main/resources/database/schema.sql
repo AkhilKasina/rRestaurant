@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS bookingitems (
     booking_id INT(7) UNSIGNED NOT NULL,
     item_id INT(7) UNSIGNED NOT NULL,
 
+    quantity INT(5),
+
     FOREIGN KEY (booking_id) REFERENCES bookings(id),
     FOREIGN KEY (item_id) REFERENCES items(id)
 );

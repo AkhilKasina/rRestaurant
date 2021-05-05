@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Booking</title>
+    <link rel="stylesheet" th:href="@{/menuPage/menu.css}" />
   </head>
   <body>
     <h1>Welcome to user booking</h1>
@@ -26,6 +27,45 @@
           <option value="Kitchen 3">Kitchen 3</option>
         </select>
           <br>
+          <div class="whitePage">
+            <div class="wrapper">
+              <div class="title">
+                <h4>Lunch Menu</h4>
+                <h3>Available 12pm to 4pm</h3>
+              </div>
+              <div class="menuWrapper">
+              
+                  <table th:each="item, Index : ${customerBooking.bookingItems}" class = "menu">
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    <div class = "item">
+                      <tr >
+                        <input type="hidden" th:field="*{bookingItems[__${Index.index}__].itemID}" id="itemID">
+                        <td th:text="${item.name}" class = "dish" id = "name"></td>
+                        <td th:text="${item.price}" class = "dish" id = "price"></td>
+                        <td>
+                          <select id="Numbers" th:field=*{bookingItems[__${Index.index}__].quantity}>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3"> 3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr>
+                      <td th:text="${item.description}" class="desc"></td>
+                      </tr>
+                    </div>
+                  </table>
+              </div>
+            </div>
+          </div>
+
       <button> CANCEL </button>
       <button th:with="text=${customerBooking.bookingDate} ? 'UPDATE BOOKING' : 'BOOK'" th:text="${text}" type="submit"> BOOK </button>
       <br>
