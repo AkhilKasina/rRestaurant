@@ -18,6 +18,7 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
@@ -36,7 +37,7 @@ public class Item{
     private String name;
 
     @Column(name = "price")
-    @NotEmpty
+    @NotNull
     private double price;
 
     @Column(name = "menu_type")

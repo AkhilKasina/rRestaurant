@@ -56,34 +56,35 @@
       <main>
          <div class="recentflex">
             <div class="customers">
-               <div class="card-header">
-                  <h2>Add Menu Item</h2>
-                  <button>Add Item <span class="las la-arrow right"></span></button>
-               </div>
-               <div class="card-body">
-                  <table width=100%>
-                     <tr>
-                        <td>Item Name:</td>
-                        <td><input type="text" placeholder="Item Name"></td>
-                     </tr>
-                     <tr>
-                        <td>Item Description:</td>
-                        <td><input type="text" placeholder="Item Description"></td>
-                     </tr>
-                     <tr>
-                        <td>Item Price:</td>
-                        <td><input type="text" placeholder="Item Price"> </td>
-                     </tr>
-                     <tr>
-                        <td>Item Type:</td>
-                        <td>
-                           Lunch <input type="radio" name="Add Lunch type" id="">
-                           Dinner <input type="radio" name="Add Lunch type" id="">
-                        </td>
-                        
-                     </tr>
-                  </table>
-               </div>
+               <form th:object = "${newItem}" method="post">
+                  <div class="card-header">
+                     <h2>Add Menu Item</h2>
+                     <button>Add Item <span class="las la-arrow right" type = "submit"></span></button>
+                  </div>
+                  <div class="card-body">
+                     <table width=100%>
+                        <tr>
+                           <td>Item Name:</td>
+                           <td><input type="text" placeholder="Item Name" th:field = "*{name}"></td>
+                        </tr>
+                        <tr>
+                           <td>Item Description:</td>
+                           <td><input type="text" placeholder="Item Description" th:field = "*{description}"></td>
+                        </tr>
+                        <tr>
+                           <td>Item Price:</td>
+                           <td><input type="text" placeholder="Item Price" th:field = "*{price}"> </td>
+                        </tr>
+                        <tr>
+                           <td>Item Type:</td>
+                           <td>
+                              Lunch <input type="radio" name="Add Lunch type" value="Lunch" th:field = "*{menuType}">
+                              Dinner <input type="radio" name="Add Lunch type" value="Dinner" th:field = "*{menuType}">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </form>
                <div class="gap">.</div>
                <div class="card-header">
                   <h2>Menu Items</h2>
@@ -91,32 +92,16 @@
                </div>
                <div class="card-body">
                   <table width=100%>
-                     <thead>
-                        <tr>
-                           <td>Menu.NO</td>
-                           <td>Name</td>
-                           <td>Price</td>
-                           <td>Dish Type</td>
-                        </tr>
-                     </thead>
+                     <th>ID</th>
+                     <th>Name</th>
+                     <th>Price</th>
+                     <th>Menu</th>
                      <tbody>
-                        <tr>
-                           <td>1</td>
-                           <td>Chicken Pasta</td>
-                           <td>$ 15</td>
-                           <td>Lunch</td>
-                        </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>Pizza </td>
-                           <td>$ 13</td>
-                           <td>Lunch and Dinner</td>
-                        </tr>
-                        <tr>
-                           <td>3</td>
-                           <td>Mushroom Risotto</td>
-                           <td>$ 17</td>
-                           <td>Dinner</td>
+                        <tr th:each="item : ${Items}">
+                           <td th:text=${item.id} style="text-align:center"></td>
+                           <td th:text=${item.name} style="text-align:center"></td>
+                           <td th:text=${item.price} style="text-align:center"></td>
+                           <td th:text=${item.menuType} style="text-align:center"></td>
                         </tr>
                      </tbody>
                   </table>
