@@ -5,36 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <link rel="stylesheet" th:href="@{/loginPage/login.css}">
-    <title>Customer</title>
-</head>
-
-<body>
-    <div>
-        <h1>Welcome</h1>
-        <span th:text="${customer.firstName + ' ' + customer.lastName}"></span><br />
-        <span>Address: </span><span th:text="${customer.address}"></span><br />
-    </div>
-    <h2> Bookings </h2>
-    <table>
-        <tr>
-            <th>Action</th>
-            <th>Booking ID</th>
-            <th>Booking Time</th>
-            <th>Booking Date</th>
-        </tr>
-        <tr th:each="booking : ${customer.bookings}">
-            <td><a th:href="@{/booking/{bookingID}(bookingID=${booking.id})}">View</a></td>
-            <td th:text=${booking.id}></td>
-            <td th:text=${booking.bookingTime}></td>
-            <td th:text=${booking.tablePosition}></td>
-        </tr>
-    </table><br>
-    <form action="#" th:action="@{/booking/new}">
-        <button type="submit">Book a table</button>
-    </form>
-=======
     <link rel="stylesheet" th:href="@{/customerPortal/cusPortal.css}" />
     <title>Customer Portal</title>
 </head>
@@ -95,7 +65,6 @@
         </div>
     </div>
     
->>>>>>> main
 
 
 </body>
