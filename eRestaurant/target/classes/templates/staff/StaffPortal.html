@@ -42,7 +42,7 @@
          <div class="userwrapper">
             <img th:src="@{staffPortal/male.jpg}" width="50px" height="50px" alt="">
             <div>
-               <h4>Finn Tearle</h4>
+               <h4 th:text="${staff.firstName} + ' ' + ${staff.lastName}"></h4>
                <small>Staff Member</small>
             </div>
          </div>
@@ -55,13 +55,16 @@
                   <img th:src="@{staffPortal/male.jpg}" height="300px" width="300px">
                   <ul>
                      <li>
-                        <h1 th:text="${staff.firstName} + ' ' + ${staff.lastName} + '(' + ${staff.username} + ')'"></h1>
+                        <h1 th:text="${staff.firstName} + ' ' + ${staff.lastName}"></h1>
                      </li>
                      <li>
                         Phone: <span th:text="${staff.telephone}"></span>
                      </li>
                      <li>
                         Email Address: <span th:text="${staff.email}"></span>
+                     </li>
+                     <li>
+                        Username: <span th:text="${staff.username}"></span>
                      </li>
                   </ul>
 
