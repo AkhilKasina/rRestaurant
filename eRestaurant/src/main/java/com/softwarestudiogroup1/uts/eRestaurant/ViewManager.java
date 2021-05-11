@@ -8,7 +8,7 @@ public class ViewManager {
     public static final String SIGN_UP = "signupPage";
     public static final String LUNCH_MENU = "menu/lunchMenu";
     public static final String DINNER_MENU = "menu/dinnerMenu";
-
+    public static final String RECIEPT = "reciept";
 
     // CUSTOMER
     public static final String CUS_BOOKING = "customers/bookingPage";

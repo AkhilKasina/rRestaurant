@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Reciept</title>
+    </head>
+</div>
+<div>
+    <body>
+        <table>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <tbody>
+                <tr th:each="name, Index : ${names}">
+                    <td th:text=${name} style="text-align:center"></td>
+                    <td th:text=${quantities[Index.index]} style="text-align:center"></td>
+                    <td th:text=${price[Index.index]} style="text-align:center"></td>
+                 </tr>
+            </tbody>
+        </table>
+    </body>
+</div>
+</html>
