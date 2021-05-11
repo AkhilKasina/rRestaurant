@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS customers (
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     telephone VARCHAR(20),
-    address VARCHAR(200)
+    address VARCHAR(200),
+    points INT(6)
 );
 
 CREATE TABLE IF NOT EXISTS bookings (
@@ -37,6 +38,18 @@ CREATE TABLE IF NOT EXISTS bookingitems (
     FOREIGN KEY (booking_id) REFERENCES bookings(id),
     FOREIGN KEY (item_id) REFERENCES items(id)
 );
+
+CREATE TABLE IF NOT EXISTS rewards (
+    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    reward_name VARCHAR(5) NOT NULL,
+    discount DOUBLE,
+    date_acquired VARCHAR(10),
+    expiry_date VARCHAR(10),
+
+    customer_id INT(7) UNSIGNED NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
 
 -- System User
 CREATE TABLE IF NOT EXISTS managers (

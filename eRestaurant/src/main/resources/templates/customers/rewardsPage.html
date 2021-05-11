@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rewards Page</title>
+    <link rel="stylesheet" th:href="@{/customerPortal/cusPortal.css}" />
+    <script>
+      function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("RewardsTable");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+          switching = false;
+          rows = table.rows;
+          for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (dir == "asc") {
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            } else if (dir == "desc") {
+              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+          }
+          if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount ++;
+          } else {
+            if (switchcount == 0 && dir == "asc") {
+              dir = "desc";
+              switching = true;
+            }
+          }
+        }
+      }
+      </script>
+  </head>
+  
+  <body>
+      <div class="col1">
+        <div class="whitePage">
+          <p id="name">
+            <span th:text="${customer.firstName + ' ' + customer.lastName}"></span>'s Rewards
+          </p>
+          <div class="func">
+            <button onclick="sortTable(0)">Sort Name</button>
+            <button onclick="sortTable(1)">Sort Discount</button>
+            <button onclick="sortTable(2)">Sort Date Received</button>
+            <button onclick="sortTable(3)">Sort Expiring</button>
+            <form action="#" >
+              <button type="submit" id="red" onclick="history.back()">Return to Portal</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col2">
+        <div class="whitePage">
+          <h1>Rewards</h1>
+          <table id="RewardsTable">
+            <thead>
+              <tr>
+                  <th onclick="sortTable(0)">Promo Code</th>
+                  <th onclick="sortTable(1)">Discount</th>
+                  <th onclick="sortTable(2)">Date Received</th>
+                  <th onclick="sortTable(3)">Expiry Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="reward : ${customer.rewards}">
+                  <td th:text=${reward.rewardName}></td>
+                  <td th:text=${reward.discount}></td>
+                  <td th:text=${reward.dateAcquired}></td>
+                  <td th:text=${reward.expiryDate}></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col3">
+        <div class="whitePage">
+          <p>Total available Points </p>
+          <!-- display customer points, 3 coupon options and exchange function -->
+        </div>
+      </div>
+  </body>
+</html>

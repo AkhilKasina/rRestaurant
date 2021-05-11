@@ -5,6 +5,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import java.util.ArrayList;
@@ -55,8 +58,17 @@ public class Customer {
     @Column(name = "address")
 	private String address;
 
+	@Column(name = "points")
+	private Integer points;
+
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "customer", fetch = FetchType.EAGER)
 	private Set<Booking> bookings;
+
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "customer", fetch = FetchType.EAGER)
+	private Set<Reward> rewards;
+
+
+
 
 	public Integer getId() {
 		return id;
@@ -118,6 +130,14 @@ public class Customer {
         return password;
     }
 
+	public Integer getPoints() {
+		return this.points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
+	}
+
 	protected Set<Booking> getBookingsInternal() {
 		if (this.bookings == null) {
 			this.bookings = new HashSet<>();
@@ -136,8 +156,6 @@ public class Customer {
 		return Collections.unmodifiableList(sortedBookings);
 	}
 
-
-
 	public void addBooking(Booking booking) {
 		if (booking.getId() == null) {
 			getBookingsInternal().add(booking);
@@ -153,6 +171,32 @@ public class Customer {
 		this.address = address;
 		this.username = username;
 		this.password = password;
+	}
+
+	// protected Set<Rewards> getRewardsInternal() {
+	// 	if (this.rewards == null) {
+	// 		this.rewards = new HashSet<>();
+	// 	}
+	// 	return this.rewards;
+	// }
+
+	// protected void setRewardsInteral(Set<Rewards> rewards) {
+	// 	this.rewards = rewards;
+	// }
+
+	// public List<Rewards> getRewards() {
+	// 	List<Rewards> sortedRewards = new ArrayList<>(getRewardsInternal());
+	// 	PropertyComparator.sort(sortedRewards, new MutableSortDefinition("id",1 true, true));
+
+	// 	return Collections.unmodifiableList(sortedRewards);
+	// }
+
+	public Set<Reward> getRewards() {
+		return this.rewards;
+	}
+
+	public void setRewards(Set<Reward> rewards) {
+		this.rewards = rewards;
 	}
 
 }

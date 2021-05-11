@@ -29,8 +29,8 @@
                 <form action="#">
                     <button type="submit">Function B</button>
                 </form>
-                <form action="#">
-                    <button type="submit">Function C</button>
+                <form action="#" th:action="@{/viewRewards}">
+                    <button type="submit">View Rewards</button>
                 </form>
                 <form action="#" th:action="@{/}">
                     <button type="submit" id="red">Log Out</button>
@@ -63,7 +63,11 @@
             </table>
         </div>
     </div>
-    
-
-
+    <div class="col3">
+        <div class="whitePage">
+            <h1>Expiring Reward </h1>
+            
+            <h1>Total Reward Points: </h1>
+        </div>
+    </div>
 </body>

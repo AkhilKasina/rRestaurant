@@ -102,7 +102,7 @@ public class CustomerController {
             }
         }
         
-        // redirectAttributes.addFlashAttribute("customerID", this.currentID);
+        redirectAttributes.addFlashAttribute("customerID", this.currentID);
         return redirectToCustomerPortal(redirectAttributes);
     }
 
@@ -154,6 +154,21 @@ public class CustomerController {
 
         redirectAttributes.addFlashAttribute("customerID", this.currentID);
         return "redirect:/booking";
+    }
+
+    //REWARDS PAGE
+
+    @GetMapping(value="/viewRewards")
+    public String getRewardsPage(Model model) {
+        Optional<Customer> currentCus = customerRepository.findById(this.currentID);
+
+        if (currentCus.isPresent()) {
+            Customer customer = currentCus.get();
+            model.addAttribute("customer", customer);
+
+       }
+
+        return ViewManager.CUS_REWARDS;
     }
 }
 
