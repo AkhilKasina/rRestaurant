@@ -17,6 +17,7 @@ import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Booking;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Customer;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Item;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Manager;
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Staff;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,8 +50,25 @@ public class ManagerController {
     //@GetMapping("/restrurant")
 
     @GetMapping("/staffmanager")
-    public String staffmanager(){
-        return ViewManager.MNG_STAFF;
+    public String staffmanager(Model model){
+        List<Staff> Stafflist = staffRepository.findAll();
+        model.addAttribute("Staff", Stafflist);
+        model.addAttribute("newStaff", new StaffDAO());
+        return ViewManager.MNG_MENU;
+    }
+
+    @PostMapping("/staffmanager")
+    public String staffmanager(@ModelAttribute("newStaff") StaffDAO staffDAO, final RedirectAttributes redirectAttributes){
+        System.out.println("id: " + staffDAO.getId() + "Firstname: " + staffDAO.getFirstName() + "Lastname: " + staffDAO.getLastName() + "description: " + staffDAO.getDescription() + "Hourly wage: " + staffDAO.getHourlyWage() + "DOB: " + staffDAO.getDateOfBirth() + "Shift type " + staffDAO.getShiftType());
+        Staff staff = new Staff();
+        staff.isNew();
+        staff.setFirstName(staffDAO.getFirstName());
+        staff.setLastName(staffDAO.getLastName());
+        staff.setDescription(staffDAO.getDescription());
+        staff.setHourlyWage(staffDAO.getHourlyWage());
+        staff.setDateOfBirth(staffDAO.getDateOfBirth());
+        staffRepository.save(staff);
+        return redirectToManagerPortal(redirectAttributes);
     }
 
     @GetMapping("/menumanager")

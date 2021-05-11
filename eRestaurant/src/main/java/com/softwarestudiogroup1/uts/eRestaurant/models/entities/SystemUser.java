@@ -93,4 +93,8 @@ public class SystemUser {
     public String getLastName() {
         return lastName;
     }
+
+    public boolean isNew() {
+        return this.id == null;
+    }
 }
