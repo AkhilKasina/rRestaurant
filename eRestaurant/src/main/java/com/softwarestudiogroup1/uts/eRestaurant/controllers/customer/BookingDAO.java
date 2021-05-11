@@ -2,13 +2,17 @@ package com.softwarestudiogroup1.uts.eRestaurant.controllers.customer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BookingDAO {
     private int id;
     private String bookingDate;
     private String bookingTime;
     private String tablePosition;
+
+    private ArrayList<BookingItemDAO> bookingItems;
 
     public int getId() {
         return id;
@@ -42,7 +46,7 @@ public class BookingDAO {
         this.tablePosition = tablePosition;
     }
 
-    private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     public void setDateAndTime(Date timeStamp) {
         String datesString = timeStamp.toString().split(" ")[0];
@@ -54,9 +58,18 @@ public class BookingDAO {
 
     public Date getBookingTimeStamp() {
         try {
-            return DATE_TIME_FORMAT.parse(bookingDate + " " + bookingTime + ":00");
+            return DATE_TIME_FORMAT.parse(bookingDate + " " + bookingTime);
         } catch (ParseException e) {
             throw new IllegalArgumentException(e);
         }
     }
+
+    public void setBookingItems(ArrayList<BookingItemDAO> bookingItems) {
+        this.bookingItems = bookingItems;
+    }
+
+    public ArrayList<BookingItemDAO> getBookingItems() {
+        return bookingItems;
+    }
+
 }

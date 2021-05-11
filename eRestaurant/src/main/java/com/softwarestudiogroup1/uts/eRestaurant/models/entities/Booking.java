@@ -1,19 +1,29 @@
 package com.softwarestudiogroup1.uts.eRestaurant.models.entities;
 
 import java.security.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -27,7 +37,7 @@ public class Booking {
     
     @Column(name = "booking_datetime")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date bookingDateTime;
 
     @Column(name = "booking_time")
@@ -42,6 +52,9 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "booking", fetch = FetchType.EAGER)
+    private Set<BookingItem> items;
 
     public Integer getId() {
         return id;
@@ -90,5 +103,35 @@ public class Booking {
     public Customer getCustomer() {
         return customer;
     }
+
+    protected Set<BookingItem> getBookingItemsInternal() {
+		if (this.items == null) {
+			this.items = new HashSet<>();
+		}
+		return this.items;
+	}
+
+	protected void setBookingItemsInteral(Set<BookingItem> items) {
+		this.items = items;
+	}
+
+	public List<BookingItem> getBookingItems() {
+		List<BookingItem> sortedBookingItemss = new ArrayList<>(getBookingItemsInternal());
+		PropertyComparator.sort(sortedBookingItemss, new MutableSortDefinition("id", true, true));
+
+		return Collections.unmodifiableList(sortedBookingItemss);
+	}
+
+	public void addBookingItems(List<BookingItem> bookingItems) {
+        Set<BookingItem> sets = new HashSet<>();
+        
+        for (BookingItem bookingItem: bookingItems) {
+            sets.add(bookingItem);
+            bookingItem.setBooking(this);
+        }
+		
+        setBookingItemsInteral(sets);
+	}
+
 
 }

@@ -2,7 +2,7 @@
 
 :root{
 
-      --main-colour: #145db1;
+      --main-colour: #098171;
       --color-dark: #1d2231;
       --text-grey: #8390a2;
 
@@ -68,7 +68,7 @@ header{
    display: flex;
    justify-content: space-between;
    padding: 1rem;
-   box-shadow: 4px 4px 10px rgb(68, 81, 202);
+   box-shadow: 4px 4px 10px rgb(8, 122, 88);
 }
 .userwrapper{
    display: flex;

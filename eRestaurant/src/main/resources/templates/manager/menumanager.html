@@ -25,13 +25,13 @@
                <a th:href="@{/manager}"><span class="las la-bars"> </span> <span> Dashboard  </span></a>
             </li>
             <li>
-               <a href=""><span class="las la-utensils"></span> <span></span>Restrurant</span></a>
-            </li>
-            <li>
                <a th:href="@{/staffmanager}"><span class="las la-address-book"></span> <span></span>Staff</span></a>
             </li>
             <li>
                <a th:href="@{/menumanager}" class="active"><span class="las la-list"></span> <span></span>Menu</span></a>
+            </li>
+            <li>
+               <a href=""><span class="las la-angle-double-left"></span> <span> Logout</span></a>
             </li>
          </ul>
       </div>
@@ -54,7 +54,61 @@
       </header>
 
       <main>
-        
+         <div class="recentflex">
+            <div class="customers">
+               <form th:object = "${newItem}" method="post">
+                  <div class="card-header">
+                     <h2>Add Menu Item</h2>
+                     <button>Add Item <span class="las la-arrow right" type = "submit"></span></button>
+                  </div>
+                  <div class="card-body">
+                     <table width=100%>
+                        <tr>
+                           <td>Item Name:</td>
+                           <td><input type="text" placeholder="Item Name" th:field = "*{name}"></td>
+                        </tr>
+                        <tr>
+                           <td>Item Description:</td>
+                           <td><input type="text" placeholder="Item Description" th:field = "*{description}"></td>
+                        </tr>
+                        <tr>
+                           <td>Item Price:</td>
+                           <td><input type="text" placeholder="Item Price" th:field = "*{price}"> </td>
+                        </tr>
+                        <tr>
+                           <td>Item Type:</td>
+                           <td>
+                              Lunch <input type="radio" name="Add Lunch type" value="Lunch" th:field = "*{menuType}">
+                              Dinner <input type="radio" name="Add Lunch type" value="Dinner" th:field = "*{menuType}">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </form>
+               <div class="gap">.</div>
+               <div class="card-header">
+                  <h2>Menu Items</h2>
+                  <button>See all <span class="las la-arrow right"></span></button>
+               </div>
+               <div class="card-body">
+                  <table width=100%>
+                     <th>ID</th>
+                     <th>Name</th>
+                     <th>Price</th>
+                     <th>Menu</th>
+                     <tbody>
+                        <tr th:each="item : ${Items}">
+                           <td th:text=${item.id} style="text-align:center"></td>
+                           <td th:text=${item.name} style="text-align:center"></td>
+                           <td th:text=${item.price} style="text-align:center"></td>
+                           <td th:text=${item.menuType} style="text-align:center"></td>
+                        </tr>
+                     </tbody>
+                  </table>
+
+               </div>
+            </div>
+         </div>
       </main>
 
    </div>
