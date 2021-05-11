@@ -2,6 +2,7 @@ package com.softwarestudiogroup1.uts.eRestaurant.controllers.Reciept;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,29 +16,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 public class recieptController {
-    private final int bookingID;
+    private int bookingID;
     private final BookingItemRepository bookingItemRepository;
 
-    public recieptController(@ModelAttribute("bookingID") int bookingID, BookingItemRepository bookingItemRepository) {
+    public recieptController(BookingItemRepository bookingItemRepository) {
         this.bookingItemRepository = bookingItemRepository;
-        this.bookingID = bookingID;
     }
 
-    @GetMapping("/reciept")
-    public String recieptScreen(Model model){
+    @GetMapping("/reciept/{BookingID}")
+    public String recieptScreen(@PathVariable("BookingID") int BookingID, Model model){
         ArrayList<String> names= new ArrayList();
         ArrayList<Integer> quantities= new ArrayList();
         ArrayList<Double> Price= new ArrayList();
-        List<BookingItem> Bitems = bookingItemRepository.findbyBookingID(bookingID);
+        List<BookingItem> Bitems = bookingItemRepository.findAll();
         Double total = 0.0;
+        this.bookingID = BookingID;
 
         for (BookingItem Bitem:Bitems){
-            names.add(Bitem.getItem().getName());
-            int currentquan = Bitem.getQuantity();
-            quantities.add(currentquan);
-            double currentprice = Bitem.getItem().getPrice()*currentquan;
-            Price.add(currentprice);
-            total+=currentprice;
+            if (Bitem.getBooking().getId() == bookingID){
+                names.add(Bitem.getItem().getName());
+                int currentquan = Bitem.getQuantity();
+                quantities.add(currentquan);
+                double currentprice = Bitem.getItem().getPrice()*currentquan;
+                Price.add(currentprice);
+                total+=currentprice;
+            }
         }
 
         model.addAttribute("names",names);
