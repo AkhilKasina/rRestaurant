@@ -58,8 +58,8 @@
             <button onclick="sortTable(1)">Sort Discount</button>
             <button onclick="sortTable(2)">Sort Date Received</button>
             <button onclick="sortTable(3)">Sort Expiring</button>
-            <form action="#" >
-              <button type="submit" id="red" onclick="history.back()">Return to Portal</button>
+            <form action="#" th:action="@{/return}">
+              <button type="submit" id="red">Return to Portal</button>
             </form>
           </div>
         </div>
@@ -94,16 +94,19 @@
 
           <h1>Exchange 100 points for 10% off coupon</h1>
           <form action="#" th:action="@{/exchange10}" method="POST">
-            <button>Exchange 10</button>
+            <button>Exchange 10%</button>
           </form>
           <h1>Exchange 180 points for 15% off coupon</h1>
           <form action="#" th:action="@{/exchange15}" method="POST">
-            <button></button>
+            <button>Exchange 15%</button>
           </form>
           <h1>Exchange 250 points for 20% off coupon</h1>
           <form action="#" th:action="@{/exchange20}" method="POST">
-            <button></button>
+            <button>Exchange 20%</button>
           </form>
+          <div th:if="${check == false}">
+            <p style="color: red"> Login Unsuccessful, please try again</p>
+         </div>
           <p style="color: grey;">note: each coupon will expire in 30 days after the day of exchange</p>
         </div>
       </div>

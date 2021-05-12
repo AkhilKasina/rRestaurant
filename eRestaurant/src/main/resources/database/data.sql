@@ -2,9 +2,9 @@ INSERT INTO customers (id, username, password, first_name, last_name, telephone,
 VALUES(1, 'johnny', '123', 'Johnny', 'Nguyen', '012345634', '123 Add Street', 100);
 
 INSERT INTO bookings VALUES(1, '2021-01-02 20:30','20:30','2021-01-02', 'Window 1', 1);
-INSERT INTO rewards VALUES(1, '10OFF', 0.9, '2021-01-02', '2021-03-20', 1); 
-INSERT INTO rewards VALUES(2, '20OFF', 0.8, '2021-02-13', '2021-02-15', 1);
-INSERT INTO rewards VALUES(3, '15OFF', 0.85, '2021-01-20', '2021-02-15', 1);
+INSERT INTO rewards VALUES(1, '10OFF', 10, '2021-01-02', '2021-03-20', 1); 
+INSERT INTO rewards VALUES(2, '20OFF', 20, '2021-02-13', '2021-02-15', 1);
+INSERT INTO rewards VALUES(3, '15OFF', 15, '2021-01-20', '2021-02-15', 1);
 
 
 

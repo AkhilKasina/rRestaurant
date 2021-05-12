@@ -284,41 +284,47 @@ public class CustomerController {
     }
 
     //helper function to exchange reward
-    public void exchangeReward(String name, double discount, int point) {
+    public String exchangeReward(String name, double discount, int point, Model model) {
         Optional<Customer> currentCus = customerRepository.findById(this.currentID);
 
         if (currentCus.isPresent()) {
             Customer customer = currentCus.get();
-            if(customer.getPoints() >= point){
+            boolean check = (customer.getPoints() >= point);
+            if(check){
                 String currentDate = java.time.LocalDate.now().toString();
                 String expDate = java.time.LocalDate.now().plusDays(30).toString();
                 Reward reward = new Reward(name, discount, currentDate , expDate, customer);
                 this.rewardRepository.save(reward);
                 customer.setPoints(customer.getPoints() - point);
                 customerRepository.save(customer);
+            } else{
+                model.addAttribute("check", check);
             }
-       }   
+       }
+       return "redirect:/viewRewards";
     }
 
     //exchanges 100 points for 10%
     @PostMapping("/exchange10")
-    public String exchangeTen() {
-        exchangeReward("10OFF", 0.9, 100);
-        return "redirect:/viewRewards";
+    public String exchangeTen(Model model) {
+       return exchangeReward("10OFF", 10, 100, model);
     }
 
     //exchanges 180 points for 15%
     @PostMapping("/exchange15")
-    public String exchangeFifteen() {
-        exchangeReward("15OFF", 0.85, 180);
-        return "redirect:/viewRewards";
+    public String exchangeFifteen(Model model) {
+        return exchangeReward("15OFF", 15, 250, model);
     }
 
     //exchanges 250 points for 20%
     @PostMapping("/exchange20")
-    public String exchangeTwenty() {
-        exchangeReward("20OFF", 0.8, 250);
-        return "redirect:/viewRewards";
+    public String exchangeTwenty(Model model) {
+        return exchangeReward("20OFF", 20, 250, model);
+    }
+
+    @GetMapping("/return")
+    public String exitRewards(final RedirectAttributes redirectAttributes) {
+        return redirectToCustomerPortal(redirectAttributes);
     }
 
     

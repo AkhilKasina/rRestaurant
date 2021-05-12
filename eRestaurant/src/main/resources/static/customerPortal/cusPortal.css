@@ -39,6 +39,7 @@ body {
   border-radius: 20px;
   width: 25%;
   margin: 20px;
+  text-align: center;
 }
 
 h1{
@@ -129,4 +130,8 @@ table tbody tr:last-of-type {
   text-align: center;
   font-weight: bold;
   font-size: 18px;
+}
+
+.col3 button{
+  margin-bottom: 20px;
 }
