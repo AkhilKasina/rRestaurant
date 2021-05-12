@@ -17,9 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class RecieptController {
+public class recieptController {
     private final BookingItemRepository bookingItemRepository;
-    public RecieptController(BookingItemRepository bookingItemRepository) {
+    public recieptController(BookingItemRepository bookingItemRepository) {
         this.bookingItemRepository = bookingItemRepository;
     }
 
