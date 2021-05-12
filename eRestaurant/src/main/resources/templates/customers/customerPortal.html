@@ -9,7 +9,7 @@
     <title>Customer Portal</title>
 </head>
 
-<body>
+<body>z
     <div class="col1">
         <div class="whitePage">
             <h1>Welcome, </h1>
@@ -30,8 +30,8 @@
                 <form action="#">
                     <button type="submit">Function B</button>
                 </form>
-                <form action="#">
-                    <button type="submit">Function C</button>
+                <form action="#" th:action="@{/viewRewards}">
+                    <button type="submit">View Rewards</button>
                 </form>
                 <form action="#" th:action="@{/}">
                     <button type="submit" id="red">Log Out</button>
@@ -64,6 +64,19 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="col3">
+        <div class="whitePage">
+            <h1>Expiring Reward </h1>
+            <p><b>Name: </b><span th:text=${expreward.rewardName}></span></p>
+            <p><b>Discount: </b><span th:text=${expreward.discount}></span>%</p>
+            <p><b>Expiry Date: </b><span th:text=${expreward.expiryDate}></span></p>
+            
+            
+            <h1>Total Reward Points: </h1>
+            <p id="rp"><span th:text=${customer.points}></span></p>
+            <p style="color: grey;">Note: you can only have a maximum of 250 points at any given time</p>
         </div>
     </div>
 </body>

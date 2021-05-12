@@ -80,6 +80,8 @@
               <td>
                 <input
                   type="text"
+                  pattern="[A-Za-z].{2,}"
+                  title="Can only contain lower and uppercase letters"
                   placeholder="Enter a preferred username"
                   th:field="*{username}"
                   required
@@ -95,6 +97,7 @@
                   type="text"
                   pattern="[0-9]{10}"
                   placeholder="Enter your Australian telephone number"
+                  title="Please enter your 10 digit Australian phone number"
                   th:field="*{telephone}"
                   required
                 />
