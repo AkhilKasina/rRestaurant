@@ -11,10 +11,16 @@
     <h1>Welcome to user booking</h1>
     <form th:object="${customerBooking}" method="post">
         <input type="hidden" id="id" th:field="*{id}" />
-        <input type="date" id="bookingDate" placeholder="yyyy-mm-dd" th:field="*{bookingDate}">
+        <div th:if="${error == true}">
+          <p style="color: red" th:text="${errorMessage}"></p>
+         </div>
+        <input type="date" id="bookingDate" placeholder="yyyy-mm-dd" th:field="*{bookingDate}" >
           <br>
-        <input type="time" id="bookingTime" th:field="*{bookingTime}">
+        <input type="time" id="bookingTime" th:field="*{bookingTime}" >
           <br>
+        <div th:if="${timeError == true}">
+          <p style="color: red" th:text="${timeErrorMessage}"></p>
+         </div>
         <select id="Tables" th:field="*{tablePosition}">
           <option value="Window 1">Window 1</option>
           <option value="Window 2">Window 2</option>
@@ -27,11 +33,12 @@
           <option value="Kitchen 3">Kitchen 3</option>
         </select>
           <br>
+          <input type="submit" name="showMenu" value="Show Menu" />
           <div class="whitePage">
             <div class="wrapper">
               <div class="title">
-                <h4>Lunch Menu</h4>
-                <h3>Available 12pm to 4pm</h3>
+                <h4>Menu</h4>
+                <h3></h3>
               </div>
               <div class="menuWrapper">
               
@@ -66,8 +73,8 @@
             </div>
           </div>
 
-      <button> CANCEL </button>
-      <button th:with="text=${customerBooking.bookingDate} ? 'UPDATE BOOKING' : 'BOOK'" th:text="${text}" type="submit"> BOOK </button>
+      <input type="submit" name="cancel" value="Cancel" />
+      <button th:with="text=${isEditing} ? 'UPDATE BOOKING' : 'BOOK'" th:text="${text}" type="submit"> BOOK </button>
       <br>
       
     </form>

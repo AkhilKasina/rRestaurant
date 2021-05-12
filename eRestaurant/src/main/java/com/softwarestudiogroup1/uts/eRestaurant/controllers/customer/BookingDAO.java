@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Item;
+
 public class BookingDAO {
     private int id;
     private String bookingDate;
@@ -66,6 +68,43 @@ public class BookingDAO {
 
     public void setBookingItems(ArrayList<BookingItemDAO> bookingItems) {
         this.bookingItems = bookingItems;
+    }
+
+    public void setBookingItemsFrom(List<Item> itemsList, MenuType type) {
+        ArrayList<BookingItemDAO> bookingItemDAOs = new ArrayList<>();
+
+        if (type == MenuType.LUNCH) {
+             for(Item item : itemsList){
+                if (item.getMenuType().equals("lunch")) {
+                    BookingItemDAO bookingItemDAO = new BookingItemDAO();
+
+                    bookingItemDAO.setItemID(item.getId());
+                    bookingItemDAO.setName(item.getName());
+                    bookingItemDAO.setPrice(item.getPrice());
+                    bookingItemDAO.setDescription(item.getDescription());
+                    bookingItemDAO.setQuantity("0");
+
+                    bookingItemDAOs.add(bookingItemDAO);
+                }
+            } 
+        }
+        else if (type == MenuType.DINNER) {
+            for (Item item : itemsList) {
+                if(item.getMenuType().equals("dinner")){
+                    BookingItemDAO bookingItemDAO = new BookingItemDAO();
+
+                    bookingItemDAO.setItemID(item.getId());
+                    bookingItemDAO.setName(item.getName());
+                    bookingItemDAO.setPrice(item.getPrice());
+                    bookingItemDAO.setDescription(item.getDescription());
+                    bookingItemDAO.setQuantity("0");
+
+                    bookingItemDAOs.add(bookingItemDAO);
+                }
+            }
+        }
+
+        this.setBookingItems(bookingItemDAOs);
     }
 
     public ArrayList<BookingItemDAO> getBookingItems() {
