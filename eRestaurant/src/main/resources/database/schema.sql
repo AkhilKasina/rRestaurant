@@ -71,5 +71,8 @@ CREATE TABLE IF NOT EXISTS staffs (
     email VARCHAR(40),
     first_name VARCHAR(30),
     last_name VARCHAR(30),
-    telephone VARCHAR(20)
+    telephone VARCHAR(20),
+    description VARCHAR(30),
+    -- date_of_birth DATE,
+    hourly_wage DOUBLE
 );
