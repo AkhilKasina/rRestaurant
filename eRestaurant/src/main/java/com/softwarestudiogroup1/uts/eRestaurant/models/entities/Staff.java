@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "staffs")
@@ -15,12 +16,12 @@ public class Staff extends SystemUser {
     @NotEmpty
     private String description;
 
-    @Column(name = "date_of_birth")
-    @NotEmpty
-    private Date dateOfBirth;
+    // @Column(name = "date_of_birth")
+    // @NotEmpty
+    // private Date dateOfBirth;
 
     @Column(name = "hourly_wage")
-    @NotEmpty
+    @NotNull
     private double hourlyWage;
 
 
@@ -41,12 +42,12 @@ public class Staff extends SystemUser {
 	}
 
 
-    public @NotEmpty Date getDateOfBirth() {
-		return this.dateOfBirth;
-	}
+    // public @NotEmpty Date getDateOfBirth() {
+	// 	return this.dateOfBirth;
+	// }
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	// public void setDateOfBirth(Date dateOfBirth) {
+	// 	this.dateOfBirth = dateOfBirth;
 
-	}
+	// }
 }

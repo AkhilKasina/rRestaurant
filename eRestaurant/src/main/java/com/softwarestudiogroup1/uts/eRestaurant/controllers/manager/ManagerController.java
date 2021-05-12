@@ -54,19 +54,23 @@ public class ManagerController {
         List<Staff> Stafflist = staffRepository.findAll();
         model.addAttribute("Staff", Stafflist);
         model.addAttribute("newStaff", new StaffDAO());
-        return ViewManager.MNG_MENU;
+        return ViewManager.MNG_STAFF;
     }
 
     @PostMapping("/staffmanager")
     public String staffmanager(@ModelAttribute("newStaff") StaffDAO staffDAO, final RedirectAttributes redirectAttributes){
-        System.out.println("id: " + staffDAO.getId() + "Firstname: " + staffDAO.getFirstName() + "Lastname: " + staffDAO.getLastName() + "description: " + staffDAO.getDescription() + "Hourly wage: " + staffDAO.getHourlyWage() + "DOB: " + staffDAO.getDateOfBirth() + "Shift type " + staffDAO.getShiftType());
+        System.out.println("id: " + staffDAO.getId() + "Firstname: " + staffDAO.getFirstName() + "Lastname: " + staffDAO.getLastName() + "description: " + staffDAO.getDescription() + "Hourly wage: " + staffDAO.getHourlyWage() + "Shift type " + staffDAO.getShiftType());
         Staff staff = new Staff();
         staff.isNew();
+        staff.setTelephone(staffDAO.getTelephone());
+        staff.setPassword(staffDAO.getPassword());
+        staff.setEmail(staffDAO.getEmail());
+        staff.setUsername(staffDAO.getUsername());
         staff.setFirstName(staffDAO.getFirstName());
         staff.setLastName(staffDAO.getLastName());
         staff.setDescription(staffDAO.getDescription());
         staff.setHourlyWage(staffDAO.getHourlyWage());
-        staff.setDateOfBirth(staffDAO.getDateOfBirth());
+        // staff.setDateOfBirth(staffDAO.getDateOfBirth());
         staffRepository.save(staff);
         return redirectToManagerPortal(redirectAttributes);
     }
