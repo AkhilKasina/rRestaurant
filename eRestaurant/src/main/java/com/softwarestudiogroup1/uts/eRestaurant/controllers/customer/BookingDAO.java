@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
+
 public class BookingDAO {
     private int id;
     private String bookingDate;
@@ -68,8 +70,7 @@ public class BookingDAO {
         this.bookingItems = bookingItems;
     }
 
-    public ArrayList<BookingItemDAO> getBookingItems() {
+    public ArrayList<BookingItemDAO> getBookingItems(){
         return bookingItems;
     }
-
 }

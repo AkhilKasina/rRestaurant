@@ -65,11 +65,9 @@ public class CustomerController {
         
         this.currentID = customerID;
         Optional<Customer> currentCus = customerRepository.findById(customerID);
-        Customer customer;
-
         if (currentCus.isPresent()) {
-             customer = currentCus.get();
-             model.addAttribute("customer", customer);
+            Customer customer = currentCus.get();
+            model.addAttribute("customer", customer);
 
         }
 
