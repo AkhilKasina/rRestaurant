@@ -28,7 +28,7 @@ public class StaffController {
 
     }
     
-    @GetMapping("staff")
+    @GetMapping("/staff")
     public String staffPortal(@ModelAttribute("staffID") int staffID, Model model) {
         this.currentID = staffID;
         Optional<Staff> currentStaff = staffRepository.findById(this.currentID);

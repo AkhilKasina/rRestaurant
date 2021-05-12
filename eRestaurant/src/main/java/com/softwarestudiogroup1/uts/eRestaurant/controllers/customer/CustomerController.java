@@ -1,6 +1,7 @@
 package com.softwarestudiogroup1.uts.eRestaurant.controllers.customer;
 
 import com.softwarestudiogroup1.uts.eRestaurant.ViewManager;
+import com.softwarestudiogroup1.uts.eRestaurant.controllers.manager.StaffDAO;
 import com.softwarestudiogroup1.uts.eRestaurant.models.BookingItemRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.BookingRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.CustomerRepository;
