@@ -69,23 +69,26 @@ public class CustomerController {
             Customer customer = currentCus.get();
             model.addAttribute("customer", customer);
 
+            //expiring reward
+            Set<Reward> rewards = customer.getRewards();
+            Reward currentReward = rewards.iterator().next();
+            for(Reward r : rewards){
+                int compare = (r.getExpiryDate()).compareTo(currentReward.getExpiryDate());
+                if(compare < 0){
+                    currentReward = r;
+                }
+            }
+            model.addAttribute("expreward", currentReward);
+
         }
 
         else {
             return "redirect:/";
         }
 
-        //expiring reward
+        
 
-        Set<Reward> rewards = customer.getRewards();
-        Reward currentReward = rewards.iterator().next();
-        for(Reward r : rewards){
-            int compare = (r.getExpiryDate()).compareTo(currentReward.getExpiryDate());
-            if(compare < 0){
-                currentReward = r;
-            }
-        }
-        model.addAttribute("expreward", currentReward);
+        
 
         return ViewManager.CUS_PORTAL;
     }
