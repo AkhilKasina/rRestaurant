@@ -35,7 +35,7 @@ public class ItemController {
 
         //only puts lunch items into lunchList
         for(Item item : itemLists){
-            if(item.getMenuType().equals("lunch")){
+            if(item.getMenuType().toLowerCase().equals("lunch")){
                 lunchList.add(item);
             }
         }

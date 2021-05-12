@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS customers (
     last_name VARCHAR(30),
     telephone VARCHAR(20),
     address VARCHAR(200),
-    points INT(6)
+    points INT(3)
 );
 
 CREATE TABLE IF NOT EXISTS bookings (

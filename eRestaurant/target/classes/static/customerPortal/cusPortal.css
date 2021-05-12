@@ -124,3 +124,9 @@ table tbody tr:last-of-type {
 #RewardsTable th{
   cursor: pointer;
 }
+
+#rp{
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}

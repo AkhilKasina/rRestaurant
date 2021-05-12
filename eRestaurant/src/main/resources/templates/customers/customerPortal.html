@@ -9,7 +9,7 @@
     <title>Customer Portal</title>
 </head>
 
-<body>
+<body>z
     <div class="col1">
         <div class="whitePage">
             <h1>Welcome, </h1>
@@ -67,8 +67,14 @@
     <div class="col3">
         <div class="whitePage">
             <h1>Expiring Reward </h1>
+            <p><b>Name: </b><span th:text=${expreward.rewardName}></span></p>
+            <p><b>Discount: </b><span th:text=${expreward.discount}></span>%</p>
+            <p><b>Expiry Date: </b><span th:text=${expreward.expiryDate}></span></p>
+            
             
             <h1>Total Reward Points: </h1>
+            <p id="rp"><span th:text=${customer.points}></span></p>
+            <p style="color: grey;">Note: you can only have a maximum of 250 points at any given time</p>
         </div>
     </div>
 </body>

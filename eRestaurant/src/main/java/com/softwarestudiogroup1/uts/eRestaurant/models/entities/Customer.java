@@ -67,9 +67,6 @@ public class Customer {
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "customer", fetch = FetchType.EAGER)
 	private Set<Reward> rewards;
 
-
-
-
 	public Integer getId() {
 		return id;
 	}
@@ -173,30 +170,16 @@ public class Customer {
 		this.password = password;
 	}
 
-	// protected Set<Rewards> getRewardsInternal() {
-	// 	if (this.rewards == null) {
-	// 		this.rewards = new HashSet<>();
-	// 	}
-	// 	return this.rewards;
-	// }
-
-	// protected void setRewardsInteral(Set<Rewards> rewards) {
-	// 	this.rewards = rewards;
-	// }
-
-	// public List<Rewards> getRewards() {
-	// 	List<Rewards> sortedRewards = new ArrayList<>(getRewardsInternal());
-	// 	PropertyComparator.sort(sortedRewards, new MutableSortDefinition("id",1 true, true));
-
-	// 	return Collections.unmodifiableList(sortedRewards);
-	// }
-
 	public Set<Reward> getRewards() {
 		return this.rewards;
 	}
 
 	public void setRewards(Set<Reward> rewards) {
 		this.rewards = rewards;
+	}
+
+	public void addReward(Reward reward) {
+		this.rewards.add(reward);
 	}
 
 }

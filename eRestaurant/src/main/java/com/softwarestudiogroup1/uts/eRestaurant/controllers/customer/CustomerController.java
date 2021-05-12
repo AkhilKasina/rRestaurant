@@ -5,10 +5,12 @@ import com.softwarestudiogroup1.uts.eRestaurant.models.BookingItemRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.BookingRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.CustomerRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.ItemRepository;
+import com.softwarestudiogroup1.uts.eRestaurant.models.RewardRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Booking;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Customer;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Item;
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Reward;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Controller
@@ -32,12 +35,14 @@ public class CustomerController {
     private final BookingRepository bookingRepository;
     private final ItemRepository itemRepository;
     private final BookingItemRepository bookingItemRepository;
+    private final RewardRepository rewardRepository;
 
-    public CustomerController(CustomerRepository customerRepository, BookingRepository bookingRepository, ItemRepository itemRepository, BookingItemRepository bookingItemRepository) {
+    public CustomerController(CustomerRepository customerRepository, BookingRepository bookingRepository, ItemRepository itemRepository, BookingItemRepository bookingItemRepository, RewardRepository rewardRepository) {
         this.customerRepository = customerRepository;
         this.bookingRepository = bookingRepository;
         this.itemRepository = itemRepository;
         this.bookingItemRepository = bookingItemRepository;
+        this.rewardRepository = rewardRepository;
     }
 
     /**
@@ -59,9 +64,10 @@ public class CustomerController {
         
         this.currentID = customerID;
         Optional<Customer> currentCus = customerRepository.findById(customerID);
+        Customer customer;
 
         if (currentCus.isPresent()) {
-             Customer customer = currentCus.get();
+             customer = currentCus.get();
              model.addAttribute("customer", customer);
 
         }
@@ -69,6 +75,18 @@ public class CustomerController {
         else {
             return "redirect:/";
         }
+
+        //expiring reward
+
+        Set<Reward> rewards = customer.getRewards();
+        Reward currentReward = rewards.iterator().next();
+        for(Reward r : rewards){
+            int compare = (r.getExpiryDate()).compareTo(currentReward.getExpiryDate());
+            if(compare < 0){
+                currentReward = r;
+            }
+        }
+        model.addAttribute("expreward", currentReward);
 
         return ViewManager.CUS_PORTAL;
     }
@@ -113,7 +131,7 @@ public class CustomerController {
 
             System.out.println("Booking: " + bookingDAO.getBookingDate() + " time: " + bookingDAO.getBookingTime() + " table: " + bookingDAO.getTablePosition());
 
-            if (currentCus.isPresent()) {
+            if (currentCus.isPresent()) {       
                 Customer customer = currentCus.get();
                 
                 // Save Booking To Database
@@ -263,6 +281,46 @@ public class CustomerController {
 
         return ViewManager.CUS_REWARDS;
     }
+
+    //helper function to exchange reward
+    public void exchangeReward(String name, double discount, int point) {
+        Optional<Customer> currentCus = customerRepository.findById(this.currentID);
+
+        if (currentCus.isPresent()) {
+            Customer customer = currentCus.get();
+            if(customer.getPoints() >= point){
+                String currentDate = java.time.LocalDate.now().toString();
+                String expDate = java.time.LocalDate.now().plusDays(30).toString();
+                Reward reward = new Reward(name, discount, currentDate , expDate, customer);
+                this.rewardRepository.save(reward);
+                customer.setPoints(customer.getPoints() - point);
+                customerRepository.save(customer);
+            }
+       }   
+    }
+
+    //exchanges 100 points for 10%
+    @PostMapping("/exchange10")
+    public String exchangeTen() {
+        exchangeReward("10OFF", 0.9, 100);
+        return "redirect:/viewRewards";
+    }
+
+    //exchanges 180 points for 15%
+    @PostMapping("/exchange15")
+    public String exchangeFifteen() {
+        exchangeReward("15OFF", 0.85, 180);
+        return "redirect:/viewRewards";
+    }
+
+    //exchanges 250 points for 20%
+    @PostMapping("/exchange20")
+    public String exchangeTwenty() {
+        exchangeReward("20OFF", 0.8, 250);
+        return "redirect:/viewRewards";
+    }
+
+    
 }
 
 

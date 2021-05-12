@@ -43,6 +43,18 @@ public class Reward {
 	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 
+	public Reward() {
+
+	}
+
+	public Reward(String name, double discount, String dateExchanged, String couponExp, Customer customer) {
+		this.rewardName = name;
+		this.discount = discount;
+		this.dateAcquired = dateExchanged;
+		this.expiryDate = couponExp;
+		this.customer = customer;
+	}
+
 
     public Integer getId() {
 		return this.id;

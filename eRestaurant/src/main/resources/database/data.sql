@@ -1,5 +1,5 @@
-INSERT INTO customers (id, username, password, first_name, last_name, telephone, address)
-VALUES(1, 'johnny', '123', 'Johnny', 'Nguyen', '012345634', '123 Add Street');
+INSERT INTO customers (id, username, password, first_name, last_name, telephone, address, points)
+VALUES(1, 'johnny', '123', 'Johnny', 'Nguyen', '012345634', '123 Add Street', 100);
 
 INSERT INTO bookings VALUES(1, '2021-01-02 20:30','20:30','2021-01-02', 'Window 1', 1);
 INSERT INTO rewards VALUES(1, '10OFF', 0.9, '2021-01-02', '2021-03-20', 1); 

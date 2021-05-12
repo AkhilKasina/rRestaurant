@@ -89,8 +89,22 @@
       </div>
       <div class="col3">
         <div class="whitePage">
-          <p>Total available Points </p>
-          <!-- display customer points, 3 coupon options and exchange function -->
+          <h1>Total Reward Points: </h1>
+          <p id="rp"><span th:text=${customer.points}></span></p>
+
+          <h1>Exchange 100 points for 10% off coupon</h1>
+          <form action="#" th:action="@{/exchange10}" method="POST">
+            <button>Exchange 10</button>
+          </form>
+          <h1>Exchange 180 points for 15% off coupon</h1>
+          <form action="#" th:action="@{/exchange15}" method="POST">
+            <button></button>
+          </form>
+          <h1>Exchange 250 points for 20% off coupon</h1>
+          <form action="#" th:action="@{/exchange20}" method="POST">
+            <button></button>
+          </form>
+          <p style="color: grey;">note: each coupon will expire in 30 days after the day of exchange</p>
         </div>
       </div>
   </body>
