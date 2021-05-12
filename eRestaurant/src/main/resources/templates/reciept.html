@@ -3,11 +3,24 @@
 <div>
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Reciept</title>
-    </head>
+     </head>
 </div>
 <div>
     <body>
+        <table>
+            <th>Booking ID: </th>
+            <th th:text = ${ID}></th>
+        </table>
+        <table>
+            <th>Customer: </th>
+            <th th:text = ${cusfirst}></th>
+            <th th:text = ${cuslast}></th>
+            <th>ID: </th>
+            <th th:text = ${cusID}></th>
+        </table>
         <table>
             <th>Item</th>
             <th>Quantity</th>
@@ -16,9 +29,13 @@
                 <tr th:each="name, Index : ${names}">
                     <td th:text=${name} style="text-align:center"></td>
                     <td th:text=${quantities[Index.index]} style="text-align:center"></td>
-                    <td th:text=${price[Index.index]} style="text-align:center"></td>
-                 </tr>
+                    <td th:text=${price[Index.index]} style="text-align:center"></td> 
+                </tr>
             </tbody>
+        </table>
+        <table>
+            <th>Total = </th>
+            <th th:text = ${total}></th>
         </table>
     </body>
 </div>

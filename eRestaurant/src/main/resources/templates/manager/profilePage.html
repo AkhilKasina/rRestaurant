@@ -114,7 +114,7 @@
                            <td th:text=${booking.bookingDate} style="text-align:center"></td>
                            <td th:text=${booking.tablePosition} style="text-align:center"></td>
                            <td th:text=${names[Index.index]} style="text-align:center"></td>
-                           <td><a th:href="@{/reciept/{bookingID}(bookingID=${booking.id})}">View</a></td>
+                           <td style="text-align:center"><a th:href="@{/showreciept/{BookingID}(BookingID=${booking.id})}">View</a></td>
                         </tr>
                      </tbody>
                   </table>

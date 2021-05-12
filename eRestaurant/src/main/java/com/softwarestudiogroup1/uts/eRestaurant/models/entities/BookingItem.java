@@ -21,9 +21,6 @@ public class BookingItem {
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
-    @Column(name = "bookingID")
-    private int bookingId;
-
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
@@ -37,7 +34,6 @@ public class BookingItem {
 
     public void setBooking(Booking booking) {
         this.booking = booking;
-        this.bookingId = booking.getId();
     }
 
     public Booking getBooking() {
@@ -61,10 +57,6 @@ public class BookingItem {
     }
 
     public int getBookingId(){
-        return bookingId;
+        return booking.getId();
     }
-
-
-
-
 }
