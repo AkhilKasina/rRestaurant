@@ -177,7 +177,9 @@ public class CustomerController {
 
         BookingDAO bookingDAO = new BookingDAO();
         bookingDAO.setId(currentBooking.getId());
-        bookingDAO.setDateAndTime(currentBooking.getBookingDateTime());
+        // bookingDAO.setDateAndTime(currentBooking.getBookingDateTime());
+        bookingDAO.setBookingDate(currentBooking.getBookingDate());
+        bookingDAO.setBookingTime(currentBooking.getBookingTime());
         bookingDAO.setTablePosition(currentBooking.getTablePosition());
         
 
@@ -239,13 +241,15 @@ public class CustomerController {
                 return ViewManager.CUS_BOOKING;
             }
 
-            System.out.println("Update Booking: " + bookingDAO.getBookingDate() + " time: " + bookingDAO.getBookingTime() + " table: " + bookingDAO.getTablePosition());
+           
 
             updatedBooking.setBookingDateTime(bookingDAO.getBookingTimeStamp());
             updatedBooking.setBookingTime(bookingDAO.getBookingTime());
             updatedBooking.setBookingDate(bookingDAO.getBookingDate());
             updatedBooking.setTablePosition(bookingDAO.getTablePosition());
             updatedBooking.setCustomer(currentCus.get());
+
+            System.out.println("Update Booking: " + updatedBooking.getBookingDateTime()  +" table: " + bookingDAO.getTablePosition());
 
             saveBookingItemsToDBs(bookingDAO.getBookingItems(), updatedBooking);
 
