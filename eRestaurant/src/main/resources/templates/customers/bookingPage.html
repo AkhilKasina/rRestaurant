@@ -33,7 +33,10 @@
           <option value="Kitchen 3">Kitchen 3</option>
         </select>
           <br>
-          <input type="submit" name="showMenu" value="Show Menu" />
+          <div th:if="${!isEditing}">
+            <input  type="submit" name="showMenu" value="Show Menu" />
+          </div>
+         
           <div class="whitePage">
             <div class="wrapper">
               <div class="title">

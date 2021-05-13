@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Item;
 
 public class BookingDAO {
@@ -105,6 +106,55 @@ public class BookingDAO {
         }
 
         this.setBookingItems(bookingItemDAOs);
+    }
+
+    public void setBookingItemQuantity(List<BookingItem> currentBookingItems, MenuType type, List<Item> menuItems) {
+        ArrayList<BookingItemDAO> bookingItemDAOs = new ArrayList<>();
+
+        if (type == MenuType.LUNCH) {
+            for(Item item : menuItems){
+               if (item.getMenuType().equals("lunch")) {
+                   BookingItemDAO bookingItemDAO = new BookingItemDAO();
+
+                   bookingItemDAO.setItemID(item.getId());
+                   bookingItemDAO.setName(item.getName());
+                   bookingItemDAO.setPrice(item.getPrice());
+                   bookingItemDAO.setDescription(item.getDescription());
+                   bookingItemDAO.setQuantity("0");
+
+                   for (BookingItem bookingItem: currentBookingItems) {
+                    if (bookingItem.getItem().getId() == item.getId()) {
+                        bookingItemDAO.setQuantity("" + bookingItem.getQuantity());
+                    }
+                }
+
+                   bookingItemDAOs.add(bookingItemDAO);
+               }
+           } 
+       }
+       else if (type == MenuType.DINNER) {
+           for (Item item : menuItems) {
+               if(item.getMenuType().equals("dinner")) {
+                   BookingItemDAO bookingItemDAO = new BookingItemDAO();
+
+                    bookingItemDAO.setItemID(item.getId());
+                    bookingItemDAO.setName(item.getName());
+                    bookingItemDAO.setPrice(item.getPrice());
+                    bookingItemDAO.setDescription(item.getDescription());
+                    bookingItemDAO.setQuantity("0");
+
+                    for (BookingItem bookingItem: currentBookingItems) {
+                        if (bookingItem.getItem().getId() == item.getId()) {
+                            bookingItemDAO.setQuantity("" + bookingItem.getQuantity());
+                        }
+                    }
+
+                    bookingItemDAOs.add(bookingItemDAO);
+               }
+           }
+       } 
+
+        setBookingItems(bookingItemDAOs);
     }
 
     public ArrayList<BookingItemDAO> getBookingItems() {

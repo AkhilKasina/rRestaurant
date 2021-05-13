@@ -46,20 +46,6 @@ public class CustomerController {
         this.bookingItemRepository = bookingItemRepository;
     }
 
-    /**
-    * This function is used for a purpose of database testing. 
-    * Has to remove when publishing website
-    */
-    @GetMapping("/allcustomers")
-    public String getHomePage(Model model) {
-        List<Customer> cusLists = customerRepository.findAll();
-
-        model.addAttribute("customerLists", cusLists);
-
-        return "customers/allcustomers";
-        
-    }
-
     @GetMapping("/booking")
     public String getBookingPage(@ModelAttribute("customerID") int customerID, Model model) {
         
@@ -86,6 +72,7 @@ public class CustomerController {
         BookingDAO bookingDAO = new BookingDAO();
 
         model.addAttribute("customerBooking", bookingDAO);
+        model.addAttribute("isEditing", false);
         return ViewManager.CUS_BOOKING;
     }
     
@@ -112,7 +99,9 @@ public class CustomerController {
 
                 bookingRepository.save(newBooking);
 
-                saveBookingItemsToDBs(bookingDAO.getBookingItems(), newBooking);
+                if (bookingDAO.getBookingItems() != null) {
+                    saveBookingItemsToDBs(bookingDAO.getBookingItems(), newBooking);
+                }
             
             }
 
@@ -133,6 +122,7 @@ public class CustomerController {
             model.addAttribute("timeErrorMessage", "Lunch 12PM-4PM | Dinner 4PM-9PM"); 
         }
 
+        model.addAttribute("isEditing", false);
         return ViewManager.CUS_BOOKING;
     }
 
@@ -145,6 +135,8 @@ public class CustomerController {
     @RequestMapping(value = "/booking/new", method = RequestMethod.POST, params = "showMenu")
     public String showMenu(@ModelAttribute("customerBooking") BookingDAO bookingDAO, 
         final Model model, final RedirectAttributes redirectAttributes) {
+        
+        System.out.println("isTimeWithinBoth " + bookingDAO.getBookingTime());
 
         if (bookingDAO.getBookingDate().replaceAll("\\s+","").isEmpty()) {
             model.addAttribute("error", true);
@@ -156,11 +148,11 @@ public class CustomerController {
             model.addAttribute("errorMessage","Please Enter Booking Time!");
         }
         else if (!isTimeWithin(MenuType.BOTH ,bookingDAO.getBookingTime())) {
-     
+            
             model.addAttribute("timeError", true);
             model.addAttribute("timeErrorMessage", "Lunch 12PM-4PM | Dinner 4PM-9PM"); 
         }
-        else if (isTimeWithin(MenuType.BOTH ,bookingDAO.getBookingTime()))  {
+        else  {
             List<Item> itemsList = itemRepository.findAll();
 
             if (isTimeWithin(MenuType.LUNCH ,bookingDAO.getBookingTime())) {
@@ -172,7 +164,7 @@ public class CustomerController {
 
         }
         model.addAttribute("customerBooking", bookingDAO);
-
+        model.addAttribute("isEditing", false);
         
         return ViewManager.CUS_BOOKING;
     }
@@ -192,28 +184,12 @@ public class CustomerController {
         ArrayList<BookingItemDAO> bookingItemsDAO = new ArrayList<>();
         List<Item> itemLists = itemRepository.findAll();
 
-        //only puts lunch items into lunchList
-        for(Item item : itemLists){
-            if(item.getMenuType().equals("lunch")){
-                BookingItemDAO bookingItemDAO = new BookingItemDAO();
-
-                bookingItemDAO.setItemID(item.getId());
-                bookingItemDAO.setName(item.getName());
-                bookingItemDAO.setPrice(item.getPrice());
-                bookingItemDAO.setDescription(item.getDescription());
-                bookingItemDAO.setQuantity("0");
-
-                for (BookingItem bookingItem: currentBookItems) {
-                    if (bookingItem.getItem().getId() == item.getId()) {
-                        bookingItemDAO.setQuantity("" + bookingItem.getQuantity());
-                    }
-                }
-
-                bookingItemsDAO.add(bookingItemDAO);
-            }
+        MenuType currentBookingType = bookingType(currentBooking.getBookingTime());
+        if (currentBookingType == MenuType.LUNCH) {
+            bookingDAO.setBookingItemQuantity(currentBookItems, MenuType.LUNCH, itemLists);
+        } else {
+            bookingDAO.setBookingItemQuantity(currentBookItems, MenuType.DINNER, itemLists);
         }
-
-        bookingDAO.setBookingItems(bookingItemsDAO);
 
         model.addAttribute("allowDelete", true);
         model.addAttribute("isEditing", true);
@@ -221,13 +197,50 @@ public class CustomerController {
         return ViewManager.CUS_BOOKING;
     }
 
+    @RequestMapping(value = "/booking/{bookingID}", method = RequestMethod.POST, params = "cancel")
+    public String cancelBooking(@PathVariable("bookingID") int bookingID, 
+        final Model model, final RedirectAttributes redirectAttributes) {
+        return redirectToCustomerPortal(redirectAttributes);
+    }
+
     @PostMapping("/booking/{bookingID}")
-    public String updateBooking(@ModelAttribute("customerBooking") BookingDAO bookingDAO, final RedirectAttributes redirectAttributes) {
+    public String updateBooking(@ModelAttribute("customerBooking") BookingDAO bookingDAO, final RedirectAttributes redirectAttributes, Model model) {
         Optional<Customer> currentCus = customerRepository.findById(currentID);
         Optional<Booking> currentBooking = this.bookingRepository.findById(bookingDAO.getId());
 
         if (currentCus.isPresent() &&  currentBooking.isPresent()) {
             Booking updatedBooking = currentBooking.get();
+            List<BookingItem> currentBookItems = updatedBooking.getBookingItems();
+
+            List<Item> itemLists = itemRepository.findAll();
+
+            MenuType currentBookingType = bookingType(updatedBooking.getBookingTime());
+            MenuType customerInputBookingType = bookingType(bookingDAO.getBookingTime());
+
+            if (currentBookingType != customerInputBookingType) {
+                System.out.println("Different Time");
+                
+                model.addAttribute("error", true);
+                if (currentBookingType == MenuType.LUNCH) {
+                    model.addAttribute("errorMessage", "Please book within lunch time | 12PM - 4PM");
+                } else {
+                    model.addAttribute("errorMessage", "Please book within dinner time | 4PM - 9PM");
+                }
+
+                if (currentBookingType == MenuType.LUNCH) {
+                    bookingDAO.setBookingItemQuantity(currentBookItems, MenuType.LUNCH, itemLists);
+                } else {
+                    bookingDAO.setBookingItemQuantity(currentBookItems, MenuType.DINNER, itemLists);
+                }
+
+                model.addAttribute("allowDelete", true);
+                model.addAttribute("isEditing", true);
+                model.addAttribute("customerBooking", bookingDAO);
+                return ViewManager.CUS_BOOKING;
+            }
+
+            System.out.println("Update Booking: " + bookingDAO.getBookingDate() + " time: " + bookingDAO.getBookingTime() + " table: " + bookingDAO.getTablePosition());
+
             updatedBooking.setBookingDateTime(bookingDAO.getBookingTimeStamp());
             updatedBooking.setBookingTime(bookingDAO.getBookingTime());
             updatedBooking.setBookingDate(bookingDAO.getBookingDate());
@@ -287,7 +300,15 @@ public class CustomerController {
 
     }
 
-    
+    private MenuType bookingType(String timeString) {
+        if (isTimeWithin(MenuType.LUNCH, timeString)) {
+            return MenuType.LUNCH;
+        } else if (isTimeWithin(MenuType.DINNER, timeString)) {
+            return MenuType.DINNER;
+        }
+
+        return MenuType.BOTH;
+    }
 
     private Boolean isTimeWithin(MenuType type, String timeString) {
         try {
