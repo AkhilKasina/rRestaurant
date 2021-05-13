@@ -117,7 +117,7 @@ public class CustomerController {
             model.addAttribute("error", true);
             model.addAttribute("errorMessage","Please Enter Booking Time!");
         }
-        else if (!isTimeWithin( MenuType.BOTH ,bookingDAO.getBookingTime())) {
+        else if (!isTimeWithin( BookingType.BOTH ,bookingDAO.getBookingTime())) {
             model.addAttribute("timeError", true);
             model.addAttribute("timeErrorMessage", "Lunch 12PM-4PM | Dinner 4PM-9PM"); 
         }
@@ -147,7 +147,7 @@ public class CustomerController {
             model.addAttribute("error", true);
             model.addAttribute("errorMessage","Please Enter Booking Time!");
         }
-        else if (!isTimeWithin(MenuType.BOTH ,bookingDAO.getBookingTime())) {
+        else if (!isTimeWithin(BookingType.BOTH ,bookingDAO.getBookingTime())) {
             
             model.addAttribute("timeError", true);
             model.addAttribute("timeErrorMessage", "Lunch 12PM-4PM | Dinner 4PM-9PM"); 
@@ -155,11 +155,11 @@ public class CustomerController {
         else  {
             List<Item> itemsList = itemRepository.findAll();
 
-            if (isTimeWithin(MenuType.LUNCH ,bookingDAO.getBookingTime())) {
-                bookingDAO.setBookingItemsFrom(itemsList, MenuType.LUNCH);
+            if (isTimeWithin(BookingType.LUNCH ,bookingDAO.getBookingTime())) {
+                bookingDAO.setBookingItemsFrom(itemsList, BookingType.LUNCH);
 
-            } else if (isTimeWithin(MenuType.DINNER, bookingDAO.getBookingTime())) {
-                bookingDAO.setBookingItemsFrom(itemsList, MenuType.DINNER);
+            } else if (isTimeWithin(BookingType.DINNER, bookingDAO.getBookingTime())) {
+                bookingDAO.setBookingItemsFrom(itemsList, BookingType.DINNER);
             }
 
         }
@@ -186,11 +186,11 @@ public class CustomerController {
         ArrayList<BookingItemDAO> bookingItemsDAO = new ArrayList<>();
         List<Item> itemLists = itemRepository.findAll();
 
-        MenuType currentBookingType = bookingType(currentBooking.getBookingTime());
-        if (currentBookingType == MenuType.LUNCH) {
-            bookingDAO.setBookingItemQuantity(currentBookItems, MenuType.LUNCH, itemLists);
+        BookingType currentBookingType = bookingType(currentBooking.getBookingTime());
+        if (currentBookingType == BookingType.LUNCH) {
+            bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.LUNCH, itemLists);
         } else {
-            bookingDAO.setBookingItemQuantity(currentBookItems, MenuType.DINNER, itemLists);
+            bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.DINNER, itemLists);
         }
 
         model.addAttribute("allowDelete", true);
@@ -216,23 +216,23 @@ public class CustomerController {
 
             List<Item> itemLists = itemRepository.findAll();
 
-            MenuType currentBookingType = bookingType(updatedBooking.getBookingTime());
-            MenuType customerInputBookingType = bookingType(bookingDAO.getBookingTime());
+            BookingType currentBookingType = bookingType(updatedBooking.getBookingTime());
+            BookingType customerInputBookingType = bookingType(bookingDAO.getBookingTime());
 
             if (currentBookingType != customerInputBookingType) {
                 System.out.println("Different Time");
                 
                 model.addAttribute("error", true);
-                if (currentBookingType == MenuType.LUNCH) {
+                if (currentBookingType == BookingType.LUNCH) {
                     model.addAttribute("errorMessage", "Please book within lunch time | 12PM - 4PM");
                 } else {
                     model.addAttribute("errorMessage", "Please book within dinner time | 4PM - 9PM");
                 }
 
-                if (currentBookingType == MenuType.LUNCH) {
-                    bookingDAO.setBookingItemQuantity(currentBookItems, MenuType.LUNCH, itemLists);
+                if (currentBookingType == BookingType.LUNCH) {
+                    bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.LUNCH, itemLists);
                 } else {
-                    bookingDAO.setBookingItemQuantity(currentBookItems, MenuType.DINNER, itemLists);
+                    bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.DINNER, itemLists);
                 }
 
                 model.addAttribute("allowDelete", true);
@@ -304,17 +304,17 @@ public class CustomerController {
 
     }
 
-    private MenuType bookingType(String timeString) {
-        if (isTimeWithin(MenuType.LUNCH, timeString)) {
-            return MenuType.LUNCH;
-        } else if (isTimeWithin(MenuType.DINNER, timeString)) {
-            return MenuType.DINNER;
+    private BookingType bookingType(String timeString) {
+        if (isTimeWithin(BookingType.LUNCH, timeString)) {
+            return BookingType.LUNCH;
+        } else if (isTimeWithin(BookingType.DINNER, timeString)) {
+            return BookingType.DINNER;
         }
 
-        return MenuType.BOTH;
+        return BookingType.BOTH;
     }
 
-    private Boolean isTimeWithin(MenuType type, String timeString) {
+    private Boolean isTimeWithin(BookingType type, String timeString) {
         try {
             DateFormat timeFormat = new SimpleDateFormat("HH:mm");
             Date time = timeFormat.parse(timeString);
@@ -325,13 +325,13 @@ public class CustomerController {
             Date openDinnerTime = timeFormat.parse("16:00");
             Date endDinnerTime = timeFormat.parse("21:00");
           
-            if (type.equals(MenuType.BOTH)) {
+            if (type.equals(BookingType.BOTH)) {
                 return time.after(openLunchTime) && time.before(endDinnerTime);
             }
-            else if (type.equals(MenuType.LUNCH)) {
+            else if (type.equals(BookingType.LUNCH)) {
                 return time.after(openLunchTime) && time.before(endLunchTime);
             } 
-            else if (type.equals(MenuType.DINNER)) {
+            else if (type.equals(BookingType.DINNER)) {
                 return time.after(openDinnerTime) && time.before(endDinnerTime);
             }
 

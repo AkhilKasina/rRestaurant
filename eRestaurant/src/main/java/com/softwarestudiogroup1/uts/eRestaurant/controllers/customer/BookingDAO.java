@@ -71,10 +71,10 @@ public class BookingDAO {
         this.bookingItems = bookingItems;
     }
 
-    public void setBookingItemsFrom(List<Item> itemsList, MenuType type) {
+    public void setBookingItemsFrom(List<Item> itemsList, BookingType type) {
         ArrayList<BookingItemDAO> bookingItemDAOs = new ArrayList<>();
 
-        if (type == MenuType.LUNCH) {
+        if (type == BookingType.LUNCH) {
              for(Item item : itemsList){
                 if (item.getMenuType().equals("lunch")) {
                     BookingItemDAO bookingItemDAO = new BookingItemDAO();
@@ -89,7 +89,7 @@ public class BookingDAO {
                 }
             } 
         }
-        else if (type == MenuType.DINNER) {
+        else if (type == BookingType.DINNER) {
             for (Item item : itemsList) {
                 if(item.getMenuType().equals("dinner")){
                     BookingItemDAO bookingItemDAO = new BookingItemDAO();
@@ -108,10 +108,10 @@ public class BookingDAO {
         this.setBookingItems(bookingItemDAOs);
     }
 
-    public void setBookingItemQuantity(List<BookingItem> currentBookingItems, MenuType type, List<Item> menuItems) {
+    public void setBookingItemQuantity(List<BookingItem> currentBookingItems, BookingType type, List<Item> menuItems) {
         ArrayList<BookingItemDAO> bookingItemDAOs = new ArrayList<>();
 
-        if (type == MenuType.LUNCH) {
+        if (type == BookingType.LUNCH) {
             for(Item item : menuItems){
                if (item.getMenuType().equals("lunch")) {
                    BookingItemDAO bookingItemDAO = new BookingItemDAO();
@@ -132,7 +132,7 @@ public class BookingDAO {
                }
            } 
        }
-       else if (type == MenuType.DINNER) {
+       else if (type == BookingType.DINNER) {
            for (Item item : menuItems) {
                if(item.getMenuType().equals("dinner")) {
                    BookingItemDAO bookingItemDAO = new BookingItemDAO();

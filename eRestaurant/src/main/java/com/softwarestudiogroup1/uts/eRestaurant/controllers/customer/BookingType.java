@@ -1,5 +1,5 @@
 package com.softwarestudiogroup1.uts.eRestaurant.controllers.customer;
 
-public enum MenuType {
+public enum BookingType {
     LUNCH, DINNER, BOTH
 }
