@@ -151,7 +151,7 @@ public class CustomerController {
 
         //only puts lunch items into lunchList
         for(Item item : itemLists){
-            if(item.getMenuType().equals("lunch")){
+            if(item.getMenuType().toLowerCase().equals("lunch")){
                 BookingItemDAO bookingItemDAO = new BookingItemDAO();
 
                 bookingItemDAO.setItemID(item.getId());
