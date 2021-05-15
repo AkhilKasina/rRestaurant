@@ -83,8 +83,7 @@ public class SignInController {
         }
         else {
             // Customer Login
-            List<Customer> cusLists = customerRepository.findAll();
-
+            List<Customer> cusLists = customerRepository.findAll(); // 
             for (Customer currentCus: cusLists) {
                 if (currentCus.getUsername().equals(username) && currentCus.getPassword().equals(password)) {
                     success = true;
@@ -97,6 +96,7 @@ public class SignInController {
                 redirectAttributes.addFlashAttribute("customerID", id);
                 return "redirect:/booking";
             }
+            System.out.println("HIend");
         }
         
 

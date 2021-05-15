@@ -56,7 +56,7 @@ public class BookingItem {
         return quantity;
     }
 
-
-
-
+    public int getBookingId(){
+        return booking.getId();
+    }
 }

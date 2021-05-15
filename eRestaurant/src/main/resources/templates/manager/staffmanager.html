@@ -56,38 +56,61 @@
       <main>
          <div class="recentflex">
             <div class="customers">
+               <form method = "post" th:object = "${newStaff}">
                <div class="card-header">
                   <h2>Add Staff Member</h2>
-                  <button>Add Staff <span class="las la-arrow right"></span></button>
+                  <button>Add Staff <span class="las la-arrow right" type = "submit"></span></button>
                </div>
                <div class="card-body">
                   <table width=100%>
                      <tr>
-                        <td>Member Name:</td>
-                        <td><input type="text" placeholder="Member Name"></td>
+                        <td>Email:</td>
+                        <td><input type="text" placeholder="Email" th:field = "*{email}"></td>
+                     </tr>
+                     <tr>
+                        <td>Username:</td>
+                        <td><input type="text" placeholder="Username" th:field = "*{username}"></td>
+                     </tr>
+                     <tr>
+                        <td>Password:</td>
+                        <td><input type="text" placeholder="Password" th:field = "*{password}"></td>
+                     </tr>
+                     <tr>
+                        <td>Telephone:</td>
+                        <td><input type="text" placeholder="Telephone" th:field = "*{telephone}"></td>
+                     </tr>
+                     <tr>
+                        <td>First Name:</td>
+                        <td><input type="text" placeholder="First Name" th:field = "*{firstName}"></td>
+                     </tr>
+                     <tr>
+                        <td>Last Name:</td>
+                        <td><input type="text" placeholder="Last Name" th:field = "*{lastName}"></td>
                      </tr>
                      <tr>
                         <td>Member Description:</td>
-                        <td><input type="text" placeholder="Member Description"></td>
+                        <td><input type="text" placeholder="Member Description" th:field = "*{description}"></td>
                      </tr>
                      <tr>
                         <td>Hourly Wage</td>
-                        <td><input type="text" placeholder="Hourly Wage" > </td>
+                        <td><input type="text" placeholder="Hourly Wage" th:field = "*{hourlyWage}"> </td>
                      </tr>
-                     <tr>
+                     <!-- <tr>
                         <td>Date Of Birth</td>
-                        <td><input type="date" ></td>
-                     </tr>
+                        <td><input type="date" th:field = "*{dateOfBirth}"></td>
+                     </tr> -->
                      <tr>
                         <td>Shift Type:</td>
                         <td>
-                           Lunch <input type="checkbox" name="Shift type" id="">
-                           Dinner <input type="checkbox" name="Shift type" id="">
+                           Lunch <input type="radio" name="Shift type" id="" value = "lunch" th:field = "*{shiftType}">
+                           Dinner <input type="radio" name="Shift type" id="" value = "dinner" th:field = "*{shiftType}">
+                           Both <input type="radio" name="Shift type" id="" value = "both" th:field = "*{shiftType}">
                         </td>
                         
                      </tr>
                   </table>
                </div>
+               </form>
                <div class="gap">""</div>
 
                <div class="card-header">
@@ -96,28 +119,26 @@
                </div>
                <div class="card-body">
                   <table width=100%>
-                     <thead>
-                        <tr>
-                           <td>Cus.NO</td>
-                           <td>Name</td>
-                           <td>Working Hours</td>
-                        </tr>
-                     </thead>
+                     <th>ID</th>
+                     <th>Email</th>
+                     <th>Username</th>
+                     <th>Telephone</th>
+                     <th>First Name</th>
+                     <th>Last Name</th>
+                     <th>Description</th>
+                     <th>Hourly Wage</th>
+                     <!-- <th>Date of Birth</th> -->
                      <tbody>
-                        <tr>
-                           <td>1</td>
-                           <td>Jane Smith</td>
-                           <td>2</td>
-                        </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>Kara Zor-El</td>
-                           <td>4</td>
-                        </tr>
-                        <tr>
-                           <td>3</td>
-                           <td>Barry Allen</td>
-                           <td>6</td>
+                        <tr th:each="staff : ${Staff}">
+                           <td th:text=${staff.id} style="text-align:center"></td>
+                           <td th:text=${staff.email} style="text-align:center"></td>
+                           <td th:text=${staff.username} style="text-align:center"></td>
+                           <td th:text=${staff.telephone} style="text-align:center"></td>
+                           <td th:text=${staff.firstName} style="text-align:center"></td>
+                           <td th:text=${staff.lastName} style="text-align:center"></td>
+                           <td th:text=${staff.description} style="text-align:center"></td>
+                           <td th:text=${staff.hourlyWage} style="text-align:center"></td>
+                           <!-- <td th:text=${staff.dateOfBirth} style="text-align:center"></td> -->
                         </tr>
                      </tbody>
                   </table>
