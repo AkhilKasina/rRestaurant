@@ -46,7 +46,7 @@
             Dashboard
          </h2>
          <div class="userwrapper">
-            <img th:src="@{staffPortal/male.jpg}" width="50px" height="50px" alt="">
+            <!-- <img th:src="@{staffPortal/male.jpg}" width="50px" height="50px" alt=""> -->
             <div>
                <h4 th:text="${staff.firstName} + ' ' + ${staff.lastName}"></h4>
                <small>Staff Member</small>
@@ -57,7 +57,7 @@
          <div class="cards">
             <div class="card-single">
                <div>
-                  <h1>34</h1>
+                  <h1 th:text="${customersCount}"> 0 </h1>
                   <span>Customers</span>
                </div>
                <div>
@@ -67,7 +67,7 @@
             </div>
             <div class="card-single">
                <div>
-                  <h1>12</h1>
+                  <h1 th:text="${bookingsCount}"> 0 </h1>
                   <span>Bookings</span>
                </div>
                <div>

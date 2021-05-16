@@ -83,6 +83,10 @@ public class StaffController {
 
         if (currentStaff.isPresent()) {
             Staff staff = currentStaff.get();
+
+            model.addAttribute("customersCount", customerRepository.findAll().size());
+            model.addAttribute("bookingsCount", bookingRepository.findAll().size());
+
             model.addAttribute("staff", staff);
         } else {
             return "redirect:/";
