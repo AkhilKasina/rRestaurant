@@ -7,10 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
-<<<<<<< HEAD
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Item;
-=======
->>>>>>> origin/main
 
 public class BookingDAO {
     private int id;
