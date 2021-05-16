@@ -128,6 +128,10 @@ public class ManagerController {
 
         if (currentManager.isPresent()) {
             model.addAttribute("manager", currentManager.get());
+
+            model.addAttribute("customersCount", customerRepository.findAll().size());
+            model.addAttribute("bookingsCount", bookingRepository.findAll().size());
+
         } else {
             return "redirect:/";
         }
