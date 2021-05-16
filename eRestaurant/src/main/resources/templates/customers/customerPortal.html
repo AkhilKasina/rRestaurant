@@ -43,7 +43,7 @@
                         <th>Booking Time</th>
                         <th>Booking Date</th>
                         <th>Table</th>
-                        <th>Reciept</th>
+                        <th> </th>
                         <th> </th>
                     </tr>
                 </thead>
@@ -53,8 +53,8 @@
                         <td th:text=${booking.bookingTime} style="text-align:center"></td>
                         <td th:text=${booking.bookingDate} style="text-align:center"></td>
                         <td th:text=${booking.tablePosition} style="text-align:center"></td>
-                        <td style="text-align:center"><a th:href="@{/showreciept/{BookingID}(BookingID=${booking.id})}">View</a></td>
-                        <td><a th:href="@{/booking/{bookingID}(bookingID=${booking.id})}">View</a></td>
+                        <td style="text-align:center"><a th:href="@{/showreciept/{BookingID}(BookingID=${booking.id})}">Receipt</a></td>
+                        <td><a th:href="@{/booking/{bookingID}(bookingID=${booking.id})}">View Booking</a></td>
                     </tr>
                 </tbody>
             </table>
