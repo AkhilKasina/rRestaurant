@@ -113,7 +113,7 @@ public class ManagerController {
         Item item = new Item();
         item.isNew();
         item.setName(itemDAO.getName());
-        item.setMenuType(itemDAO.getMenuType());
+        item.setMenuType(itemDAO.getMenuType().toLowerCase());
         item.setPrice(itemDAO.getPrice());
         item.setDescription(itemDAO.getDescription());
         itemRepository.save(item);
