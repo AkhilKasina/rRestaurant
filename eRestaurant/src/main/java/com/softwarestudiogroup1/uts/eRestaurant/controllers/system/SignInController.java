@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwarestudiogroup1.uts.eRestaurant.ViewManager;
+import com.softwarestudiogroup1.uts.eRestaurant.controllers.customer.CustomerController;
 import com.softwarestudiogroup1.uts.eRestaurant.controllers.manager.ManagerController;
 import com.softwarestudiogroup1.uts.eRestaurant.controllers.manager.StaffController;
 import com.softwarestudiogroup1.uts.eRestaurant.models.CustomerRepository;
@@ -32,6 +33,9 @@ public class SignInController {
 
     @Autowired
     private ManagerController managerController;
+
+    @Autowired
+    private CustomerController customerController;
 
     private final CustomerRepository customerRepository;
     private final ManagerRepository managerRepository;
@@ -107,6 +111,9 @@ public class SignInController {
             }
 
             if (success == true) {
+
+                customerController.setID(id);
+
                 redirectAttributes.addFlashAttribute("customerID", id);
                 return "redirect:/booking";
             }

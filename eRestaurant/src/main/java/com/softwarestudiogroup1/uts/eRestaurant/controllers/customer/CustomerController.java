@@ -37,6 +37,9 @@ import java.util.Set;
 public class CustomerController {
 
     private int currentID = 0;
+    public void setID(int id) {
+        this.currentID = id;
+    }
 
     private final CustomerRepository customerRepository;
     private final BookingRepository bookingRepository;
@@ -53,10 +56,9 @@ public class CustomerController {
     }
 
     @GetMapping("/booking")
-    public String getBookingPage(@ModelAttribute("customerID") int customerID, Model model) {
-        
-        this.currentID = customerID;
-        Optional<Customer> currentCus = customerRepository.findById(customerID);
+    public String getBookingPage(Model model) {
+
+        Optional<Customer> currentCus = customerRepository.findById(this.currentID);
         if (currentCus.isPresent()) {
             Customer customer = currentCus.get();
             model.addAttribute("customer", customer);
@@ -73,7 +75,6 @@ public class CustomerController {
             model.addAttribute("expreward", currentReward);
 
         }
-
         else {
             return "redirect:/";
         }
@@ -89,6 +90,13 @@ public class CustomerController {
 
     @GetMapping(value="/booking/new")
     public String processBookingForm(Model model) {
+
+        Optional<Customer> currentCus = customerRepository.findById(currentID);
+        
+        if (currentCus.isEmpty()) {
+            return "redirect:/";
+        }
+
         BookingDAO bookingDAO = new BookingDAO();
 
         model.addAttribute("customerBooking", bookingDAO);
@@ -98,6 +106,12 @@ public class CustomerController {
     
     @PostMapping("/booking/new")
     public String processBooking(@ModelAttribute("customerBooking") BookingDAO bookingDAO, final RedirectAttributes redirectAttributes, Model model) {
+
+        Optional<Customer> currentCus = customerRepository.findById(currentID);
+        
+        if (currentCus.isEmpty()) {
+            return "redirect:/";
+        }
 
         // Validate Date and Time here
         if ( !bookingDAO.getBookingDate().replaceAll("\\s+","").isEmpty()
@@ -192,6 +206,13 @@ public class CustomerController {
     // EDIT BOOKING
     @GetMapping("/booking/{bookingID}")
     public String editBooking(@PathVariable("bookingID") int bookingID, Model model) {
+
+        Optional<Customer> currentCus = customerRepository.findById(currentID);
+        
+        if (currentCus.isEmpty()) {
+            return "redirect:/";
+        }
+
         Booking currentBooking = this.bookingRepository.findById(bookingID).get();
         List<BookingItem> currentBookItems = currentBooking.getBookingItems();
 
@@ -283,11 +304,24 @@ public class CustomerController {
     @GetMapping("/booking/{bookingID}/delete")
     public String deleteBooking(@PathVariable("bookingID") int bookingID, final RedirectAttributes redirectAttributes) {
 
+        Optional<Customer> currentCus = customerRepository.findById(currentID);
+        
+        if (currentCus.isEmpty()) {
+            return "redirect:/";
+        }
+
         if ( bookingRepository.existsById(bookingID)) {
             this.bookingRepository.deleteById(bookingID);
         }
 
         return redirectToCustomerPortal(redirectAttributes);
+    }
+
+    // LOG OUT
+    @RequestMapping(value = {"/booking"}, method = RequestMethod.POST, params = "logout")
+    public String logout() {
+        this.currentID = -1;
+        return "redirect:/";
     }
 
     // CONVENIENCE
@@ -378,6 +412,8 @@ public class CustomerController {
             Customer customer = currentCus.get();
             model.addAttribute("customer", customer);
 
+       } else  {
+           return "redirect:/";
        }
 
         return ViewManager.CUS_REWARDS;
@@ -400,7 +436,11 @@ public class CustomerController {
             } else{
                 model.addAttribute("check", check);
             }
+       } 
+       else {
+            return "redirect:/";
        }
+
        return "redirect:/viewRewards";
     }
 
