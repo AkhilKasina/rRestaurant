@@ -2,8 +2,10 @@ package com.softwarestudiogroup1.uts.eRestaurant.models;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Booking;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
 
 import org.springframework.data.jpa.repository.JpaRepository;

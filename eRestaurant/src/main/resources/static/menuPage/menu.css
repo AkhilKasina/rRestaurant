@@ -28,14 +28,14 @@ body {
 
 .title h4 {
   text-transform: capitalize;
-  font-size: 55px;
+  font-size: 48px;
   position: relative;
   display: inline-block;
 }
 
 .title h3 {
   display: block;
-  font-size: 32px;
+  font-size: 28px;
   font-style: italic;
   margin-top: -30px;
 }
@@ -65,7 +65,7 @@ body {
 
 .dish{
   text-transform: capitalize;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 5px;
   padding-bottom: 5px;
@@ -87,7 +87,7 @@ body {
 .desc{
   opacity: 0.8;
   font-style: italic;
-  font-size: 20px;
+  font-size: 18px;
   padding-bottom: 25px;
 }
 

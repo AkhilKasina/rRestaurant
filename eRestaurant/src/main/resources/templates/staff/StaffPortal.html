@@ -78,38 +78,34 @@
 
                </div>
                <div class="gap">""</div>
-               <div class="card-header">
-                  <h2>Recent Customers</h2>
-                  <button>See all <span class="las la-arrow right"></span></button>
-               </div>
-               <div class="card-body">
-                  <table width=100%>
-                     <thead>
-                        <tr>
-                           <td>Cus.NO</td>
-                           <td>Name</td>
-                           <td>Bookings made</td>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <tr>
-                           <td>1</td>
-                           <td>Jane Smith</td>
-                           <td>2</td>
-                        </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>Kara Zor-El</td>
-                           <td>2</td>
-                        </tr>
-                        <tr>
-                           <td>3</td>
-                           <td>Barry Allen</td>
-                           <td>2</td>
-                        </tr>
-                     </tbody>
-                  </table>
-
+               <div class="recentflex">
+                  <div class="customers">
+                     <div class="card-header">
+                        <h2>Recent Bookings</h2>
+                        <button>See all <span class="las la-arrow right"></span></button>
+                     </div>
+                     <div class="card-body">
+                        <table width=100%>
+                           <th>Booking ID</th>
+                           <th>Booking Time</th>
+                           <th>Booking Date</th>
+                           <th>Table</th>
+                           <th>Customer ID</th>
+                           <th>Reciept</th>
+                           <tbody>
+                              <tr th:each="booking, Index : ${bookings}">
+                                 <td th:text=${booking.id} style="text-align:center"></td>
+                                 <td th:text=${booking.bookingTime} style="text-align:center"></td>
+                                 <td th:text=${booking.bookingDate} style="text-align:center"></td>
+                                 <td th:text=${booking.tablePosition} style="text-align:center"></td>
+                                 <td th:text=${names[Index.index]} style="text-align:center"></td>
+                                 <td style="text-align:center"><a th:href="@{/showreciept/{BookingID}(BookingID=${booking.id})}">View</a></td>
+                              </tr>
+                           </tbody>
+                        </table>
+      
+                     </div>
+                  </div>
                </div>
             </div>
          </div>

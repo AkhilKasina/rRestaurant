@@ -8,7 +8,6 @@
     <link rel="stylesheet" th:href="@{/menuPage/menu.css}" />
   </head>
   <body>
-    <h1>Welcome to user booking</h1>
     <form th:object="${customerBooking}" method="post">
         <input type="hidden" id="id" th:field="*{id}" />
         <div th:if="${error == true}">
@@ -61,7 +60,7 @@
                             <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
-                            <option value="3"> 3</option>
+                            <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                           </select>
