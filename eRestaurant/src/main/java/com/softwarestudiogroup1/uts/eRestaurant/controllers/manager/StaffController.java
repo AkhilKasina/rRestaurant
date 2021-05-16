@@ -18,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
@@ -97,6 +99,12 @@ public class StaffController {
         model.addAttribute("bookings", bookinglist);
 
         return ViewManager.STAFF_RESTAURANT;
+    }
+
+    @RequestMapping(value = {"/staff", "/staff/restaurant"}, method = RequestMethod.POST, params = "logout")
+    public String logout() {
+        this.currentID = -1;
+        return "redirect:/";
     }
 
     public void setID(int id) {

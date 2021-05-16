@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwarestudiogroup1.uts.eRestaurant.ViewManager;
+import com.softwarestudiogroup1.uts.eRestaurant.controllers.manager.ManagerController;
 import com.softwarestudiogroup1.uts.eRestaurant.controllers.manager.StaffController;
 import com.softwarestudiogroup1.uts.eRestaurant.models.CustomerRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.ManagerRepository;
@@ -28,6 +29,9 @@ public class SignInController {
 
     @Autowired
     private StaffController staffController;
+
+    @Autowired
+    private ManagerController managerController;
 
     private final CustomerRepository customerRepository;
     private final ManagerRepository managerRepository;
@@ -71,8 +75,10 @@ public class SignInController {
             // Manager Login
             
             Optional<Manager> currentManager = managerRepository.findByUserNameAndPassword(username, password);
-            System.out.println(currentManager.get().getId());
+
             if (currentManager.isPresent()) {
+                managerController.setID(currentManager.get().getId());
+
                 redirectAttributes.addFlashAttribute("managerID", currentManager.get().getId());
                 return "redirect:/manager";
             }
@@ -82,7 +88,9 @@ public class SignInController {
             Optional<Staff> currentStaff = staffRepository.findByUserNameAndPassword(username, password);
            
             if (currentStaff.isPresent()) {
+
                 staffController.setID(currentStaff.get().getId());
+
                 redirectAttributes.addFlashAttribute("staffID", currentStaff.get().getId());
                 return "redirect:/staff";
             }

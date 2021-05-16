@@ -28,7 +28,10 @@
                <a th:href="@{/staff/restaurant}" class="active"><span class="las la-utensils"></span> <span></span>Restaurant</span></a>
             </li>
             <li>
-               <a href=""><span class="las la-angle-double-left"></span> <span> Logout</span></a>
+               <!-- <a href=""><span class="las la-angle-double-left"></span> <span> Logout</span></a> -->
+               <form method="POST" >
+                  <input type="submit" name="logout" value="Logout" />
+               </form>
             </li>
 
          </ul>

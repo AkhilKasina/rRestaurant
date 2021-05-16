@@ -55,6 +55,16 @@ public class ManagerController {
 
     @GetMapping("/staffmanager")
     public String staffmanager(Model model){
+
+        //  Validate if the current session has manager
+        Optional<Manager> currentManager = managerRepository.findById(currentID);
+
+        if (currentManager.isPresent()) {
+            model.addAttribute("manager", currentManager.get());
+        } else {
+            return "redirect:/";
+        }
+
         List<Staff> Stafflist = staffRepository.findAll();
         model.addAttribute("Staff", Stafflist);
         model.addAttribute("newStaff", new StaffDAO());
@@ -81,6 +91,16 @@ public class ManagerController {
 
     @GetMapping("/menumanager")
     public String menumanager(Model model){
+
+        //  Validate if the current session has manager
+        Optional<Manager> currentManager = managerRepository.findById(currentID);
+
+        if (currentManager.isPresent()) {
+            model.addAttribute("manager", currentManager.get());
+        } else {
+            return "redirect:/";
+        }
+
         List<Item> Itemlist = itemRepository.findAll();
         model.addAttribute("Items", Itemlist);
         model.addAttribute("newItem", new ItemDAO());
@@ -101,12 +121,16 @@ public class ManagerController {
     }
 
     @GetMapping("/manager")
-    public String managerPortal(Model model){//@ModelAttribute("managerID") int managerID, Model model) {
-        //this.currentID = managerID;
-        //Optional<Manager> currentManager = managerRepository.findById(currentID);
-        //if (currentManager.isPresent()) {
-            //Manager manager = currentManager.get();   ##### IS THIS NEEDED
-            //model.addAttribute("manager", manager);
+    public String managerPortal(Model model){
+
+        //  Validate if the current session has manager
+        Optional<Manager> currentManager = managerRepository.findById(currentID);
+
+        if (currentManager.isPresent()) {
+            model.addAttribute("manager", currentManager.get());
+        } else {
+            return "redirect:/";
+        }
 
         List<Booking> bookinglist = bookingRepository.findAll();
         ArrayList<String> names = new ArrayList<>();
@@ -123,7 +147,7 @@ public class ManagerController {
     
     @RequestMapping(value = {"/manager", "/staffmanager", "/menumanager"}, method = RequestMethod.POST, params = "logout")
     public String logout() {
-        System.out.println("Logout");
+        this.currentID = -1;
         return "redirect:/";
     }
     
@@ -133,5 +157,9 @@ public class ManagerController {
 
         redirectAttributes.addFlashAttribute("managerID", this.currentID);
         return "redirect:/manager";
+    }
+
+    public void setID(int id) {
+        this.currentID = id;
     }
 }
