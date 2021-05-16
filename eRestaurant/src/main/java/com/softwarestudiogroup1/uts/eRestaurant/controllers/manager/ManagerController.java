@@ -26,6 +26,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 
 @Controller
@@ -115,6 +119,15 @@ public class ManagerController {
         model.addAttribute("bookings", bookinglist);
         return ViewManager.MNG_PORTAL;
     }
+
+    
+    @RequestMapping(value = {"/manager", "/staffmanager", "/menumanager"}, method = RequestMethod.POST, params = "logout")
+    public String logout() {
+        System.out.println("Logout");
+        return "redirect:/";
+    }
+    
+    
 
     private String redirectToManagerPortal(final RedirectAttributes redirectAttributes) {
 
