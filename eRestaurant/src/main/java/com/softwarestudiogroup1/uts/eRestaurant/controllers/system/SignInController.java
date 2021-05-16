@@ -74,7 +74,7 @@ public class SignInController {
         } 
         else if (username.startsWith("S_") || username.startsWith("s_")) {
             // Staff Login
-            Optional<Staff> currentStaff = staffRepository.findByUserNameAndLastName(username, password);
+            Optional<Staff> currentStaff = staffRepository.findByUserNameAndPassword(username, password);
 
             if (currentStaff.isPresent()) {
                 redirectAttributes.addFlashAttribute("staffID", currentStaff.get().getId());
@@ -96,7 +96,6 @@ public class SignInController {
                 redirectAttributes.addFlashAttribute("customerID", id);
                 return "redirect:/booking";
             }
-            System.out.println("HIend");
         }
         
 

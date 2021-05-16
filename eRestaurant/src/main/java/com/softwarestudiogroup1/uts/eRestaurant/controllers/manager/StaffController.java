@@ -38,6 +38,6 @@ public class StaffController {
             model.addAttribute("staff", staff);
         }
 
-        return "";
+        return ViewManager.STAFF_PORTAL;
     }
 }

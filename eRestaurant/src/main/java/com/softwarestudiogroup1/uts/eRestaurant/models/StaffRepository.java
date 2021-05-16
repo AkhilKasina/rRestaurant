@@ -19,5 +19,5 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
 
     @Query("SELECT staff FROM Staff staff WHERE LOWER(staff.username) = LOWER(?1) AND staff.password = ?2")
     @Transactional(readOnly = true)
-    Optional<Staff> findByUserNameAndLastName(String username, String password);
+    Optional<Staff> findByUserNameAndPassword(String username, String password);
 }
