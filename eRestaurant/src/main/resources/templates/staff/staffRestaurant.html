@@ -8,7 +8,7 @@
    <title>Manager Portal</title>
    <link rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-   <link rel="stylesheet" href="Staff.css">
+   <link rel="stylesheet" th:href="@{/staffPortal/Staff.css}">
 
 
 </head>
@@ -22,10 +22,10 @@
       <div class="sidebar-menu">
          <ul>
             <li>
-               <a href="StaffPortal.html" ><span class="las la-bars"> </span> <span> Dashboard </span></a>
+               <a th:href="@{/staff}" ><span class="las la-bars"> </span> <span> Dashboard </span></a>
             </li>
             <li>
-               <a href="staffRestaurant.html" class="active"><span class="las la-utensils"></span> <span></span>Restaurant</span></a>
+               <a th:href="@{/staff/restaurant}" class="active"><span class="las la-utensils"></span> <span></span>Restaurant</span></a>
             </li>
             <li>
                <a href=""><span class="las la-angle-double-left"></span> <span> Logout</span></a>
@@ -43,9 +43,9 @@
             Dashboard
          </h2>
          <div class="userwrapper">
-            <img src="male.jpg" width="50px" height="50px" alt="">
+            <img th:src="@{staffPortal/male.jpg}" width="50px" height="50px" alt="">
             <div>
-               <h4>Finn Tearle</h4>
+               <h4 th:text="${staff.firstName} + ' ' + ${staff.lastName}"></h4>
                <small>Staff Member</small>
             </div>
          </div>
@@ -92,28 +92,20 @@
                </div>
                <div class="card-body">
                   <table width=100%>
-                     <thead>
-                        <tr>
-                           <td>Cus.NO</td>
-                           <td>Name</td>
-                           <td>Bookings made</td>
-                        </tr>
-                     </thead>
+                     <th>Booking ID</th>
+                     <th>Booking Time</th>
+                     <th>Booking Date</th>
+                     <th>Table</th>
+                     <th>Customer ID</th>
+                     <th>Reciept</th>
                      <tbody>
-                        <tr>
-                           <td>1</td>
-                           <td>Jane Smith</td>
-                           <td>2</td>
-                        </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>Kara Zor-El</td>
-                           <td>2</td>
-                        </tr>
-                        <tr>
-                           <td>3</td>
-                           <td>Barry Allen</td>
-                           <td>2</td>
+                        <tr th:each="booking, Index : ${bookings}">
+                           <td th:text=${booking.id} style="text-align:center"></td>
+                           <td th:text=${booking.bookingTime} style="text-align:center"></td>
+                           <td th:text=${booking.bookingDate} style="text-align:center"></td>
+                           <td th:text=${booking.tablePosition} style="text-align:center"></td>
+                           <td th:text=${names[Index.index]} style="text-align:center"></td>
+                           <td style="text-align:center"><a th:href="@{/showreciept/{BookingID}(BookingID=${booking.id})}">View</a></td>
                         </tr>
                      </tbody>
                   </table>

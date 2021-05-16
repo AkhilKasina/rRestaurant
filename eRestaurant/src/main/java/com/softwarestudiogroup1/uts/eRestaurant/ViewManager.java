@@ -25,6 +25,7 @@ public class ViewManager {
 
     // STAFF
     public static final String STAFF_PORTAL = "staff/StaffPortal";
+    public static final String STAFF_RESTAURANT = "staff/staffRestaurant";
 
 
     private ViewManager() {}

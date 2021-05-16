@@ -40,13 +40,17 @@ public class StaffController {
     }
     
     @GetMapping("/staff")
-    public String staffPortal(@ModelAttribute("staffID") int staffID, Model model) {
-        this.currentID = staffID;
+    public String staffPortal(Model model) {
+
+        System.out.println("Staff Controller ID + " + currentID);
+
         Optional<Staff> currentStaff = staffRepository.findById(this.currentID);
 
         if (currentStaff.isPresent()) {
             Staff staff = currentStaff.get();
             model.addAttribute("staff", staff);
+        } else {
+            return "redirect:/";
         }
 
         List<Booking> allBookings = this.bookingRepository.findAllByOrderByBookingDateTimeAsc();
@@ -70,4 +74,33 @@ public class StaffController {
 
         return ViewManager.STAFF_PORTAL;
     }
+
+    @GetMapping("/staff/restaurant")
+    public String staffRestaurant(Model model) {
+        Optional<Staff> currentStaff = staffRepository.findById(this.currentID);
+
+        if (currentStaff.isPresent()) {
+            Staff staff = currentStaff.get();
+            model.addAttribute("staff", staff);
+        } else {
+            return "redirect:/";
+        }
+
+        List<Booking> bookinglist = bookingRepository.findAll();
+        ArrayList<String> names = new ArrayList<>();
+
+        for (Booking booking : bookinglist){
+            Customer customer = booking.getCustomer();
+            names.add(customer.getFirstName() + " " + customer.getLastName());
+        }
+        model.addAttribute("names", names);
+        model.addAttribute("bookings", bookinglist);
+
+        return ViewManager.STAFF_RESTAURANT;
+    }
+
+    public void setID(int id) {
+        this.currentID = id;
+    }
+
 }

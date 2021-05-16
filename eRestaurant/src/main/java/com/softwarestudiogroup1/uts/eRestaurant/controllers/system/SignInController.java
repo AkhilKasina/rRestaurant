@@ -5,6 +5,7 @@ import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Manager;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Patron;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Staff;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwarestudiogroup1.uts.eRestaurant.ViewManager;
+import com.softwarestudiogroup1.uts.eRestaurant.controllers.manager.StaffController;
 import com.softwarestudiogroup1.uts.eRestaurant.models.CustomerRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.ManagerRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.StaffRepository;
@@ -23,6 +25,9 @@ import org.springframework.ui.Model;
 
 @Controller
 public class SignInController {
+
+    @Autowired
+    private StaffController staffController;
 
     private final CustomerRepository customerRepository;
     private final ManagerRepository managerRepository;
@@ -75,8 +80,9 @@ public class SignInController {
         else if (username.startsWith("S_") || username.startsWith("s_")) {
             // Staff Login
             Optional<Staff> currentStaff = staffRepository.findByUserNameAndPassword(username, password);
-
+           
             if (currentStaff.isPresent()) {
+                staffController.setID(currentStaff.get().getId());
                 redirectAttributes.addFlashAttribute("staffID", currentStaff.get().getId());
                 return "redirect:/staff";
             }
