@@ -13,12 +13,12 @@ CREATE TABLE IF NOT EXISTS customers (
 
 CREATE TABLE IF NOT EXISTS rewards (
     id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    reward_name VARCHAR(5) NOT NULL,
+    reward_name VARCHAR(5),
     discount DOUBLE,
     date_acquired VARCHAR(10),
     expiry_date VARCHAR(10),
 
-    customer_id INT(7) UNSIGNED NOT NULL,
+    customer_id INT(7) UNSIGNED,
     FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 

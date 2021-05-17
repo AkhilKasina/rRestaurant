@@ -105,6 +105,7 @@ public class CustomerController {
         if (!customerRepository.existsById(currentID) ) { return "redirect:/"; }
 
         Customer customer = customerRepository.findById(this.currentID).get();
+        bookingDAO.setCustomer(customer);
 
         // No Errors in Validation
         if (bookingValidationToModel(model, bookingDAO) == null) {
@@ -184,6 +185,7 @@ public class CustomerController {
             return "redirect:/";
         }
         Customer customer = customerRepository.findById(this.currentID).get();
+        model.addAttribute("customer", customer);
 
 
         Booking currentBooking = this.bookingRepository.findById(bookingID).get();

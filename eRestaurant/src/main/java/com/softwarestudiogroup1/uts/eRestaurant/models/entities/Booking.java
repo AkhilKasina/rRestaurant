@@ -57,7 +57,7 @@ public class Booking {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "booking", fetch = FetchType.EAGER)
     private Set<BookingItem> items;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "reward_id")
     private Reward reward;
 
