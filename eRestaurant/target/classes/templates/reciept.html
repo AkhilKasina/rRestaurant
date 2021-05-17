@@ -1,42 +1,123 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
-<div>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Reciept</title>
-     </head>
-</div>
-<div>
-    <body>
-        <table>
-            <th>Booking ID: </th>
-            <th th:text = ${ID}></th>
-        </table>
-        <table>
-            <th>Customer: </th>
-            <th th:text = ${cusfirst}></th>
-            <th th:text = ${cuslast}></th>
-            <th>ID: </th>
-            <th th:text = ${cusID}></th>
-        </table>
-        <table>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <tbody>
-                <tr th:each="name, Index : ${names}">
-                    <td th:text=${name} style="text-align:center"></td>
-                    <td th:text=${quantities[Index.index]} style="text-align:center"></td>
-                    <td th:text=${price[Index.index]} style="text-align:center"></td> 
-                </tr>
-            </tbody>
-        </table>
-        <table>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciept</title>
+   
+    <style>
+        body {
+            border-collapse: collapse;
+            border: 2px black;
+            border-radius: 5px;
+            width: 300px;
+            align-content: center;
+            align-items: center;
+            background-color: #c2c7c2;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 2px black;
+            border-radius: 5px;
+            width: auto;
+        }
+
+        th {
+            border-collapse: collapse;
+            border: 2px black;
+            border-radius: 5px;
+        }
+
+        td {
+            border-collapse: collapse;
+            border: 2px black;
+            border-radius: 5px;
+        }
+
+        tr {
+            border-collapse: collapse;
+            border: 2px black;
+            border-radius: 5px;
+        }
+
+        .header {
+            border-collapse: collapse;
+            border: 2px black;
+            border-radius: 5px;
+        }
+
+        .items {
+            border-collapse: collapse;
+            border: 2px black;
+            border-radius: 50%;
+        }
+
+        button {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #73a875;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: auto;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .total {
+            border: 10px black;
+        }
+    </style>
+
+</head>
+
+
+
+<body>
+    <table>
+        <div class="header">
+            <tr>
+                <th>Booking ID: </th>
+                <th th:text=${ID}></th>
+            </tr>
+
+            <tr>
+                <th>Customer: </th>
+                <th th:text=${cusfirst}></th>
+                <th th:text=${cuslast}></th>
+            </tr>
+            <tr>
+                <th>ID: </th>
+                <th th:text=${cusID}></th>
+            </tr>
+        </div>
+        <div class="items">
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+
+            <tr th:each="name, Index : ${names}">
+                <td th:text=${name} style="text-align:center"></td>
+                <td th:text=${quantities[Index.index]} style="text-align:center"></td>
+                <td th:text=${price[Index.index]} style="text-align:center"></td>
+            </tr>
+        </div>
+
+        <div class="total">
             <th>Total = </th>
-            <th th:text = ${total}></th>
-        </table>
-    </body>
-</div>
+            <th th:text=${total}></th>
+        </div>
+    </table>
+    
+</body>
+
+
 </html>
