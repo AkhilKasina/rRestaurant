@@ -86,7 +86,7 @@ public class ManagerController {
         staff.setHourlyWage(staffDAO.getHourlyWage());
         // staff.setDateOfBirth(staffDAO.getDateOfBirth());
         staffRepository.save(staff);
-        return redirectToManagerPortal(redirectAttributes);
+        return "redirect:/staffmanager";
     }
 
     @GetMapping("/menumanager")
@@ -117,7 +117,7 @@ public class ManagerController {
         item.setPrice(itemDAO.getPrice());
         item.setDescription(itemDAO.getDescription());
         itemRepository.save(item);
-        return redirectToManagerPortal(redirectAttributes);
+        return "redirect:/menumanager";
     }
 
     @GetMapping("/manager")
