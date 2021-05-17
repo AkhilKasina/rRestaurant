@@ -46,9 +46,8 @@
 
               <div class="barchild">
                 <p>Select coupon:</p>
-                <select id="reward" th:field="*{reward}">
-                  <option value="NONE"></option>
-                  <option th:each="reward : ${customer.rewards}" th:value="${reward.rewardName}" th:text="${reward.rewardName}">reward</option>
+                <select th:field="*{rewardname}">
+                  <option th:each="r : ${customer.rewards}" value="${r.rewardName}" th:text="${r.rewardName}">reward</option>
                 </select>
               </div>
               

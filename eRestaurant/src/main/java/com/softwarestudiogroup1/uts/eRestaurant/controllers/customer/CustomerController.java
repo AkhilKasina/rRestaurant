@@ -91,6 +91,7 @@ public class CustomerController {
         model.addAttribute("customer", currentCus);
 
         BookingDAO bookingDAO = new BookingDAO();
+        bookingDAO.setCustomer(currentCus);
         
         model.addAttribute("bookingType", "");
         model.addAttribute("customerBooking", bookingDAO);
@@ -116,6 +117,7 @@ public class CustomerController {
             newBooking.setBookingDate(bookingDAO.getBookingDate());
             newBooking.setTablePosition(bookingDAO.getTablePosition());
             newBooking.setCustomer(customer);
+            newBooking.setReward(bookingDAO.getReward());
 
             bookingRepository.save(newBooking);
 
@@ -143,6 +145,9 @@ public class CustomerController {
     @RequestMapping(value = "/booking/new", method = RequestMethod.POST, params = "showMenu")
     public String showMenu(@ModelAttribute("customerBooking") BookingDAO bookingDAO, 
         Model model, final RedirectAttributes redirectAttributes) {
+        Customer currentCus = customerRepository.findById(this.currentID).get();
+        model.addAttribute("customer", currentCus);
+        bookingDAO.setCustomer(currentCus);
         
         System.out.println("isTimeWithinBoth " + bookingDAO.getBookingTime());
 
@@ -167,6 +172,7 @@ public class CustomerController {
         model.addAttribute("customerBooking", bookingDAO);
         model.addAttribute("isEditing", false);
         
+        
         return ViewManager.CUS_BOOKING;
     }
 
@@ -184,6 +190,7 @@ public class CustomerController {
         List<BookingItem> currentBookItems = currentBooking.getBookingItems();
 
         BookingDAO bookingDAO = new BookingDAO();
+        bookingDAO.setCustomer(customer);
         bookingDAO.setId(currentBooking.getId());
         // bookingDAO.setDateAndTime(currentBooking.getBookingDateTime());
         bookingDAO.setBookingDate(currentBooking.getBookingDate());
@@ -242,6 +249,8 @@ public class CustomerController {
                 model.addAttribute("errorMessage", "Please book within dinner time | 4PM - 9PM");
                 bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.DINNER, itemRepository.findAll());
             }
+
+            bookingDAO.setCustomer(currentCus);
 
             model.addAttribute("allowDelete", true);
             model.addAttribute("isEditing", true);
