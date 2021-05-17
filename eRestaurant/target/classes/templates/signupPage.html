@@ -7,20 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
     <link rel="stylesheet" th:href="@{/loginPage/login.css}" />
-    <!-- <script>
-      //   checks if passwords are matching
-      function checkPassword(form) {
-        psw1 = form.psw1.value;
-        psw2 = form.psw2.value;
-
-        if (psw1 != psw2) {
-          alert("\nPasswords do not match");
-          return false;
-        } else {
-          return true;
-        }
-      }
-    </script> -->
+    <script>
+  var check = function() {
+  if (document.getElementById('psw1').value ==
+    document.getElementById('psw2').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'Passwords matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'Passwords do not match';
+  }
+}
+    </script>
   </head>
 
   <header>
@@ -84,7 +82,8 @@
                 <label>First Name: </label>
               </th>
               <td>
-                <input type="text" th:field="*{firstName}" placeholder="eg. John" required />
+                <input type="text" pattern="[A-Za-z].{2,}"
+                title="Can only contain lower and uppercase letters" th:field="*{firstName}" placeholder="eg. John" required />
               </td>
             </tr>
             <tr>
@@ -92,7 +91,8 @@
                 <label>Last Name: </label>
               </th>
               <td>
-                <input type="text" th:field="*{lastName}" placeholder="eg. Smith" required />
+                <input type="text" pattern="[A-Za-z].{2,}"
+                title="Can only contain lower and uppercase letters" th:field="*{lastName}" placeholder="eg. Smith" required />
               </td>
             </tr>
             <tr>
@@ -130,10 +130,11 @@
               <td>
                 <input
                   type="password"
-                  name="psw1"
+                  id="psw1"
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                   title="Must contain at least one uppercase letter, one number, and at least 8 or more characters"
                   placeholder="Enter a password"
+                  onkeyup="check();"
                   required
                 />
               </td>
@@ -143,11 +144,15 @@
               <td>
                 <input
                   type="password"
-                  name="psw2"
+                  id="psw2"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  title="Must contain at least one uppercase letter, one number, and at least 8 or more characters"
                   placeholder="Re-enter password"
                   th:field="*{password}"
+                  onkeyup="check();"
                   required
                 />
+                
               </td>
             </tr>
             <tr>
@@ -160,9 +165,10 @@
               </td>
             </tr>
             <tr>
-              <td colspan="2"><button type="submit">Submit</button></td>
+              <td colspan="2"><button type="submit" onclick="checkPassword">Submit</button></td>
             </tr>
           </table>
+          <span id='message'></span>
         </form>
         <p>Already a member? <a th:href="@{/login}">Login here</a></p>
       </div>

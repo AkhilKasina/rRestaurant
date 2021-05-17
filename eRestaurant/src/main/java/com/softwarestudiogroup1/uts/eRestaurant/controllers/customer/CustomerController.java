@@ -67,14 +67,28 @@ public class CustomerController {
 
         //expiring reward
         Set<Reward> rewards = currentCus.getRewards();
-        Reward currentReward = rewards.iterator().next();
-        for(Reward r : rewards){
-            int compare = (r.getExpiryDate()).compareTo(currentReward.getExpiryDate());
-            if(compare < 0){
-                currentReward = r;
+        if(rewards.isEmpty()){
+            Reward noreward = new Reward();
+            noreward.setId(1);
+            noreward.setRewardName("NONE");
+            noreward.setDiscount(0);
+            noreward.setExpiryDate("2077-01-01");
+            noreward.setDateAcquired(java.time.LocalDate.now().toString());
+            noreward.setCustomers(currentCus);
+            currentCus.setPoints(200);
+            this.rewardRepository.save(noreward);
+            this.customerRepository.save(currentCus);
+            model.addAttribute("expreward", noreward);
+        }else{
+            Reward currentReward = rewards.iterator().next();
+            for(Reward r : rewards){
+                int compare = (r.getExpiryDate()).compareTo(currentReward.getExpiryDate());
+                if(compare < 0){
+                    currentReward = r;
+                }
             }
+            model.addAttribute("expreward", currentReward);
         }
-        model.addAttribute("expreward", currentReward);
 
         return ViewManager.CUS_PORTAL;
     }

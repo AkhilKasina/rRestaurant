@@ -171,6 +171,9 @@ public class Customer {
 	}
 
 	public Set<Reward> getRewards() {
+		if (this.rewards == null) {
+			this.rewards = new HashSet<>();
+		}
 		return this.rewards;
 	}
 
