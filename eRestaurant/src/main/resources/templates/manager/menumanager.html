@@ -68,21 +68,21 @@
                      <table width=100%>
                         <tr>
                            <td>Item Name:</td>
-                           <td><input type="text" placeholder="Item Name" th:field = "*{name}"></td>
+                           <td><input type="text" placeholder="Item Name" th:field = "*{name}" required></td>
                         </tr>
                         <tr>
                            <td>Item Description:</td>
-                           <td><input type="text" placeholder="Item Description" th:field = "*{description}"></td>
+                           <td><input type="text" placeholder="Item Description" th:field = "*{description}" required></td>
                         </tr>
                         <tr>
                            <td>Item Price:</td>
-                           <td><input type="text" placeholder="Item Price" th:field = "*{price}"> </td>
+                           <td><input type="text" placeholder="Item Price" th:field = "*{price}" required> </td>
                         </tr>
                         <tr>
                            <td>Item Type:</td>
                            <td>
-                              Lunch <input type="radio" name="Add Lunch type" value="Lunch" th:field = "*{menuType}">
-                              Dinner <input type="radio" name="Add Lunch type" value="Dinner" th:field = "*{menuType}">
+                              Lunch <input type="radio" name="Add Lunch type" value="Lunch" th:field = "*{menuType}" required>
+                              Dinner <input type="radio" name="Add Lunch type" value="Dinner" th:field = "*{menuType}" required>
                            </td>
                         </tr>
                      </table>
