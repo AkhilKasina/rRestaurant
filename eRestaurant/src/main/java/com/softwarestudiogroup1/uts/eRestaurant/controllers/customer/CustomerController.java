@@ -67,6 +67,7 @@ public class CustomerController {
 
         //expiring reward
         Set<Reward> rewards = currentCus.getRewards();
+        if (rewards != null && !rewards.isEmpty()) {
         Reward currentReward = rewards.iterator().next();
         for(Reward r : rewards){
             int compare = (r.getExpiryDate()).compareTo(currentReward.getExpiryDate());
@@ -75,6 +76,7 @@ public class CustomerController {
             }
         }
         model.addAttribute("expreward", currentReward);
+        }
 
         return ViewManager.CUS_PORTAL;
     }
