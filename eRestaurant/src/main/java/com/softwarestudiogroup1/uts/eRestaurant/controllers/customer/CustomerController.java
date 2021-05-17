@@ -203,25 +203,6 @@ public class CustomerController {
         ArrayList<BookingItemDAO> bookingItemsDAO = new ArrayList<>();
         List<Item> itemLists = itemRepository.findAll();
 
-        // //only puts lunch items into lunchList
-        // for(Item item : itemLists){
-        //     if(item.getMenuType().toLowerCase().equals("lunch")){
-        //         BookingItemDAO bookingItemDAO = new BookingItemDAO();
-
-        //         bookingItemDAO.setItemID(item.getId());
-        //         bookingItemDAO.setName(item.getName());
-        //         bookingItemDAO.setPrice(item.getPrice());
-        //         bookingItemDAO.setDescription(item.getDescription());
-        //         bookingItemDAO.setQuantity("0");
-
-        //         for (BookingItem bookingItem: currentBookItems) {
-        //             if (bookingItem.getItem().getId() == item.getId()) {
-        //                 bookingItemDAO.setQuantity("" + bookingItem.getQuantity());
-        //             }
-        //         }
-
-        //         bookingItemsDAO.add(bookingItemDAO);
-        //     }
         BookingType currentBookingType = bookingType(currentBooking.getBookingTime());
         if (currentBookingType == BookingType.LUNCH) {
             bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.LUNCH, itemLists);

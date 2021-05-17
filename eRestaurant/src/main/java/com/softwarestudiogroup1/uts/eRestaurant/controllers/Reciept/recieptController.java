@@ -11,6 +11,7 @@ import com.softwarestudiogroup1.uts.eRestaurant.ViewManager;
 import com.softwarestudiogroup1.uts.eRestaurant.models.BookingItemRepository;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Customer;
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Reward;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,7 @@ public class recieptController {
                 total+=roundDbl;
             }
         }
+        
 
         model.addAttribute("names",names);
         model.addAttribute("quantities",quantities);
