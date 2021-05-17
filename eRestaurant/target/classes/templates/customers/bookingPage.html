@@ -9,33 +9,57 @@
   </head>
   <body>
     <form th:object="${customerBooking}" method="post">
-        <input type="hidden" id="id" th:field="*{id}" />
-        <div th:if="${error == true}">
-          <p style="color: red" th:text="${errorMessage}"></p>
-         </div>
-        <input type="date" id="bookingDate" placeholder="yyyy-mm-dd" th:field="*{bookingDate}" >
-          <br>
-        <input type="time" id="bookingTime" th:field="*{bookingTime}" >
-          <br>
-        <div th:if="${timeError == true}">
-          <p style="color: red" th:text="${timeErrorMessage}"></p>
-         </div>
-        <select id="Tables" th:field="*{tablePosition}">
-          <option value="Window 1">Window 1</option>
-          <option value="Window 2">Window 2</option>
-          <option value="Window 3">Window 3</option>
-          <option value="Centre 1">Centre 1</option>
-          <option value="Centre 2">Centre 2</option>
-          <option value="Centre 3">Centre 3</option>
-          <option value="Kitchen 1">Kitchen 1</option>
-          <option value="Kitchen 2">Kitchen 2</option>
-          <option value="Kitchen 3">Kitchen 3</option>
-        </select>
-          <br>
-          <div th:if="${!isEditing}">
-            <input  type="submit" name="showMenu" value="Show Menu" />
+        <div class="whitePage">
+          <div class="wrapper">
+            <div class="bar">
+              <div class="barchild">
+                <p>Select Date:</p>
+                <input type="hidden" id="id" th:field="*{id}" />
+              <div th:if="${error == true}">
+                <p style="color: red" th:text="${errorMessage}"></p>
+               </div>
+              <input type="date" id="bookingDate" placeholder="yyyy-mm-dd" th:field="*{bookingDate}" >
+              </div>
+
+              <div class="barchild">
+                <p>Select suitable time:</p>
+                <input type="time" id="bookingTime" th:field="*{bookingTime}" >
+                <div th:if="${timeError == true}">
+                  <p style="color: red" th:text="${timeErrorMessage}"></p>
+                 </div>
+              </div>
+
+              <div class="barchild">
+                <p>Select table:</p>
+                <select id="Tables" th:field="*{tablePosition}">
+                  <option value="Window 1">Window 1</option>
+                  <option value="Window 2">Window 2</option>
+                  <option value="Window 3">Window 3</option>
+                  <option value="Centre 1">Centre 1</option>
+                  <option value="Centre 2">Centre 2</option>
+                  <option value="Centre 3">Centre 3</option>
+                  <option value="Kitchen 1">Kitchen 1</option>
+                  <option value="Kitchen 2">Kitchen 2</option>
+                  <option value="Kitchen 3">Kitchen 3</option>
+                </select>
+              </div>
+
+              <div class="barchild">
+                <p>Select coupon:</p>
+                <select id="reward" th:field="*{reward}">
+                  <option value="NONE"></option>
+                  <option th:each="reward : ${customer.rewards}" th:value="${reward.rewardName}" th:text="${reward.rewardName}">reward</option>
+                </select>
+              </div>
+              
+                <div th:if="${!isEditing}" class="barchild">
+                  <input  type="submit" name="showMenu" value="Confirm Selections" id="confirm"/>
+                </div>
+            </div>
           </div>
-         
+        </div>
+
+        
           <div class="whitePage">
             <div class="wrapper">
               <div class="title">
@@ -71,13 +95,14 @@
                       </tr>
                     </div>
                   </table>
+                  <div class="bbutton">
+                    <input type="submit" name="cancel" value="Cancel" id="cancel"/>
+                    <button th:with="text=${isEditing} ? 'UPDATE BOOKING' : 'BOOK'" th:text="${text}" type="submit"> BOOK </button>
+                  </div>
               </div>
             </div>
           </div>
 
-      <input type="submit" name="cancel" value="Cancel" />
-      <button th:with="text=${isEditing} ? 'UPDATE BOOKING' : 'BOOK'" th:text="${text}" type="submit"> BOOK </button>
-      <br>
       
     </form>
 

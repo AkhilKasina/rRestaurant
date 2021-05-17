@@ -87,6 +87,8 @@ public class CustomerController {
         if (!customerRepository.existsById(currentID) ) {
             return "redirect:/";
         }
+        Customer currentCus = customerRepository.findById(this.currentID).get();
+        model.addAttribute("customer", currentCus);
 
         BookingDAO bookingDAO = new BookingDAO();
         
@@ -332,7 +334,7 @@ public class CustomerController {
     //exchanges 180 points for 15%
     @PostMapping("/exchange15")
     public String exchangeFifteen(Model model) {
-        return exchangeReward("15OFF", 15, 250, model);
+        return exchangeReward("15OFF", 15, 180, model);
     }
 
     //exchanges 250 points for 20%

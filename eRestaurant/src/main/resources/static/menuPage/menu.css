@@ -123,6 +123,15 @@ button:hover{
 
 #cancel{
   background-color: #ED2939;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  text-align: center;
+  font-size: 16px;
 }
 
 .dropdown-menu {
@@ -178,5 +187,35 @@ header{
 }
 .nav button{
   margin-top: 16px;
+  float: right;
+}
+
+.bar{
+  margin-top: 20px;
+  display: flex;
+}
+
+.barchild{
+  font-weight: bold;
+  font-size: 18px;
+  flex: 1;
+  margin: 18px;
+}
+
+#confirm{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #73a875;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.bbutton{
   float: right;
 }

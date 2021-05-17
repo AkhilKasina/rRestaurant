@@ -11,6 +11,17 @@ CREATE TABLE IF NOT EXISTS customers (
     points INT(3)
 );
 
+CREATE TABLE IF NOT EXISTS rewards (
+    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    reward_name VARCHAR(5) NOT NULL,
+    discount DOUBLE,
+    date_acquired VARCHAR(10),
+    expiry_date VARCHAR(10),
+
+    customer_id INT(7) UNSIGNED NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
 CREATE TABLE IF NOT EXISTS bookings (
     id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     booking_DateTime TIMESTAMP,
@@ -19,7 +30,11 @@ CREATE TABLE IF NOT EXISTS bookings (
     table_Position VARCHAR(10),
 
     customer_id INT(7) UNSIGNED NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customers(id)
+    reward_id INT(7) UNSIGNED,
+
+    FOREIGN KEY (customer_id) REFERENCES customers(id),
+    FOREIGN KEY (reward_id) REFERENCES rewards(id)
+
 );
 
 CREATE TABLE IF NOT EXISTS items (
@@ -39,17 +54,6 @@ CREATE TABLE IF NOT EXISTS bookingitems (
 
     FOREIGN KEY (booking_id) REFERENCES bookings(id),
     FOREIGN KEY (item_id) REFERENCES items(id)
-);
-
-CREATE TABLE IF NOT EXISTS rewards (
-    id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    reward_name VARCHAR(5) NOT NULL,
-    discount DOUBLE,
-    date_acquired VARCHAR(10),
-    expiry_date VARCHAR(10),
-
-    customer_id INT(7) UNSIGNED NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
 

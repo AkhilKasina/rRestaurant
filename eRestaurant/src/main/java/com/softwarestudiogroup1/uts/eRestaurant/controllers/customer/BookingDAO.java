@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Item;
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Reward;
 
 public class BookingDAO {
     private int id;
@@ -16,6 +17,7 @@ public class BookingDAO {
     private String tablePosition;
 
     private ArrayList<BookingItemDAO> bookingItems;
+    private Reward reward;
 
     public int getId() {
         return id;
@@ -160,4 +162,12 @@ public class BookingDAO {
     public ArrayList<BookingItemDAO> getBookingItems(){
         return bookingItems;
     }
+
+    public Reward getReward() {
+		return this.reward;
+	}
+
+	public void setReward(Reward reward) {
+		this.reward = reward;
+	}
 }
