@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,6 +56,10 @@ public class Booking {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "booking", fetch = FetchType.EAGER)
     private Set<BookingItem> items;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reward_id")
+    private Reward reward;
 
     public Integer getId() {
         return id;
@@ -131,6 +136,14 @@ public class Booking {
         }
 		
         setBookingItemsInteral(sets);
+	}
+
+    public Reward getReward() {
+		return this.reward;
+	}
+
+	public void setReward(Reward reward) {
+		this.reward = reward;
 	}
 
 

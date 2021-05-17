@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,9 +44,10 @@ public class Reward {
 	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 
-	public Reward() {
+	// @OneToOne(mappedBy = "reward")
+	// private Booking booking;
 
-	}
+	public Reward(){}
 
 	public Reward(String name, double discount, String dateExchanged, String couponExp, Customer customer) {
 		this.rewardName = name;
@@ -103,5 +105,13 @@ public class Reward {
 	public void setCustomers(Customer customer) {
 		this.customer = customer;
 	}
+
+	// public Booking getBooking() {
+	// 	return this.booking;
+	// }
+
+	// public void setBooking(Booking booking) {
+	// 	this.booking = booking;
+	// }
     
 }

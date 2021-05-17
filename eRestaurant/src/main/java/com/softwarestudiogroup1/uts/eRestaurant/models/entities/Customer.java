@@ -182,4 +182,14 @@ public class Customer {
 		this.rewards.add(reward);
 	}
 
+	public Reward findReward(String rewardname){
+		Reward r = new Reward();
+		for(Reward rew : rewards){
+			if(rewardname.equals(rew.getRewardName())){
+				r = rew;
+			}
+		}
+		return r;
+	}
+
 }

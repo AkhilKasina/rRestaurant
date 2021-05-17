@@ -9,12 +9,34 @@
    <link rel="stylesheet" th:href="@{/loginPage/login.css}">
 </head>
 <header>
-   <a th:href="@{/}">
-      <button>
-         <b>Home</b>
-      </button>
-   </a>
-</header>
+   <img th:src="@{/homePage/flag.png}" id="logo">
+   <div class = "nav">
+
+     <a th:href="@{/}">
+       <button id="active"><b>Home</b></button>
+     </a>
+
+     <div class="dropdown">
+       <a th:href="@{/lunch}">
+         <button class="dropbtn"><b>Menu</b></button>
+         <div class="dropdown-menu">
+           <a th:href="@{/lunch}"><b>Lunch</b></a>
+           <hr>
+           <a th:href="@{/dinner}"><b>Dinner</b></a>
+         </div>
+       </a>
+     </div>
+
+     <a th:href="@{/login}">
+       <button ><b>Login</b></button>
+     </a>
+
+     <a th:href="@{/signup}">
+         <button ><b>Register</b></button>
+     </a>
+
+   </div>
+ </header>
 
 <body>
    <div class="loginpage">

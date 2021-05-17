@@ -87,8 +87,11 @@ public class CustomerController {
         if (!customerRepository.existsById(currentID) ) {
             return "redirect:/";
         }
+        Customer currentCus = customerRepository.findById(this.currentID).get();
+        model.addAttribute("customer", currentCus);
 
         BookingDAO bookingDAO = new BookingDAO();
+        bookingDAO.setCustomer(currentCus);
         
         model.addAttribute("bookingType", "");
         model.addAttribute("customerBooking", bookingDAO);
@@ -102,6 +105,7 @@ public class CustomerController {
         if (!customerRepository.existsById(currentID) ) { return "redirect:/"; }
 
         Customer customer = customerRepository.findById(this.currentID).get();
+        bookingDAO.setCustomer(customer);
 
         // No Errors in Validation
         if (bookingValidationToModel(model, bookingDAO) == null) {
@@ -114,6 +118,7 @@ public class CustomerController {
             newBooking.setBookingDate(bookingDAO.getBookingDate());
             newBooking.setTablePosition(bookingDAO.getTablePosition());
             newBooking.setCustomer(customer);
+            newBooking.setReward(bookingDAO.getReward());
 
             bookingRepository.save(newBooking);
 
@@ -141,6 +146,9 @@ public class CustomerController {
     @RequestMapping(value = "/booking/new", method = RequestMethod.POST, params = "showMenu")
     public String showMenu(@ModelAttribute("customerBooking") BookingDAO bookingDAO, 
         Model model, final RedirectAttributes redirectAttributes) {
+        Customer currentCus = customerRepository.findById(this.currentID).get();
+        model.addAttribute("customer", currentCus);
+        bookingDAO.setCustomer(currentCus);
         
         System.out.println("isTimeWithinBoth " + bookingDAO.getBookingTime());
 
@@ -165,6 +173,7 @@ public class CustomerController {
         model.addAttribute("customerBooking", bookingDAO);
         model.addAttribute("isEditing", false);
         
+        
         return ViewManager.CUS_BOOKING;
     }
 
@@ -176,12 +185,14 @@ public class CustomerController {
             return "redirect:/";
         }
         Customer customer = customerRepository.findById(this.currentID).get();
+        model.addAttribute("customer", customer);
 
 
         Booking currentBooking = this.bookingRepository.findById(bookingID).get();
         List<BookingItem> currentBookItems = currentBooking.getBookingItems();
 
         BookingDAO bookingDAO = new BookingDAO();
+        bookingDAO.setCustomer(customer);
         bookingDAO.setId(currentBooking.getId());
         // bookingDAO.setDateAndTime(currentBooking.getBookingDateTime());
         bookingDAO.setBookingDate(currentBooking.getBookingDate());
@@ -192,27 +203,6 @@ public class CustomerController {
         ArrayList<BookingItemDAO> bookingItemsDAO = new ArrayList<>();
         List<Item> itemLists = itemRepository.findAll();
 
-<<<<<<< HEAD
-        //only puts lunch items into lunchList
-        for(Item item : itemLists){
-            if(item.getMenuType().toLowerCase().equals("lunch")){
-                BookingItemDAO bookingItemDAO = new BookingItemDAO();
-
-                bookingItemDAO.setItemID(item.getId());
-                bookingItemDAO.setName(item.getName());
-                bookingItemDAO.setPrice(item.getPrice());
-                bookingItemDAO.setDescription(item.getDescription());
-                bookingItemDAO.setQuantity("0");
-
-                for (BookingItem bookingItem: currentBookItems) {
-                    if (bookingItem.getItem().getId() == item.getId()) {
-                        bookingItemDAO.setQuantity("" + bookingItem.getQuantity());
-                    }
-                }
-
-                bookingItemsDAO.add(bookingItemDAO);
-            }
-=======
         BookingType currentBookingType = bookingType(currentBooking.getBookingTime());
         if (currentBookingType == BookingType.LUNCH) {
             bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.LUNCH, itemLists);
@@ -220,7 +210,6 @@ public class CustomerController {
         } else {
             bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.DINNER, itemLists);
             model.addAttribute("bookingType", "Dinner" );
->>>>>>> 6f5f46c009d0110b50a6a52e7368a93dd92226e5
         }
 
         model.addAttribute("allowDelete", true);
@@ -262,6 +251,8 @@ public class CustomerController {
                 model.addAttribute("errorMessage", "Please book within dinner time | 4PM - 9PM");
                 bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.DINNER, itemRepository.findAll());
             }
+
+            bookingDAO.setCustomer(currentCus);
 
             model.addAttribute("allowDelete", true);
             model.addAttribute("isEditing", true);
@@ -354,7 +345,7 @@ public class CustomerController {
     //exchanges 180 points for 15%
     @PostMapping("/exchange15")
     public String exchangeFifteen(Model model) {
-        return exchangeReward("15OFF", 15, 250, model);
+        return exchangeReward("15OFF", 15, 180, model);
     }
 
     //exchanges 250 points for 20%
