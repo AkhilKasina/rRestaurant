@@ -139,8 +139,11 @@ public class SignInController {
                         newCustomerDAO.getTelephone(), newCustomerDAO.getAddress(), 
                         newCustomerDAO.getUsername(), newCustomerDAO.getPassword());
         
+        newCustomer.setPoints(0);
+        
         customerRepository.save(newCustomer);
 
+        customerController.setID(newCustomer.getId());
         redirectAttributes.addFlashAttribute("customerID", newCustomer.getId());
         return "redirect:/booking";
     }

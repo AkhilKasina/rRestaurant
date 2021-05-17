@@ -61,7 +61,7 @@
         </div>
     </div>
     <div class="col3">
-        <div class="whitePage">
+        <div class="whitePage" th:if="${expreward != null}">
             <h1>Expiring Reward </h1>
             <p><b>Name: </b><span th:text=${expreward.rewardName}></span></p>
             <p><b>Discount: </b><span th:text=${expreward.discount}></span>%</p>
