@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.softwarestudiogroup1.uts.eRestaurant.models.entities.BookingItem;
+import com.softwarestudiogroup1.uts.eRestaurant.models.entities.Item;
 
 public class BookingDAO {
     private int id;
@@ -68,6 +69,92 @@ public class BookingDAO {
 
     public void setBookingItems(ArrayList<BookingItemDAO> bookingItems) {
         this.bookingItems = bookingItems;
+    }
+
+    public void setBookingItemsFrom(List<Item> itemsList, BookingType type) {
+        ArrayList<BookingItemDAO> bookingItemDAOs = new ArrayList<>();
+
+        if (type == BookingType.LUNCH) {
+             for(Item item : itemsList){
+                if (item.getMenuType().equals("lunch")) {
+                    BookingItemDAO bookingItemDAO = new BookingItemDAO();
+
+                    bookingItemDAO.setItemID(item.getId());
+                    bookingItemDAO.setName(item.getName());
+                    bookingItemDAO.setPrice(item.getPrice());
+                    bookingItemDAO.setDescription(item.getDescription());
+                    bookingItemDAO.setQuantity("0");
+
+                    bookingItemDAOs.add(bookingItemDAO);
+                }
+            } 
+        }
+        else if (type == BookingType.DINNER) {
+            for (Item item : itemsList) {
+                if(item.getMenuType().equals("dinner")){
+                    BookingItemDAO bookingItemDAO = new BookingItemDAO();
+
+                    bookingItemDAO.setItemID(item.getId());
+                    bookingItemDAO.setName(item.getName());
+                    bookingItemDAO.setPrice(item.getPrice());
+                    bookingItemDAO.setDescription(item.getDescription());
+                    bookingItemDAO.setQuantity("0");
+
+                    bookingItemDAOs.add(bookingItemDAO);
+                }
+            }
+        }
+
+        this.setBookingItems(bookingItemDAOs);
+    }
+
+    public void setBookingItemQuantity(List<BookingItem> currentBookingItems, BookingType type, List<Item> menuItems) {
+        ArrayList<BookingItemDAO> bookingItemDAOs = new ArrayList<>();
+
+        if (type == BookingType.LUNCH) {
+            for(Item item : menuItems){
+               if (item.getMenuType().equals("lunch")) {
+                   BookingItemDAO bookingItemDAO = new BookingItemDAO();
+
+                   bookingItemDAO.setItemID(item.getId());
+                   bookingItemDAO.setName(item.getName());
+                   bookingItemDAO.setPrice(item.getPrice());
+                   bookingItemDAO.setDescription(item.getDescription());
+                   bookingItemDAO.setQuantity("0");
+
+                   for (BookingItem bookingItem: currentBookingItems) {
+                    if (bookingItem.getItem().getId() == item.getId()) {
+                        bookingItemDAO.setQuantity("" + bookingItem.getQuantity());
+                    }
+                }
+
+                   bookingItemDAOs.add(bookingItemDAO);
+               }
+           } 
+       }
+       else if (type == BookingType.DINNER) {
+           for (Item item : menuItems) {
+               if(item.getMenuType().equals("dinner")) {
+                   BookingItemDAO bookingItemDAO = new BookingItemDAO();
+
+                    bookingItemDAO.setItemID(item.getId());
+                    bookingItemDAO.setName(item.getName());
+                    bookingItemDAO.setPrice(item.getPrice());
+                    bookingItemDAO.setDescription(item.getDescription());
+                    bookingItemDAO.setQuantity("0");
+
+                    for (BookingItem bookingItem: currentBookingItems) {
+                        if (bookingItem.getItem().getId() == item.getId()) {
+                            bookingItemDAO.setQuantity("" + bookingItem.getQuantity());
+                        }
+                    }
+
+                    bookingItemDAOs.add(bookingItemDAO);
+               }
+           }
+       } 
+
+        setBookingItems(bookingItemDAOs);
     }
 
     public ArrayList<BookingItemDAO> getBookingItems(){

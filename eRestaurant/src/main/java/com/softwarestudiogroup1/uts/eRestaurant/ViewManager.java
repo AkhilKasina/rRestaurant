@@ -23,5 +23,10 @@ public class ViewManager {
     //public static final String MNG_RESTAURANT = "manager/profilePage";
     public static final String MNG_STAFF = "manager/staffmanager";
 
+    // STAFF
+    public static final String STAFF_PORTAL = "staff/StaffPortal";
+    public static final String STAFF_RESTAURANT = "staff/staffRestaurant";
+
+
     private ViewManager() {}
 }
