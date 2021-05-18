@@ -20,6 +20,8 @@ public class BookingDAO {
     private ArrayList<BookingItemDAO> bookingItems;
     private String rewardname;
 
+    private String selectedRewardID;
+
     private Customer customer;
 
     public int getId() {
@@ -186,6 +188,13 @@ public class BookingDAO {
         return customer.findReward(rewardname);
     }
 
+    public void setSelectedRewardID(String selectedRewardID) {
+        this.selectedRewardID = selectedRewardID;
+    }
+
+    public String getSelectedRewardID() {
+        return selectedRewardID;
+    }
 
 
 }
