@@ -55,6 +55,12 @@ public class CustomerController {
         this.rewardRepository = rewardRepository;
     }
 
+    String dateError = "errorMessage";
+    String isDateError = "error";
+
+    String timeError = "timeErrorMessage";
+    String isTimeError = "timeError";
+
     @GetMapping("/booking")
     public String getBookingPage(Model model) {
 
@@ -166,6 +172,8 @@ public class CustomerController {
         
         System.out.println("isTimeWithinBoth " + bookingDAO.getBookingTime());
 
+        model.addAttribute("bookingType", "");
+
         // No Error Found
         if (bookingValidationToModel(model, bookingDAO) == null) {
             List<Item> itemsList = itemRepository.findAll();
@@ -255,14 +263,14 @@ public class CustomerController {
 
         
         if (currentBookingType != customerInputBookingType) {
-            model.addAttribute("error", true);
+            model.addAttribute(isTimeError, true);
 
             // If customer select dinner time for lunch booking, there will be error
             if (currentBookingType == BookingType.LUNCH) {
-                model.addAttribute("errorMessage", "Please book within lunch time | 12PM - 4PM");
+                model.addAttribute(timeError, "Please book within lunch time | 12PM - 4PM");
                 bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.LUNCH, itemRepository.findAll());
             } else {
-                model.addAttribute("errorMessage", "Please book within dinner time | 4PM - 9PM");
+                model.addAttribute(timeError, "Please book within dinner time | 4PM - 9PM");
                 bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.DINNER, itemRepository.findAll());
             }
 
@@ -445,6 +453,24 @@ public class CustomerController {
 
        return false;
     }
+
+    private Boolean isDateValid(String dateString) {
+    try {
+        DateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date currentDate = java.sql.Date.valueOf( java.time.LocalDate.now());
+        Date userDate = timeFormat.parse(dateString);
+
+        return userDate.after(currentDate);
+    }
+    catch (Exception e) {
+        System.out.println(e);
+    }
+    
+    return false;
+    }
+
+
     /**
      * Update Model Depending on Validation
      * @param model
@@ -452,19 +478,24 @@ public class CustomerController {
      */
     private Model bookingValidationToModel(Model model, BookingDAO bookingDAO) {
         if (bookingDAO.getBookingDate().replaceAll("\\s+","").isEmpty()) {
-            model.addAttribute("error", true);
-            model.addAttribute("errorMessage","Please Enter Booking Date!");
+            model.addAttribute(isDateError, true);
+            model.addAttribute(dateError,"Please Enter Booking Date!");
 
         } 
+        else if (!isDateValid(bookingDAO.getBookingDate())) {
+            model.addAttribute(isDateError, true);
+            model.addAttribute(dateError, "Please select a day after today!");
+        } 
         else if (bookingDAO.getBookingTime().replaceAll("\\s+","").isEmpty()) {
-            model.addAttribute("error", true);
-            model.addAttribute("errorMessage","Please Enter Booking Time!");
+            model.addAttribute(isTimeError, true);
+            model.addAttribute(timeError,"Please Enter Booking Time!");
         }
         else if (!isTimeWithin(BookingType.BOTH ,bookingDAO.getBookingTime())) {
             
-            model.addAttribute("timeError", true);
-            model.addAttribute("timeErrorMessage", "Lunch 12PM-4PM | Dinner 4PM-9PM"); 
-        } else {
+            model.addAttribute(isTimeError,true);
+            model.addAttribute(timeError, "Lunch 12PM-4PM | Dinner 4PM-9PM"); 
+        } 
+        else {
             return null;
         }
 
