@@ -165,6 +165,8 @@ public class CustomerController {
         bookingDAO.setCustomer(currentCus);
         
         System.out.println("isTimeWithinBoth " + bookingDAO.getBookingTime());
+        
+        model.addAttribute("bookingType", "");
 
         // No Error Found
         if (bookingValidationToModel(model, bookingDAO) == null) {
@@ -255,14 +257,14 @@ public class CustomerController {
 
         
         if (currentBookingType != customerInputBookingType) {
-            model.addAttribute("error", true);
+            model.addAttribute("timeError", true);
 
             // If customer select dinner time for lunch booking, there will be error
             if (currentBookingType == BookingType.LUNCH) {
-                model.addAttribute("errorMessage", "Please book within lunch time | 12PM - 4PM");
+                model.addAttribute("timeErrorMessage", "Please book within lunch time | 12PM - 4PM");
                 bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.LUNCH, itemRepository.findAll());
             } else {
-                model.addAttribute("errorMessage", "Please book within dinner time | 4PM - 9PM");
+                model.addAttribute("timeErrorMessage", "Please book within dinner time | 4PM - 9PM");
                 bookingDAO.setBookingItemQuantity(currentBookItems, BookingType.DINNER, itemRepository.findAll());
             }
 
@@ -457,8 +459,8 @@ public class CustomerController {
 
         } 
         else if (bookingDAO.getBookingTime().replaceAll("\\s+","").isEmpty()) {
-            model.addAttribute("error", true);
-            model.addAttribute("errorMessage","Please Enter Booking Time!");
+            model.addAttribute("timeError", true);
+            model.addAttribute("timeErrorMessage","Please Enter Booking Time!");
         }
         else if (!isTimeWithin(BookingType.BOTH ,bookingDAO.getBookingTime())) {
             
