@@ -288,9 +288,8 @@ public class CustomerController {
     }
 
     // DELETE BOOKING
-    @GetMapping("/booking/{bookingID}/delete")
-    public String deleteBooking(@PathVariable("bookingID") int bookingID, final RedirectAttributes redirectAttributes) {
-
+    @RequestMapping(value = {"/booking/{bookingID}"}, method = RequestMethod.POST, params = "delete") 
+    public String deleteCustomerBooking(@PathVariable("bookingID") int bookingID, Model model) {
         if (!customerRepository.existsById(currentID)) {
             return "redirect:/";
         }
@@ -299,7 +298,7 @@ public class CustomerController {
             this.bookingRepository.deleteById(bookingID);
         }
 
-        return redirectToCustomerPortal(redirectAttributes);
+        return "redirect:/booking";
     }
 
     // LOG OUT
