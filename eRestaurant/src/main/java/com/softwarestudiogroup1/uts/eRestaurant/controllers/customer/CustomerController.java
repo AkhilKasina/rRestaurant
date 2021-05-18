@@ -288,6 +288,9 @@ public class CustomerController {
         updatedBooking.setTablePosition(bookingDAO.getTablePosition());
         updatedBooking.setCustomer(currentCus);
 
+        bookingItemRepository.deleteAll(updatedBooking.getBookingItems());
+        updatedBooking.removeAllItems();
+
         saveBookingItemsToDBs(bookingDAO.getBookingItems(), updatedBooking);
 
         this.bookingRepository.save(updatedBooking);

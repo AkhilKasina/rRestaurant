@@ -54,7 +54,7 @@ public class Booking {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "booking", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "booking", fetch = FetchType.EAGER)
     private Set<BookingItem> items;
 
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = true)
@@ -137,6 +137,10 @@ public class Booking {
 		
         setBookingItemsInteral(sets);
 	}
+
+    public void removeAllItems() {
+        setBookingItemsInteral(new HashSet<>());
+    }
 
     public Reward getReward() {
 		return this.reward;
