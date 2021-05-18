@@ -131,6 +131,7 @@
                      <th>Description</th>
                      <th>Hourly Wage</th>
                      <!-- <th>Date of Birth</th> -->
+                     <th></th>
                      <tbody>
                         <tr th:each="staff : ${Staff}">
                            <td th:text=${staff.id} style="text-align:center"></td>
@@ -142,6 +143,11 @@
                            <td th:text=${staff.description} style="text-align:center"></td>
                            <td th:text=${staff.hourlyWage} style="text-align:center"></td>
                            <!-- <td th:text=${staff.dateOfBirth} style="text-align:center"></td> -->
+                           <td>
+                              <form method="POST" th:action="@{/staffManager/{staffID}(staffID=${staff.id})}">
+                                 <input type="submit" name="delete" value="Delete" >
+                              </form>
+                           </td>
                         </tr>
                      </tbody>
                   </table>

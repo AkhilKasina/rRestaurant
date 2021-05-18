@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -86,6 +87,23 @@ public class ManagerController {
         staff.setHourlyWage(staffDAO.getHourlyWage());
         // staff.setDateOfBirth(staffDAO.getDateOfBirth());
         staffRepository.save(staff);
+        return "redirect:/staffmanager";
+    }
+
+    @RequestMapping(value = {"/staffManager/{staffID}"}, method = RequestMethod.POST, params = "delete") 
+    public String deleteStaff(@PathVariable("staffID") int staffID, Model model) {
+        Optional<Manager> currentManager = managerRepository.findById(currentID);
+
+        if (currentManager.isPresent()) {
+            model.addAttribute("manager", currentManager.get());
+        } else {
+            return "redirect:/";
+        }
+
+        if (staffRepository.existsById(staffID)) {
+            staffRepository.deleteById(staffID);
+        }
+        
         return "redirect:/staffmanager";
     }
 
