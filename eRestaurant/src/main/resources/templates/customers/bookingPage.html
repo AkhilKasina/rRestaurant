@@ -83,10 +83,9 @@
 
     <form
       th:if="${allowDelete}"
-      th:action="@{/booking/{bookingID}/delete(bookingID=${customerBooking.id})}"
-      method="get"
+      method="POST"
     >
-      <input type="Submit" th:value="Delete" />
+      <input type="Submit" name="delete" th:value="Delete" />
     </form>
   </body>
 </html>
