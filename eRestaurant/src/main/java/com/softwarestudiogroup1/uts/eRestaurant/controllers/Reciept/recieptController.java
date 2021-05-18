@@ -34,6 +34,7 @@ public class recieptController {
         Double total = 0.0;
         int ID = BookingID;
         Customer customer = new Customer();
+        Reward reward = new Reward();
 
         for (BookingItem Bitem:Bitems){
             if (Bitem.getBooking().getId() == ID && Bitem.getQuantity() != 0){
@@ -45,14 +46,23 @@ public class recieptController {
                 double roundDbl = Math.round(currentprice*100.0)/100.0;
                 Price.add(roundDbl);
                 total+=roundDbl;
+                reward = Bitem.getBooking().getReward();
             }
         }
+
+        Double cost = total;
+        total = total * (100 - reward.getDiscount());
+        total = total/100;
+        Double savings = cost - total;
         
 
+        model.addAttribute("cost", String.format("%.2f", cost));
+        model.addAttribute("savings", String.format("%.2f", savings));
+        model.addAttribute("reward", reward.getRewardName());
         model.addAttribute("names",names);
         model.addAttribute("quantities",quantities);
         model.addAttribute("price",Price);
-        model.addAttribute("total",total);
+        model.addAttribute("total",String.format("%.2f", total));
         model.addAttribute("ID", BookingID);
         model.addAttribute("cusID", customer.getId());
         model.addAttribute("cusfirst", customer.getFirstName());

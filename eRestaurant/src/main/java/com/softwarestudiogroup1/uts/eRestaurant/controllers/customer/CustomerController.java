@@ -72,7 +72,7 @@ public class CustomerController {
         model.addAttribute("customer", currentCus);
 
         //expiring reward
-        Set<Reward> rewards = currentCus.getRewards();
+        List<Reward> rewards = currentCus.getRewards();
         if(rewards.isEmpty()){
             Reward noreward = new Reward();
             noreward.setId(1);
@@ -80,7 +80,7 @@ public class CustomerController {
             noreward.setDiscount(0);
             noreward.setExpiryDate("2077-01-01");
             noreward.setDateAcquired(java.time.LocalDate.now().toString());
-            noreward.setCustomers(currentCus);
+            noreward.setCustomer(currentCus);
             currentCus.setPoints(200);
             this.rewardRepository.save(noreward);
             this.customerRepository.save(currentCus);

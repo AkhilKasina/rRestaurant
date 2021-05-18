@@ -18,7 +18,8 @@ public class BookingDAO {
     private String tablePosition;
 
     private ArrayList<BookingItemDAO> bookingItems;
-    private String rewardname;
+
+    private String selectedRewardID;
 
     private Customer customer;
 
@@ -166,13 +167,6 @@ public class BookingDAO {
         return bookingItems;
     }
 
-	public String getRewardname() {
-		return this.rewardname;
-	}
-
-	public void setRewardname(String rewardname) {
-		this.rewardname = rewardname;
-	}
 
     public Customer getCustomer() {
 		return this.customer;
@@ -183,9 +177,16 @@ public class BookingDAO {
 	}
 
     public Reward getReward(){
-        return customer.findReward(rewardname);
+        return customer.findReward(Integer.parseInt(selectedRewardID));
     }
 
+    public void setSelectedRewardID(String selectedRewardID) {
+        this.selectedRewardID = selectedRewardID;
+    }
+
+    public String getSelectedRewardID() {
+        return selectedRewardID;
+    }
 
 
 }

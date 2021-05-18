@@ -170,25 +170,36 @@ public class Customer {
 		this.password = password;
 	}
 
-	public Set<Reward> getRewards() {
+	protected Set<Reward> getRewardsInternal() {
 		if (this.rewards == null) {
 			this.rewards = new HashSet<>();
 		}
 		return this.rewards;
 	}
 
-	public void setRewards(Set<Reward> rewards) {
+	protected void setRewardsInteral(Set<Reward> rewards) {
 		this.rewards = rewards;
 	}
 
-	public void addReward(Reward reward) {
-		this.rewards.add(reward);
+	public List<Reward> getRewards() {
+		List<Reward> sortedRewards = new ArrayList<>(getRewardsInternal());
+		PropertyComparator.sort(sortedRewards, new MutableSortDefinition("id", true, true));
+
+		return Collections.unmodifiableList(sortedRewards);
 	}
 
-	public Reward findReward(String rewardname){
+	public void addReward(Reward reward) {
+		if (reward.getId() == null) {
+			getRewardsInternal().add(reward);
+		}
+		
+		reward.setCustomer(this);
+	}
+
+	public Reward findReward(int rewardid){
 		Reward r = new Reward();
 		for(Reward rew : rewards){
-			if(rewardname.equals(rew.getRewardName())){
+			if(rewardid == rew.getId().intValue()){
 				r = rew;
 			}
 		}
