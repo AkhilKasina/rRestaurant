@@ -171,6 +171,9 @@ public class Customer {
 	}
 
 	public Set<Reward> getRewards() {
+		if (this.rewards == null) {
+			this.rewards = new HashSet<>();
+		}
 		return this.rewards;
 	}
 
@@ -180,6 +183,16 @@ public class Customer {
 
 	public void addReward(Reward reward) {
 		this.rewards.add(reward);
+	}
+
+	public Reward findReward(String rewardname){
+		Reward r = new Reward();
+		for(Reward rew : rewards){
+			if(rewardname.equals(rew.getRewardName())){
+				r = rew;
+			}
+		}
+		return r;
 	}
 
 }

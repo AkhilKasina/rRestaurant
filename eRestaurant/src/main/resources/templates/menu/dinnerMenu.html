@@ -7,12 +7,13 @@
     <title>Dinner Menu</title>
     <link rel="stylesheet" th:href="@{/menuPage/menu.css}" />
   </head>
-  <header>
-    <a th:href="@{/}">
-      <button>Home</button>
-    </a>
-  </header>
   <body>
+    <header>
+      <img th:src="@{/homePage/flag.png}" id="logo">
+        <a th:href="@{/}">
+          <button id="active" style="margin-right: 8px;"><b>Home</b></button>
+        </a>
+    </header>
     <div class="whitePage">
       <div class="wrapper">
         <div class="title">

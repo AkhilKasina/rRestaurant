@@ -50,7 +50,7 @@ public class ItemController {
         List<Item> dinnerList = new ArrayList<>();
 
         for(Item item : itemLists){
-            if(item.getMenuType().equals("dinner")){
+            if(item.getMenuType().toLowerCase().equals("dinner")){
                 dinnerList.add(item);
             }
         }

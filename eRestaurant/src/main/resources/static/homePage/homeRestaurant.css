@@ -3,6 +3,8 @@ body {
     url(backgroung.jpg);
   height: 100vh;
   background-position: center;
+  margin: 0;
+  padding: 0;
 }
 header {
   text-align: right;
@@ -25,7 +27,7 @@ button {
   background-color: #73a875;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 8px 8px;;
   border: none;
   cursor: pointer;
   width: auto;
@@ -50,6 +52,13 @@ table {
 th {
   width: 33.3333%;
 }
+hr {
+  width: 100%;
+  text-align: center;
+  background-color: grey;
+  height: 2px;
+  border-width: 0;
+}
 label {
   width: 100px;
 }
@@ -63,6 +72,8 @@ button:hover {
   background-color: #73a875;
   text-align: center;
   padding: 10px 16px;
+  margin-left: 8px;
+  margin-top: 70px;
   z-index: 1;
 }
 
@@ -89,10 +100,24 @@ button:hover {
   display: block;
 }
 
-hr {
+header{
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0;
   width: 100%;
-  text-align: center;
-  background-color: grey;
-  height: 2px;
-  border-width: 0;
+  height: 80px;
+}
+
+#logo{
+  float: left;
+  margin: 25px;;
+}
+
+.nav{
+  top: 50%;
+  height: 80px;
+
+}
+.nav button{
+  margin-top: 16px;
+  float: right;
 }
