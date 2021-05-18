@@ -9,13 +9,17 @@
     <link rel="stylesheet" th:href="@{/loginPage/login.css}" />
     <script>
   var check = function() {
-  if (document.getElementById('psw1').value ==
-    document.getElementById('psw2').value) {
-    document.getElementById('message').style.color = 'green';
-    document.getElementById('message').innerHTML = 'Passwords matching';
-  } else {
-    document.getElementById('message').style.color = 'red';
-    document.getElementById('message').innerHTML = 'Passwords do not match';
+  if (document.getElementById('psw1').size > "0") {
+    if (document.getElementById('psw1').value ==
+      document.getElementById('psw2').value) {
+      document.getElementById('message').style.color = 'green';
+      document.getElementById('message').innerHTML = 'Passwords matching';
+      document.getElementById('signupbutton').disabled = false;
+    } else {
+      document.getElementById('message').style.color = 'red';
+      document.getElementById('message').innerHTML = 'Passwords do not match';
+      document.getElementById('signupbutton').disabled = true;
+    }
   }
 }
     </script>
@@ -165,7 +169,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="2"><button type="submit" onclick="checkPassword">Submit</button></td>
+              <td colspan="2"><button id="signupbutton" type="submit" onclick="checkPassword">Submit</button></td>
             </tr>
           </table>
           <span id='message'></span>
