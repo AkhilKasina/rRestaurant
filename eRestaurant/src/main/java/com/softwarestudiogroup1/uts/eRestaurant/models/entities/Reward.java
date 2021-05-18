@@ -4,8 +4,10 @@ import java.security.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,8 +46,11 @@ public class Reward {
 	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 
-	// @OneToOne(mappedBy = "reward")
-	// private Booking booking;
+	@OneToOne(mappedBy = "reward", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	private Booking booking;
+
+
+
 
 	public Reward(){}
 
@@ -98,20 +103,37 @@ public class Reward {
 		this.expiryDate = expiryDate;
 	}
 
-	public Customer getCustomers() {
+	public Customer getCustomer() {
 		return this.customer;
 	}
 
-	public void setCustomers(Customer customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
-	// public Booking getBooking() {
-	// 	return this.booking;
-	// }
+	// public void setCustomer(Customer customer) {
+	// 	if(sameAsFormer(customer)){return;}
+	// 	Customer oldCustomer = this.customer;
+	// 	this.customer = customer;
 
-	// public void setBooking(Booking booking) {
-	// 	this.booking = booking;
+	// 	if(oldCustomer != null){
+	// 		customer.addReward(this);
+	// 	}
+
+	// 	if(customer != null){
+	// 		customer.addReward(this);
+	// 	}
 	// }
     
+	// private boolean sameAsFormer(Customer newcustomer){
+	// 	return customer==null? newcustomer == null : customer.equals(newcustomer);
+	// }
+
+	public Booking getBooking() {
+		return this.booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
 }
